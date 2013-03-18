@@ -30,7 +30,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View arg0) {
         		Intent launchGame=new Intent(this,ControladorTirador.class);
         		startActivity(launchGame);	
-		
 	}
 
 }
