@@ -79,7 +79,7 @@ public class ControladorTirador extends Activity {
     }
 
     /**
-     * Método onResume sobrescrito de la clase Activity
+     * M��todo onResume sobrescrito de la clase Activity
      * LLamado cuando la Actividad vuelve a primer plano
      */
     @Override
@@ -110,4 +110,15 @@ public class ControladorTirador extends Activity {
 		return true;
 		
 	}*/
+    public void tiro(){
+    	try{
+    		
+    		
+    	}catch(Exception e){
+    		
+    	}
+    	
+    }
+    
+    
 }
