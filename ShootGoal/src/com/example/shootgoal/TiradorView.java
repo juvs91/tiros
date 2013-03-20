@@ -76,7 +76,8 @@ public class TiradorView extends SurfaceView implements Runnable {
             //Pinta un fondo amarillo
             //canvas.drawRGB(200, 200, 245);
             canvas.drawRGB(0, 255, 0);
-            canvas.drawBitmap(fondo, 0, 0, null);
+            Bitmap resized = Bitmap.createScaledBitmap(fondo, frameBuffer.getWidth(), frameBuffer.getHeight(), true);
+            canvas.drawBitmap(resized, 0, 0, null);
             Canvas pantalla = holder.lockCanvas();
             //Determina la resolución de la pantalla
             pantalla.getClipBounds(dstRect);
