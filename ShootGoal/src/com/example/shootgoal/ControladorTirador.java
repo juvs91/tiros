@@ -4,16 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.WindowManager;
 
 public class ControladorTirador extends Activity {
@@ -25,15 +20,12 @@ public class ControladorTirador extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.activity_main);
-		
-		//Evita que el dispositivo se duerma
-        PowerManager powerManager = (PowerManager)getSystemService(Context.POWER_SERVICE);
-        
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         AssetManager assetManager = getAssets();
         InputStream is;
         Bitmap cuadro = null;
 		try {
-			is = assetManager.open("FondoShotComp.png");
+			is = assetManager.open("fondo/FondoShotComp.png");
 			cuadro = BitmapFactory.decodeStream(is);
 			is.close();
 		} catch (IOException e) {
@@ -46,25 +38,12 @@ public class ControladorTirador extends Activity {
 		
         
         view = new TiradorView(this);
-        view.fondo = cuadro;
-        //wakeLock = powerManager.newWakeLock(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, "Test");
-		
+        view.fondo = cuadro;		
 		setContentView(view);
 		
 		
 		
 		
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		
-		
-		
-		
-		return true;
 	}
 	
 	
