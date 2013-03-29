@@ -30,7 +30,9 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.shootgoal.ControladorTirador"
-                   android:label="@string/controlador_tirador" android:screenOrientation="landscape" android:permission="android.permission.PERSISTENT_ACTIVITY">
+                   android:label="@string/controlador_tirador" 
+                   android:screenOrientation="landscape" 
+                   android:permission="android.permission.PERSISTENT_ACTIVITY">
            <intent-filter>
            <action android:name="android.intent.action.VIEW" />
            <category android:name="android.intent.category.DEFAULT" />

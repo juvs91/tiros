@@ -2,11 +2,12 @@ package com.example.shootgoal;
 
 public class Tirador extends Jugador {
 	public Tirador(){
-		this(0,0);
+		this(0, 0, true);
 	}
-	public Tirador(int x,int y){
-		posx=x;
-		posy=y;
+	public Tirador(int x, int y, boolean b){
+		posx = x;
+		posy = y;
+		tirando = b;
 	}
 	
 }
