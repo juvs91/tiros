@@ -1,58 +1,18 @@
 package com.example.shootgoal;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 
-public class TiradorView extends SurfaceView implements Runnable {
+public class PorteroView extends TiradorView {
 	private int x;
 	private int y;
-	
-	Thread renderThread = null;             //Thread de la vista
-    SurfaceHolder holder;                   //Contenedor de la vista
-    Canvas canvas;                          //Canvas para dibujar
-    volatile boolean running = false;       //Bandera para conocer el estado de la Actividad
-    float tiempoTick = 0, tick = 0.1f;      //Controladores de tiempo
-    Bitmap frameBuffer;						//Objetos Bitmap para el manejo de imagenes
-    Bitmap fondo;
-
-	public TiradorView(Context context) {
+	public PorteroView(Context context) {
 		super(context);
-		
-		//Determina la orientacion del dispositivo y crea un buffer en base a esta
-        boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-        //Ancho del buffer
-        int frameBufferWidth = isLandscape ? 480 : 320;
-        //Alto del buffer
-        int frameBufferHeight = isLandscape ? 320 : 480;
-        //Crea el buffer
-        frameBuffer = Bitmap.createBitmap(frameBufferWidth, frameBufferHeight, Config.RGB_565);
-		
-		holder = getHolder();
-        //Crea un nuevo objeto canvas con el buffer creado en la Actividad
-        canvas = new Canvas(frameBuffer);
-        
-        
 		// TODO Auto-generated constructor stub
 	}
-
-	public TiradorView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		// TODO Auto-generated constructor stub
-	}
-
-	public TiradorView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -106,5 +66,6 @@ public class TiradorView extends SurfaceView implements Runnable {
             }
         }
     }
+
 
 }
