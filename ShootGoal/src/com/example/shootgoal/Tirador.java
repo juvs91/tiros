@@ -5,9 +5,7 @@ public class Tirador extends Jugador {
 		this(0, 0, true);
 	}
 	public Tirador(int x, int y, boolean b){
-		posx = x;
-		posy = y;
-		tirando = b;
+		posicion.set(x, y);
 	}
 	
 }

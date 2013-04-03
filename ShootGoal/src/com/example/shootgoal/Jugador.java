@@ -1,27 +1,23 @@
 package com.example.shootgoal;
 
-public abstract class Jugador {
-	protected int posx;
-	protected int posy;
-	protected boolean tirando;
+import android.graphics.Point;
 
-	public int getPosx() {
-		return posx;
+public abstract class Jugador {
+	protected Point posicion;
+
+	/**
+	 * @return the posicion
+	 */
+	public Point getPosicion() {
+		return posicion;
+	}
+
+	/**
+	 * @param posicion the posicion to set
+	 */
+	public void setPosicion(Point posicion) {
+		this.posicion = posicion;
 	}
 	
-	public void setPosx(int posx) {
-		this.posx = posx;
-	}
 	
-	public int getPosy() {
-		return posy;
-	}
-	
-	public void setPosy(int posy) {
-		this.posy = posy;
-	}	
-	
-	public boolean tirando(){
-		return tirando;
-	}
 }
