@@ -16,7 +16,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pr);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		
+
 		ImageButton boton= ((ImageButton) findViewById(R.id.button1));
 		boton.setOnClickListener(this);
 	}

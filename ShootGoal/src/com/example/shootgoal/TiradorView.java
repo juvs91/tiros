@@ -20,13 +20,13 @@ public class TiradorView extends SurfaceView implements Runnable {
     Canvas canvas;                          //Canvas para dibujar
     volatile boolean running = false;       //Bandera para conocer el estado de la Actividad
     float tiempoTick = 0, tick = 0.1f;      //Controladores de tiempo
-    Bitmap frameBuffer;						//Objetos Bitmap para el manejo de im��genes
+    Bitmap frameBuffer;						//Objetos Bitmap para el manejo de imagenes
     Bitmap fondo;
 
 	public TiradorView(Context context) {
 		super(context);
 		
-		//Determina la orientaci��n del dispositivo y crea un buffer en base a esta
+		//Determina la orientacion del dispositivo y crea un buffer en base a esta
         boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         //Ancho del buffer
         int frameBufferWidth = isLandscape ? 480 : 320;
@@ -56,43 +56,32 @@ public class TiradorView extends SurfaceView implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		//Objeto Rect crea un rect��ngulo
+		//Objeto Rect crea un rectangulo
         Rect dstRect = new Rect();
-        //Obtiene el tiempo actual
-        //long tiempoI = System.nanoTime();
-        //El ciclo se ejecuta cuando la Actividad esta en ejecuci��n
+        //El ciclo se ejecuta cuando la Actividad esta en ejecucion
         while (running) {
-            //Verifica que exista una vista v��lida
+            //Verifica que exista una vista valida
             if(!holder.getSurface().isValid())
                 continue;
-
-            //Calcula el tiempo transcurrido
-            //float tiempo = (System.nanoTime() - tiempoI) / 1000000000.0f;
-            //Obtiene el tiempo actual
-            //tiempoI = System.nanoTime();
-
-            //Pinta un fondo amarillo
-            //canvas.drawRGB(200, 200, 245);
             canvas.drawRGB(0, 255, 0);
             Bitmap resized = Bitmap.createScaledBitmap(fondo, frameBuffer.getWidth(), frameBuffer.getHeight(), true);
             canvas.drawBitmap(resized, 0, 0, null);
             Canvas pantalla = holder.lockCanvas();
-            //Determina la resoluci��n de la pantalla
+            //Determina la resolucion de la pantalla
             pantalla.getClipBounds(dstRect);
-            //Dibuja el buffer en la pantalla con el tama��o de la pantalla
+            //Dibuja el buffer en la pantalla con el tamano de la pantalla
             pantalla.drawBitmap(frameBuffer, null, dstRect, null);
             holder.unlockCanvasAndPost(pantalla);
         }
-
 	}
 	
 	/**
-     * M��todo resume
+     * Metodo resume
      * Llamado cuando la Actividad vuelve a primer plano,
      * inicia el thread de la vista
      */
     public void resume() {
-        //La bandera indica que la Actividad esta en ejecuci��n
+        //La bandera indica que la Actividad esta en ejecucion
         running = true;
         //Crea un nuevo thread para la vista
         renderThread = new Thread(this);
@@ -105,7 +94,7 @@ public class TiradorView extends SurfaceView implements Runnable {
     }
     
     public void pause() {
-        //La bandera indica que la Actividad no esta en ejecuci��n
+        //La bandera indica que la Actividad no esta en ejecucion
         running = false;
         //Espera a que el thread de la vista se detenga
         while(true) {

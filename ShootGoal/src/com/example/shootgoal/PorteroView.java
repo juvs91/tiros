@@ -102,6 +102,7 @@ public class PorteroView extends SurfaceView implements Runnable {
      */
     public void resume() {
         //La bandera indica que la Actividad esta en ejecuci��n
+
         running = true;
         //Crea un nuevo thread para la vista
         renderThread = new Thread(this);
@@ -111,6 +112,7 @@ public class PorteroView extends SurfaceView implements Runnable {
     
     public void pause() {
         //La bandera indica que la Actividad no esta en ejecuci��n
+
         running = false;
         //Espera a que el thread de la vista se detenga
         while(true) {
@@ -122,5 +124,6 @@ public class PorteroView extends SurfaceView implements Runnable {
             }
         }
     }
+
 
 }
