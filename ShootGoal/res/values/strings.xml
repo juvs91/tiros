@@ -1,21 +1,4 @@
-<!--  <activity android:name="com.example.shootgoal.ControladorTirador"
-                   android:label="@string/controlador_tirador" 
-                   android:screenOrientation="landscape" 
-                   android:permission="android.permission.PERSISTENT_ACTIVITY">
-           <intent-filter>
-           <action android:name="android.intent.action.VIEW" />
-           <category android:name="android.intent.category.DEFAULT" />
-          </intent-filter>
-         </activity><activity android:name="com.example.shootgoal.ControladorTirador"
-                   android:label="@string/controlador_tirador" 
-                   android:screenOrientation="landscape" 
-                   android:permission="android.permission.PERSISTENT_ACTIVITY">
-           <intent-filter>
-           <action android:name="android.intent.action.VIEW" />
-           <category android:name="android.intent.category.DEFAULT" />
-          </intent-filter>
-         </activity>-->
-         
+
 <resources>
 
     <string name="app_name">ShootGoal</string>
@@ -23,6 +6,12 @@
     <string name="menu_settings">Settings</string>
     <string name="controlador_tirador">ControladorTirador</string>
     <string name="imgBut_jugar">Jugar</string>
+
+    <color name="ButsColors">#515151</color>
+    <color name="ButsBoack">#DCDCDC</color>
+    <string name="ScoreStr">Score</string>
+    <string name="AboutStr">About</string>
     <string name="controlador_portero">ControladorPortero</string>
+
 
 </resources>

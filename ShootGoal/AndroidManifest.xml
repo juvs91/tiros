@@ -20,7 +20,7 @@
 
 
         <activity
-            android:name="com.example.shootgoal.MainActivity"
+            android:name="com.example.shootgoal.vistas.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
             <intent-filter>
@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.shootgoal.ControladorTirador"
+        <activity android:name="com.example.shootgoal.controladores.ControladorTirador"
                    android:label="@string/controlador_tirador" 
                    android:screenOrientation="landscape" 
                    android:permission="android.permission.PERSISTENT_ACTIVITY">
@@ -38,7 +38,7 @@
            <category android:name="android.intent.category.DEFAULT" />
           </intent-filter>
          </activity>
-         <activity android:name="ControladorPortero"
+         <activity android:name="com.example.shootgoal.controladores.ControladorPortero"
                    android:label="@string/controlador_portero" 
                    android:screenOrientation="landscape" 
                    android:permission="android.permission.PERSISTENT_ACTIVITY">

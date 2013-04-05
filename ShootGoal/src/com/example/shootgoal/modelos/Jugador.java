@@ -1,11 +1,11 @@
-package com.example.shootgoal;
+package com.example.shootgoal.modelos;
 
 //import android.graphics.Bitmap;
 
 import android.graphics.Point;
 
 public abstract class Jugador {
-	protected Point posicion;
+	public Point posicion;
 	//protected Bitmap imagen; //es la imagen que se va a utilizar , en este caso el portero y el tirador
 	//protected float tiempo;  //es el tiempo que va a ir durando la animacion 
 	/**

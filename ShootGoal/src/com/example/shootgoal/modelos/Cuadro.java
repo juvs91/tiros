@@ -1,4 +1,4 @@
-package com.example.shootgoal;
+package com.example.shootgoal.modelos;
 
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -8,7 +8,7 @@ import android.graphics.Rect;
  * Maneja la imagen y la duración de un cuadro de animación
  */
 public class Cuadro {
-   Bitmap imagen;           //Imagen del cuadro
+   public Bitmap imagen;           //Imagen del cuadro
    float tiempo;            //Duración del cuadro
    Rect rectangulo;
 

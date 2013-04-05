@@ -1,7 +1,9 @@
-package com.example.shootgoal;
+package com.example.shootgoal.controladores;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import com.example.shootgoal.vistas.TiradorView;
 
 import android.app.Activity;
 import android.content.res.AssetManager;
