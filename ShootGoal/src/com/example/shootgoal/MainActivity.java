@@ -30,10 +30,11 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View arg0) {
 
-		Intent launchGame=new Intent(this,ControladorTirador.class);
+		Intent launchGame = new Intent(this,ControladorTirador.class);
 		startActivity(launchGame);	
 
-		Intent launchGame = null;
+		launchGame = null;
+		
 		if(esPortero){
 				launchGame = new Intent(this, ControladorPortero.class);
 		} else {
