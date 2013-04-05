@@ -1,27 +1,24 @@
 package com.example.shootgoal;
 
-public abstract class Jugador {
-	protected int posx;
-	protected int posy;
-	protected boolean tirando;
+//import android.graphics.Bitmap;
 
-	public int getPosx() {
-		return posx;
+import android.graphics.Point;
+
+public abstract class Jugador {
+	protected Point posicion;
+	//protected Bitmap imagen; //es la imagen que se va a utilizar , en este caso el portero y el tirador
+	//protected float tiempo;  //es el tiempo que va a ir durando la animacion 
+	/**
+	 * @return the posicion
+	 */
+	public Point getPosicion() {
+		return posicion;
 	}
-	
-	public void setPosx(int posx) {
-		this.posx = posx;
-	}
-	
-	public int getPosy() {
-		return posy;
-	}
-	
-	public void setPosy(int posy) {
-		this.posy = posy;
-	}	
-	
-	public boolean tirando(){
-		return tirando;
+
+	/**
+	 * @param posicion the posicion to set
+	 */
+	public void setPosicion(Point posicion) {
+		this.posicion = posicion;
 	}
 }

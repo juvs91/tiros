@@ -9,16 +9,19 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 public class MainActivity extends Activity implements OnClickListener {
-	int vista=0;//vista inicial 
-	
+
+	int vista = 0;//vista inicial 
+	boolean esPortero = true;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pr);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-		ImageButton boton= ((ImageButton) findViewById(R.id.butPlay));
-		boton.setOnClickListener(this);
+
+		ImageButton botonPlay= ((ImageButton) findViewById(R.id.butPlay));
+		botonPlay.setOnClickListener(this);
 		
 
 	}
@@ -26,8 +29,18 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View arg0) {
+
 		Intent launchGame=new Intent(this,ControladorTirador.class);
 		startActivity(launchGame);	
+
+		Intent launchGame = null;
+		if(esPortero){
+				launchGame = new Intent(this, ControladorPortero.class);
+		} else {
+        		launchGame = new Intent(this, ControladorTirador.class);
+		}
+		startActivity(launchGame);
+		esPortero=!esPortero;
 
 	}
 
