@@ -29,8 +29,8 @@ public class Portero extends Jugador{
 			e.printStackTrace();
 		}
 		this.animacion = animacionPor;
-		porteroPos.x -= animacion.getCuadro().getWidth()/2;
-		porteroPos.y -= animacion.getCuadro().getHeight()/2;
+		porteroPos.x -= animacion.getCuadro().getWidth()/3/2;
+		porteroPos.y -= animacion.getCuadro().getHeight()/3/2;
 		this.posicion = porteroPos;
 	}
 

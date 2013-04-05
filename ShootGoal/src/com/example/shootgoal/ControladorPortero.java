@@ -57,7 +57,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		//scaleX = (float) view.frameBuffer.getWidth()/getWindowManager().getDefaultDisplay().getWidth();
 		//scaleY = (float) view.frameBuffer.getHeight() / getWindowManager().getDefaultDisplay().getHeight();
 		
-	      Point porteroPos = new Point(view.frameBuffer.getWidth()/2, view.frameBuffer.getHeight());
+	    Point porteroPos = new Point(view.frameBuffer.getWidth()/2, view.frameBuffer.getHeight()/2);
 		portero = new Portero(porteroPos, getAssets());
 		view.setPorteroScreenContext(portero.animacion.getCuadro(), portero.posicion);
 		setContentView(view);
