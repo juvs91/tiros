@@ -13,7 +13,7 @@ import android.view.WindowManager;
 
 public class NuevoJuegoControlador  extends Activity  {
 	WakeLock wakeLock;
-	TiradorView view;
+	PorteroView view;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

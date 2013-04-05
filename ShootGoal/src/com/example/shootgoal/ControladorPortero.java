@@ -39,10 +39,6 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			e.printStackTrace();
 			//is.close();
 		} 
-		
-		
-		
-        
         view = new PorteroView(this);
         view.fondo = cuadro;		
 		
@@ -98,7 +94,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			break;
 			//Cuando se deja de hacer contacto
 		case MotionEvent.ACTION_UP:
-			//Cambia la direcci√≥n de movimiento del objeto Elefante
+			//Cambia la direcci������n de movimiento del objeto Elefante
 			//dependiendo del punto de contacto
 			portero.posicion.x = (int)(event.getX() * scaleX);
 			portero.posicion.y = (int)(event.getY() * scaleY);

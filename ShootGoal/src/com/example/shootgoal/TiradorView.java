@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -22,7 +23,8 @@ public class TiradorView extends SurfaceView implements Runnable {
     float tiempoTick = 0, tick = 0.1f;      //Controladores de tiempo
     Bitmap frameBuffer;						//Objetos Bitmap para el manejo de imagenes
     Bitmap fondo;
-
+    Bitmap balonImagen;
+    Point balonPos;
 	public TiradorView(Context context) {
 		super(context);
 		
@@ -73,6 +75,11 @@ public class TiradorView extends SurfaceView implements Runnable {
             pantalla.drawBitmap(frameBuffer, null, dstRect, null);
             holder.unlockCanvasAndPost(pantalla);
         }
+	}
+	
+	public void setTiradorScreenContext(Bitmap balonImage, Point balonPos){
+		this.balonImagen = balonImage;
+		this.balonPos = balonPos;
 	}
 	
 	/**

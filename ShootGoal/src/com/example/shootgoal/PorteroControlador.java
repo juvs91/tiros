@@ -14,7 +14,7 @@ import android.view.WindowManager;
 public class PorteroControlador extends Activity {
 	
 	WakeLock wakeLock;
-	TiradorView view;
+	PorteroView view;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
