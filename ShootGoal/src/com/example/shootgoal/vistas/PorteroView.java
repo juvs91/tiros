@@ -1,4 +1,4 @@
-package com.example.shootgoal;
+package com.example.shootgoal.vistas;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -19,8 +19,8 @@ public class PorteroView extends SurfaceView implements Runnable {
     Canvas canvas;                          //Canvas para dibujar
     volatile boolean running = false;       //Bandera para conocer el estado de la Actividad
     float tiempoTick = 0, tick = 0.1f;      //Controladores de tiempo
-    Bitmap frameBuffer;						//Objetos Bitmap para el manejo de im��genes
-    Bitmap fondo;
+    public Bitmap frameBuffer;				//Objetos Bitmap para el manejo de im��genes
+    public Bitmap fondo;
     Bitmap porteroImagen;
     Point porteroPos;
     
@@ -28,7 +28,7 @@ public class PorteroView extends SurfaceView implements Runnable {
 	public PorteroView(Context context) {
 		super(context);
 		
-		//Determina la orientaci��n del dispositivo y crea un buffer en base a esta
+		//Determina la orientacion del dispositivo y crea un buffer en base a esta
         boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         //Ancho del buffer
         int frameBufferWidth = isLandscape ? 480 : 320;

@@ -3,6 +3,8 @@ package com.example.shootgoal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.shootgoal.modelos.Cuadro;
+
 import android.graphics.Bitmap;
 
 public class AnimaBalon {

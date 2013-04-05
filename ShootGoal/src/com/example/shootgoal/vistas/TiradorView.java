@@ -1,4 +1,4 @@
-package com.example.shootgoal;
+package com.example.shootgoal.vistas;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -21,7 +21,7 @@ public class TiradorView extends SurfaceView implements Runnable {
     Canvas canvas;                          //Canvas para dibujar
     volatile boolean running = false;       //Bandera para conocer el estado de la Actividad
     float tiempoTick = 0, tick = 0.1f;      //Controladores de tiempo
-    Bitmap frameBuffer;						//Objetos Bitmap para el manejo de imagenes
+    public Bitmap frameBuffer;						//Objetos Bitmap para el manejo de imagenes
     Bitmap fondo;
     Bitmap balonImagen;
     Point balonPos;

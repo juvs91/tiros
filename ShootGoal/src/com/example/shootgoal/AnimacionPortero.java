@@ -6,6 +6,8 @@ import android.graphics.Rect;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.shootgoal.modelos.Cuadro;
+
 /**
  * Clase Animacion
  *

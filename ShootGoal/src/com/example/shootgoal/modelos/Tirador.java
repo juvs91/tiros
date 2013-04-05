@@ -1,7 +1,9 @@
-package com.example.shootgoal;
+package com.example.shootgoal.modelos;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import com.example.shootgoal.AnimaBalon;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
