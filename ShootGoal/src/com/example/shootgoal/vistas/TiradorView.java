@@ -22,9 +22,11 @@ public class TiradorView extends SurfaceView implements Runnable {
     volatile boolean running = false;       //Bandera para conocer el estado de la Actividad
     float tiempoTick = 0, tick = 0.1f;      //Controladores de tiempo
     public Bitmap frameBuffer;						//Objetos Bitmap para el manejo de imagenes
-    Bitmap fondo;
+    public Bitmap fondo;
+    Bitmap porteroImagen;
     Bitmap balonImagen;
     Point balonPos;
+    Point porteroPos;
 	public TiradorView(Context context) {
 		super(context);
 		
@@ -54,6 +56,14 @@ public class TiradorView extends SurfaceView implements Runnable {
 		super(context, attrs, defStyle);
 		// TODO Auto-generated constructor stub
 	}
+	public void setPorteroScreenContext(Bitmap porteroImage, Point porteroPos){
+		this.porteroImagen = porteroImage;
+		this.porteroPos = porteroPos;
+	}
+	public void setTiradorScreenContext(Bitmap balonImage, Point balonPos){
+		this.balonImagen = balonImage;
+		this.balonPos = balonPos;
+	}
 
 	@Override
 	public void run() {
@@ -63,24 +73,26 @@ public class TiradorView extends SurfaceView implements Runnable {
         //El ciclo se ejecuta cuando la Actividad esta en ejecucion
         while (running) {
             //Verifica que exista una vista valida
-            if(!holder.getSurface().isValid())
-                continue;
+            if(!holder.getSurface().isValid()) 
+            	continue;
             canvas.drawRGB(0, 255, 0);
             Bitmap resized = Bitmap.createScaledBitmap(fondo, frameBuffer.getWidth(), frameBuffer.getHeight(), true);
             canvas.drawBitmap(resized, 0, 0, null);
+            resized = Bitmap.createScaledBitmap(porteroImagen, porteroImagen.getWidth()/3, porteroImagen.getHeight()/3, true);
+            canvas.drawBitmap(resized, porteroPos.x, porteroPos.y, null);
+            resized=Bitmap.createScaledBitmap(balonImagen, balonImagen.getWidth()/3, balonImagen.getHeight()/3, true);
+            canvas.drawBitmap(resized, balonPos.x, balonPos.y, null);
             Canvas pantalla = holder.lockCanvas();
-            //Determina la resolucion de la pantalla
+            
+            //Determina la resoluci��n de la pantalla
             pantalla.getClipBounds(dstRect);
-            //Dibuja el buffer en la pantalla con el tamano de la pantalla
+            //Dibuja el buffer en la pantalla con el tama��o de la pantalla
             pantalla.drawBitmap(frameBuffer, null, dstRect, null);
             holder.unlockCanvasAndPost(pantalla);
         }
 	}
 	
-	public void setTiradorScreenContext(Bitmap balonImage, Point balonPos){
-		this.balonImagen = balonImage;
-		this.balonPos = balonPos;
-	}
+	
 	
 	/**
      * Metodo resume

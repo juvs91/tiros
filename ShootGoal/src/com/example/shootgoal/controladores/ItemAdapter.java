@@ -4,6 +4,7 @@ import java.util.List;
 import com.example.shootgoal.R;
 import com.example.shootgoal.modelos.Jugadores;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +20,14 @@ import android.widget.TextView;
 public class ItemAdapter extends BaseAdapter {
 	private static List <Jugadores> itemsList;
 	private LayoutInflater inflator;
+	Context context; 
+    int layoutResourceId;
 
-
-	public ItemAdapter(Context context, List<Jugadores> results) {
+	public ItemAdapter(Context context, int layoutResourceId, List<Jugadores> results) {
 		itemsList = results;
+		this.context = context;
 		inflator = LayoutInflater.from(context);
+		this.layoutResourceId = layoutResourceId;
 	}
 	
 
@@ -54,19 +58,22 @@ public class ItemAdapter extends BaseAdapter {
 	 */
 	public View getView(int pos, View view, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		ViewHolder holder;
+		//View row = view;
+		ViewHolder holder = null;;
 		
 		if(view == null) {
-			view = inflator.inflate(R.layout.jugadores, null);
+			 LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+	            view = inflater.inflate(layoutResourceId, parent, false);
 			holder = new ViewHolder();
-			holder.nombre = (TextView) view.findViewById(R.id.jugador);
+			holder.nombre = (TextView) view.findViewById(R.id.textView1);
+			holder.puntaje = (TextView) view.findViewById(R.id.textView2);
 			
 			view.setTag(holder);
 		} else {
 			holder = (ViewHolder) view.getTag();
 		}
 		holder.nombre.setText(itemsList.get(pos).getNombre());
-		
+		holder.puntaje.setText(String.valueOf(itemsList.get(pos).getPuntaje()));
 		
 		return view;
 	}

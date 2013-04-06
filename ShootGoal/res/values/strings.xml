@@ -12,6 +12,6 @@
     <string name="ScoreStr">Score</string>
     <string name="AboutStr">About</string>
     <string name="controlador_portero">ControladorPortero</string>
-
+	<string name="controlador_nuevo_juego">ControladorNuevoJuego</string>
 
 </resources>

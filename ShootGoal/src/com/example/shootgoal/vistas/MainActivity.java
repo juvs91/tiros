@@ -2,6 +2,7 @@ package com.example.shootgoal.vistas;
 
 
 import java.io.IOException;
+
 import java.io.InputStream;
 
 import android.app.Activity;
@@ -16,12 +17,13 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 
 import com.example.shootgoal.R;
+import com.example.shootgoal.controladores.ControladorNuevoJuego;
 import com.example.shootgoal.controladores.ControladorPortero;
 import com.example.shootgoal.controladores.ControladorTirador;
 public class MainActivity extends Activity implements OnClickListener {
 
 	int vista = 0;//vista inicial 
-	boolean esPortero = true;
+	//boolean esPortero = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View arg0) {
 
-		Intent launchGame = new Intent(this,ControladorTirador.class);
+		/*Intent launchGame = new Intent(this,ControladorTirador.class);
 		startActivity(launchGame);	
 
 		launchGame = null;
@@ -61,9 +63,10 @@ public class MainActivity extends Activity implements OnClickListener {
 			launchGame = new Intent(this, ControladorPortero.class);
 		} else {
 			launchGame = new Intent(this, ControladorTirador.class);
-		}
+		}*/
+		Intent launchGame = new Intent(this, ControladorNuevoJuego.class);
 		startActivity(launchGame);
-		esPortero=!esPortero;
+		//esPortero=!esPortero;
 
 	}
 

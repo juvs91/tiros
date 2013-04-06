@@ -30,6 +30,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	TiradorView view;
 	int currentView;
 	List<Jugadores> listaJugadores;
+	boolean esPortero = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +40,16 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		
 	}
 	public void init(){
+		setContentView(R.layout.nuevo_juego);
 		listaJugadores=new LinkedList<Jugadores>();
 		Jugadores jugador=new Jugadores(100,"gordo",1);
 		listaJugadores.add(jugador);
-		setContentView(R.layout.nuevo_juego);
 		currentView = R.layout.nuevo_juego;
 		final ListView lv = (ListView) findViewById(R.id.mylistview);
-		lv.setAdapter(new ItemAdapter(this, listaJugadores));
+		lv.setAdapter(new ItemAdapter(this, R.layout.list_item ,listaJugadores));
 
 		lv.setOnItemClickListener(this);
+		//setContentView(R.layout.nuevo_juego);
 	}
 	public void onClick(View view) {
 		// TODO Auto-generated method stub
@@ -56,11 +58,22 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
 		// TODO Auto-generated method stub
-		Intent launchGame;	
+		/*Intent launchGame;	
 		launchGame = null;
-		launchGame = new Intent(this, ControladorTirador.class);
-		startActivity(launchGame);
+		launchGame = new Intent(this, ControladorPortero.class);
+		startActivity(launchGame);*/
+		//Intent launchGame = new Intent(this,ControladorTirador.class);
+			
 
+		Intent launchGame = null;
+
+		if(esPortero){
+			launchGame = new Intent(this, ControladorPortero.class);
+		} else {
+			launchGame = new Intent(this, ControladorTirador.class);
+		}
+		startActivity(launchGame);
+		esPortero=!esPortero;
 	}
 
 	
