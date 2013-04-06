@@ -17,36 +17,49 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
-
         <activity
             android:name="com.example.shootgoal.vistas.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-	
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.shootgoal.controladores.ControladorTirador"
-                   android:label="@string/controlador_tirador" 
-                   android:screenOrientation="landscape" 
-                   android:permission="android.permission.PERSISTENT_ACTIVITY">
-           <intent-filter>
-           <action android:name="android.intent.action.VIEW" />
-           <category android:name="android.intent.category.DEFAULT" />
-          </intent-filter>
-         </activity>
-         <activity android:name="com.example.shootgoal.controladores.ControladorPortero"
-                   android:label="@string/controlador_portero" 
-                   android:screenOrientation="landscape" 
-                   android:permission="android.permission.PERSISTENT_ACTIVITY">
-           <intent-filter>
-           <action android:name="android.intent.action.VIEW" />
-           <category android:name="android.intent.category.DEFAULT" />
-          </intent-filter>
-         </activity>
+        <activity
+            android:name="com.example.shootgoal.controladores.ControladorMenu"
+            android:label="@string/controlador_menu"
+            android:permission="android.permission.PERSISTENT_ACTIVITY"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.shootgoal.controladores.ControladorPortero"
+            android:label="@string/controlador_portero"
+            android:permission="android.permission.PERSISTENT_ACTIVITY"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.shootgoal.controladores.ControladorTirador"
+            android:label="@string/controlador_tirador"
+            android:permission="android.permission.PERSISTENT_ACTIVITY"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

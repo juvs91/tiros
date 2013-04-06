@@ -8,7 +8,6 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Bitmap.Config;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -62,13 +61,13 @@ public class PorteroView extends SurfaceView implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		//Objeto Rect crea un rect��ngulo
+		//Objeto Rect crea un rectngulo
         Rect dstRect = new Rect();
         //Obtiene el tiempo actual
         //long tiempoI = System.nanoTime();
-        //El ciclo se ejecuta cuando la Actividad esta en ejecuci��n
+        //El ciclo se ejecuta cuando la Actividad esta en ejecucn
         while (running) {
-            //Verifica que exista una vista v��lida
+            //Verifica que exista una vista vlida
             if(!holder.getSurface().isValid())
                 continue;
 
@@ -86,9 +85,9 @@ public class PorteroView extends SurfaceView implements Runnable {
             canvas.drawBitmap(resized, porteroPos.x, porteroPos.y, null);
             Canvas pantalla = holder.lockCanvas();
             
-            //Determina la resoluci��n de la pantalla
+            //Determina la resolucin de la pantalla
             pantalla.getClipBounds(dstRect);
-            //Dibuja el buffer en la pantalla con el tama��o de la pantalla
+            //Dibuja el buffer en la pantalla con el tamao de la pantalla
             pantalla.drawBitmap(frameBuffer, null, dstRect, null);
             holder.unlockCanvasAndPost(pantalla);
         }
@@ -111,7 +110,7 @@ public class PorteroView extends SurfaceView implements Runnable {
     }
     
     public void pause() {
-        //La bandera indica que la Actividad no esta en ejecuci��n
+        //La bandera indica que la Actividad no esta en ejecucin
 
         running = false;
         //Espera a que el thread de la vista se detenga
