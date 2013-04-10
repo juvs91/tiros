@@ -30,12 +30,22 @@
         <activity
             android:name="com.example.shootgoal.controladores.ControladorMenu"
             android:label="@string/controlador_menu"
-            android:permission="android.permission.PERSISTENT_ACTIVITY"
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.shootgoal.controladores.ControladorTirador"
+            android:label="@string/controlador_tirador"
+            android:permission="android.permission.PERSISTENT_ACTIVITY"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -50,8 +60,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.shootgoal.controladores.ControladorTirador"
-            android:label="@string/controlador_tirador"
+            android:name="com.example.shootgoal.controladores.ControladorNuevoJuego"
+            android:label="@string/controlador_nuevo_juego"
             android:permission="android.permission.PERSISTENT_ACTIVITY"
             android:screenOrientation="landscape" >
             <intent-filter>

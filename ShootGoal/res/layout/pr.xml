@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutPR"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
@@ -17,29 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="21dp"
-            android:background="@drawable/soccerballanimated"
-            android:contentDescription="@string/imgBut_jugar"
-            android:src="@drawable/soccerballanimated" />
-
-        <ImageButton
-            android:id="@+id/ImageButton02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/butPlay"
-            android:layout_toRightOf="@+id/butPlay"
-            android:background="@drawable/soccerballanimated"
-            android:contentDescription="@string/imgBut_jugar"
-            android:src="@drawable/soccerballanimated" />
-
-        <ImageButton
-            android:id="@+id/ImageButton01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/ImageButton02"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="46dp"
+            android:layout_marginLeft="32dp"
             android:background="@drawable/soccerballanimated"
             android:contentDescription="@string/imgBut_jugar"
             android:src="@drawable/soccerballanimated" />
@@ -48,37 +27,25 @@
             android:id="@+id/butPlayString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/butPlay"
-            android:layout_alignRight="@+id/ImageButton01"
-            android:layout_marginRight="18dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/butPlay"
+            android:layout_marginBottom="22dp"
+            android:layout_marginRight="16dp"
             android:alpha="50"
             android:ellipsize="middle"
             android:text="@string/imgBut_jugar"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/ButsColors" />
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ImageButton02"
-            android:layout_alignRight="@+id/ImageButton02"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="16dp"
-            android:text="@string/ScoreStr"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/ButsColors" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView1"
-            android:layout_alignBottom="@+id/textView1"
-            android:layout_toLeftOf="@+id/butPlayString"
-            android:text="@string/AboutStr"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/ButsColors" />
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="27dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cookies" />
 
     </RelativeLayout>
 

@@ -58,18 +58,10 @@ public class ControladorMenu extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View arg0) {
-		Intent launchGame = new Intent(this,ControladorTirador.class);
-		startActivity(launchGame);	
 
-		launchGame = null;
-
-		if(esPortero){
-			launchGame = new Intent(this, ControladorPortero.class);
-		} else {
-			launchGame = new Intent(this, ControladorTirador.class);
-		}
+		Intent launchGame = new Intent(this, ControladorNuevoJuego.class);
 		startActivity(launchGame);
-		esPortero=!esPortero;
+		
 		
 	}
 }

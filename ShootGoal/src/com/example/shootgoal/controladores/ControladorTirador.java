@@ -19,7 +19,6 @@ import android.view.WindowManager;
 
 public class ControladorTirador extends Activity {
 	WakeLock wakeLock;
-	PorteroView viewPortero;
 	TiradorView viewTirador;
 	Portero portero;
 	float scaleX, scaleY,scaleXBalon, scaleYBalon;
@@ -42,30 +41,24 @@ public class ControladorTirador extends Activity {
 			e.printStackTrace();
 			//is.close();
 		} 
-		viewPortero = new PorteroView(this);
-		viewPortero.fondo = cuadro;		
+			
 		viewTirador= new TiradorView(this);
+		viewTirador.fondo =cuadro;
 
-		Point point = new Point();
 		Point pointBalon=new Point();
 
-		getWindowManager().getDefaultDisplay().getSize(point);
+		getWindowManager().getDefaultDisplay().getSize(pointBalon);
 
-		//Escala en x basada en el ancho del buffer y el ancho de la pantalla del dispositivo
-		scaleX = (float) viewPortero.frameBuffer.getWidth() / point.x;
-		//Escala en y basada en el alto del buffre y el alto de la pantalla del dispositivo
-		scaleY = (float) viewPortero.frameBuffer.getHeight() / point.y;
+		
 		
 		scaleXBalon=(float) viewTirador.frameBuffer.getWidth() / pointBalon.x;
 		scaleYBalon=(float) viewTirador.frameBuffer.getHeight() / pointBalon.y;
 
 
-		Point porteroPos = new Point(viewPortero.frameBuffer.getWidth()/2, viewPortero.frameBuffer.getHeight());
+		Point porteroPos = new Point(viewTirador.frameBuffer.getWidth()/2, viewTirador.frameBuffer.getHeight()/2);
 		portero = new Portero(porteroPos, getAssets());
-		viewPortero.setPorteroScreenContext(portero.animacion.getCuadro(), portero.posicion);
-		setContentView(viewPortero);
-
-		Point balonPos = new Point(viewTirador.frameBuffer.getWidth()/2, viewTirador.frameBuffer.getHeight());
+		viewTirador.setPorteroScreenContext(portero.animacion.getCuadro(), portero.posicion);
+		Point balonPos = new Point(viewTirador.frameBuffer.getWidth()/2, viewTirador.frameBuffer.getHeight()/2+120);
 		tirador = new Tirador(balonPos, getAssets());
 		viewTirador.setTiradorScreenContext(tirador.animacion.getCuadro(), tirador.posicion);
 		setContentView(viewTirador);
@@ -79,7 +72,7 @@ public class ControladorTirador extends Activity {
 		super.onPause();
 		//Pausa la vista de la Actividad
 		//TiradorView view = (TiradorView)getLayoutInflater().inflate(R.layout.tira_view, null);
-		viewPortero.pause();
+		viewTirador.pause();
 		//Libera el candado que protege la pantalla
 		//wakeLock.release();
 	}
@@ -93,7 +86,7 @@ public class ControladorTirador extends Activity {
 		super.onResume();
 		//Reanuda la vista de la Actividad
 		//TiradorView view = (TiradorView)getLayoutInflater().inflate(R.layout.tira_view, null);
-		viewPortero.resume();
+		viewTirador.resume();
 		//Retoma el candado que protege a la pantalla
 		//wakeLock.acquire();
 	}

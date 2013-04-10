@@ -6,6 +6,7 @@
     <string name="controlador_tirador">ControladorTirador</string>
     <string name="controlador_portero">ControladorPortero</string>
     <string name="controlador_menu">ControladorMenu</string>
+    <string name="controlador_nuevo_juego">ControladorNuevoJuego</string>
     <string name="imgBut_jugar">Jugar</string>
 
     <color name="ButsColors">#515151</color>

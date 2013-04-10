@@ -2,46 +2,79 @@ package com.example.shootgoal.controladores;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.LinkedList;
+import java.util.List;
 
+import com.example.shootgoal.R;
+import com.example.shootgoal.modelos.Jugador;
+import com.example.shootgoal.modelos.Jugadores;
 import com.example.shootgoal.vistas.TiradorView;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.view.View.OnClickListener;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.PowerManager.WakeLock;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
-public class ControladorNuevoJuego  extends Activity  {
+public class ControladorNuevoJuego  extends Activity implements OnItemClickListener,OnClickListener  {
 	WakeLock wakeLock;
 	TiradorView view;
+	int currentView;
+	List<Jugadores> listaJugadores;
+	boolean esPortero = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.init();
 		
+		
 	}
 	public void init(){
-		//setContentView(R.layout.activity_main);
-		  /* getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-	       AssetManager assetManager = getAssets();
-	       InputStream is;
-	       Bitmap cuadro = null;
-			try {
-				is = assetManager.open("fondo/fondoShotComp.png");
-				cuadro = BitmapFactory.decodeStream(is);
-				is.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				//is.close();
-			}
-			
-	       view = new PorteroView(this);
-	       view.fondo = cuadro;		
-			setContentView(view);*/
+		setContentView(R.layout.nuevo_juego);
+		listaJugadores=new LinkedList<Jugadores>();
+		Jugadores jugador=new Jugadores(100,"gordo",1);
+		listaJugadores.add(jugador);
+		currentView = R.layout.nuevo_juego;
+		final ListView lv = (ListView) findViewById(R.id.mylistview);
+		lv.setAdapter(new ItemAdapter(this, R.layout.list_item ,listaJugadores));
+
+		lv.setOnItemClickListener(this);
+		//setContentView(R.layout.nuevo_juego);
 	}
+	public void onClick(View view) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+		// TODO Auto-generated method stub
+		/*Intent launchGame;	
+		launchGame = null;
+		launchGame = new Intent(this, ControladorPortero.class);
+		startActivity(launchGame);*/
+		//Intent launchGame = new Intent(this,ControladorTirador.class);
+			
+
+		Intent launchGame = null;
+
+		if(esPortero){
+			launchGame = new Intent(this, ControladorPortero.class);
+		} else {
+			launchGame = new Intent(this, ControladorTirador.class);
+		}
+		startActivity(launchGame);
+		esPortero=!esPortero;
+	}
+
 	
 }
