@@ -24,15 +24,14 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 	PorteroView view;
 	Portero portero;
 	float scaleX, scaleY;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_main);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        AssetManager assetManager = getAssets();
-        InputStream is;
-        Bitmap cuadro = null;
+		AssetManager assetManager = getAssets();
+		InputStream is;
+		Bitmap cuadro = null;
 		try {
 			is = assetManager.open("fondo/FondoShotComp.png");
 			cuadro = BitmapFactory.decodeStream(is);
@@ -42,45 +41,43 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			e.printStackTrace();
 			//is.close();
 		} 
-        view = new PorteroView(this);
-        view.fondo = cuadro;		
-		
+		view = new PorteroView(this);
+		view.fondo = cuadro;		
+
 		Point point = new Point();
-		
+
 		getWindowManager().getDefaultDisplay().getSize(point);
-		
+
 		//Escala en x basada en el ancho del buffer y el ancho de la pantalla del dispositivo
-	      scaleX = (float) view.frameBuffer.getWidth() / point.x;
-	      		//Escala en y basada en el alto del buffre y el alto de la pantalla del dispositivo
-	      scaleY = (float) view.frameBuffer.getHeight() / point.y;
-		//scaleX = (float) view.frameBuffer.getWidth()/getWindowManager().getDefaultDisplay().getWidth();
-		//scaleY = (float) view.frameBuffer.getHeight() / getWindowManager().getDefaultDisplay().getHeight();
-		
-	    Point porteroPos = new Point(view.frameBuffer.getWidth()/2, view.frameBuffer.getHeight()/2);
+		scaleX = (float) view.frameBuffer.getWidth() / point.x;
+		//Escala en y basada en el alto del buffre y el alto de la pantalla del dispositivo
+		scaleY = (float) view.frameBuffer.getHeight() / point.y;
+
+		Point porteroPos = new Point(view.frameBuffer.getWidth()/2, view.frameBuffer.getHeight()/2);
 		portero = new Portero(porteroPos, getAssets());
 		view.setPorteroScreenContext(portero.animacion.getCuadro(), portero.posicion);
 		setContentView(view);
-		
-	}
-	
-	
-	@Override
-    protected void onPause() {
-        super.onPause();
-        view.pause();
-    }
 
-    /**
-     * Metodo onResume sobrescrito de la clase Activity
-     * LLamado cuando la Actividad vuelve a primer plano
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        view.resume();
-    }
-    
-    @Override
+	}
+
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		view.pause();
+	}
+
+	/**
+	 * Metodo onResume sobrescrito de la clase Activity
+	 * LLamado cuando la Actividad vuelve a primer plano
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		view.resume();
+	}
+
+	@Override
 	public boolean onTouch(View v, MotionEvent event){
 		//Maneja los eventos de contacto
 		switch (event.getAction()) {
@@ -97,7 +94,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			break;
 			//Cuando se deja de hacer contacto
 		case MotionEvent.ACTION_UP:
-			//Cambia la direcci������n de movimiento del objeto Elefante
+			//Cambia la direccin de movimiento del objeto Elefante
 			//dependiendo del punto de contacto
 			portero.posicion.x = (int)(event.getX() * scaleX);
 			portero.posicion.y = (int)(event.getY() * scaleY);
