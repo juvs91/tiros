@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.PowerManager.WakeLock;
+import android.view.MotionEvent;
 import android.view.WindowManager;
 
 public class ControladorTirador extends Activity {
@@ -23,6 +24,7 @@ public class ControladorTirador extends Activity {
 	Portero portero;
 	float scaleX, scaleY,scaleXBalon, scaleYBalon;
 	Tirador tirador;
+	Point point=new Point();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,7 @@ public class ControladorTirador extends Activity {
 	}
 
 	/**
-	 * M��todo onResume sobrescrito de la clase Activity
+	 * M������todo onResume sobrescrito de la clase Activity
 	 * LLamado cuando la Actividad vuelve a primer plano
 	 */
 	@Override
@@ -100,6 +102,15 @@ public class ControladorTirador extends Activity {
 		}
 
 	}
+	
+	public boolean onTouchEvent(MotionEvent event){
+		point.set((int)(event.getX()),(int)event.getY());
+		tirador.setPosicion(point);
+		
+		return true;
+		
+	}
+	
 
 
 }
