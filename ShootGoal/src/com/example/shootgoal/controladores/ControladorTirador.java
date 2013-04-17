@@ -1,5 +1,6 @@
 package com.example.shootgoal.controladores;
 
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -15,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.PowerManager.WakeLock;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
@@ -25,7 +27,9 @@ public class ControladorTirador extends Activity {
 	float scaleX, scaleY,scaleXBalon, scaleYBalon;
 	Tirador tirador;
 	Point point=new Point();
-
+	private int anchoCancha=0;
+	private int altoCancha=0;
+	private int mitad;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -92,9 +96,15 @@ public class ControladorTirador extends Activity {
 		//Retoma el candado que protege a la pantalla
 		//wakeLock.acquire();
 	}
-
-	private void tiro(){
+	
+	private void tiro(Point point){
 		try{
+		viewTirador= new TiradorView(this);
+		anchoCancha=viewTirador.fondo.getWidth();
+		altoCancha=viewTirador.fondo.getHeight();
+		mitad=anchoCancha/2;
+		
+		
 
 
 		}catch(Exception e){
@@ -103,13 +113,6 @@ public class ControladorTirador extends Activity {
 
 	}
 	
-	public boolean onTouchEvent(MotionEvent event){
-		point.set((int)(event.getX()),(int)event.getY());
-		tirador.setPosicion(point);
-		
-		return true;
-		
-	}
 	
 
 

@@ -11,8 +11,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.view.View.OnTouchListener;
 
-public class TiradorView extends SurfaceView implements Runnable {
+public class TiradorView extends SurfaceView implements Runnable,OnTouchListener {
 	private int x;
 	private int y;
 	
@@ -125,5 +127,12 @@ public class TiradorView extends SurfaceView implements Runnable {
             }
         }
     }
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		// TODO Auto-generated method stub
+		
+		return false;
+	}
 
 }
