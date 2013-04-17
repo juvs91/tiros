@@ -30,7 +30,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	TiradorView view;
 	int currentView;
 	List<Jugadores> listaJugadores;
-	boolean esPortero = true;
+	boolean esPortero = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +72,8 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		} else {
 			launchGame = new Intent(this, ControladorTirador.class);
 		}
-		startActivity(launchGame);
 		esPortero=!esPortero;
+		startActivity(launchGame);
 	}
 
 	
