@@ -1,7 +1,6 @@
 package com.example.shootgoal;
 
 import android.graphics.Bitmap;
-import android.graphics.Rect;
 
 import java.util.ArrayList;
 import java.util.List;

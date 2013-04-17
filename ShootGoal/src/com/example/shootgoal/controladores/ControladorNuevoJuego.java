@@ -1,36 +1,28 @@
 package com.example.shootgoal.controladores;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.example.shootgoal.R;
-import com.example.shootgoal.modelos.Jugador;
-import com.example.shootgoal.modelos.Jugadores;
-import com.example.shootgoal.vistas.TiradorView;
-
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.view.View.OnClickListener;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.PowerManager.WakeLock;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+
+import com.example.shootgoal.R;
+import com.example.shootgoal.modelos.Jugadores;
+import com.example.shootgoal.vistas.TiradorView;
 
 public class ControladorNuevoJuego  extends Activity implements OnItemClickListener,OnClickListener  {
 	WakeLock wakeLock;
 	TiradorView view;
 	int currentView;
 	List<Jugadores> listaJugadores;
-	boolean esPortero = true;
+	boolean esPortero = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +64,8 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		} else {
 			launchGame = new Intent(this, ControladorTirador.class);
 		}
-		startActivity(launchGame);
 		esPortero=!esPortero;
+		startActivity(launchGame);
 	}
 
 	
