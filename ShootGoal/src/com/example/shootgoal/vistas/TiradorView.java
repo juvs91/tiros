@@ -14,7 +14,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
-public class TiradorView extends SurfaceView implements Runnable,OnTouchListener {
+public class TiradorView extends SurfaceView implements Runnable {
 	private int x;
 	private int y;
 	
@@ -25,6 +25,7 @@ public class TiradorView extends SurfaceView implements Runnable,OnTouchListener
     float tiempoTick = 0, tick = 0.1f;      //Controladores de tiempo
     public Bitmap frameBuffer;						//Objetos Bitmap para el manejo de imagenes
     public Bitmap fondo;
+    public Bitmap porteria;
     Bitmap porteroImagen;
     Bitmap balonImagen;
     Point balonPos;
@@ -40,6 +41,8 @@ public class TiradorView extends SurfaceView implements Runnable,OnTouchListener
         int frameBufferHeight = isLandscape ? 320 : 480;
         //Crea el buffer
         frameBuffer = Bitmap.createBitmap(frameBufferWidth, frameBufferHeight, Config.RGB_565);
+        
+        
 		
 		holder = getHolder();
         //Crea un nuevo objeto canvas con el buffer creado en la Actividad
@@ -80,6 +83,8 @@ public class TiradorView extends SurfaceView implements Runnable,OnTouchListener
             canvas.drawRGB(0, 255, 0);
             Bitmap resized = Bitmap.createScaledBitmap(fondo, frameBuffer.getWidth(), frameBuffer.getHeight(), true);
             canvas.drawBitmap(resized, 0, 0, null);
+            resized= Bitmap.createScaledBitmap(porteria, porteria.getWidth(),porteria.getHeight(), true);
+            
             resized = Bitmap.createScaledBitmap(porteroImagen, porteroImagen.getWidth()/3, porteroImagen.getHeight()/3, true);
             canvas.drawBitmap(resized, porteroPos.x, porteroPos.y, null);
             resized=Bitmap.createScaledBitmap(balonImagen, balonImagen.getWidth()/3, balonImagen.getHeight()/3, true);
@@ -128,11 +133,6 @@ public class TiradorView extends SurfaceView implements Runnable,OnTouchListener
         }
     }
 
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		// TODO Auto-generated method stub
-		
-		return false;
-	}
+	
 
 }
