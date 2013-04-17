@@ -31,11 +31,7 @@
             android:name="com.example.shootgoal.controladores.ControladorMenu"
             android:label="@string/controlador_menu"
             android:screenOrientation="landscape" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.example.shootgoal.controladores.ControladorTirador"
