@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+
 public class TiradorView extends SurfaceView implements Runnable {
 	private int x;
 	private int y;
@@ -126,4 +127,5 @@ public class TiradorView extends SurfaceView implements Runnable {
         }
     }
 
+    
 }
