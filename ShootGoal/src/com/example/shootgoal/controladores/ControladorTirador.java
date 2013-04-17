@@ -5,7 +5,6 @@ import java.io.InputStream;
 
 import com.example.shootgoal.modelos.Portero;
 import com.example.shootgoal.modelos.Tirador;
-import com.example.shootgoal.vistas.PorteroView;
 import com.example.shootgoal.vistas.TiradorView;
 
 import android.app.Activity;
@@ -15,14 +14,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.PowerManager.WakeLock;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 
-public class ControladorTirador extends Activity {
+public class ControladorTirador extends Activity implements OnTouchListener{
 	WakeLock wakeLock;
 	TiradorView viewTirador;
 	Portero portero;
-	float scaleX, scaleY,scaleXBalon, scaleYBalon;
+	float scaleX, scaleY;
 	Tirador tirador;
 	Point point=new Point();
 
@@ -46,15 +48,16 @@ public class ControladorTirador extends Activity {
 			
 		viewTirador= new TiradorView(this);
 		viewTirador.fondo =cuadro;
-
+		viewTirador.setOnTouchListener(this);
+		
 		Point pointBalon=new Point();
 
 		getWindowManager().getDefaultDisplay().getSize(pointBalon);
 
 		
 		
-		scaleXBalon=(float) viewTirador.frameBuffer.getWidth() / pointBalon.x;
-		scaleYBalon=(float) viewTirador.frameBuffer.getHeight() / pointBalon.y;
+		scaleX=(float) viewTirador.frameBuffer.getWidth() / pointBalon.x;
+		scaleY=(float) viewTirador.frameBuffer.getHeight() / pointBalon.y;
 
 
 		Point porteroPos = new Point(viewTirador.frameBuffer.getWidth()/2, viewTirador.frameBuffer.getHeight()/2);
@@ -102,15 +105,20 @@ public class ControladorTirador extends Activity {
 		}
 
 	}
+
+
 	
-	public boolean onTouchEvent(MotionEvent event){
-		point.set((int)(event.getX()),(int)event.getY());
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+    	Point point=new Point();
+		point.set((int)(event.getX()*scaleX-tirador.animacion.getCuadro().getWidth()/3/2),(int)(event.getY()*scaleY-tirador.animacion.getCuadro().getHeight()/3/2));
 		tirador.setPosicion(point);
-		
+		viewTirador.setTiradorScreenContext(tirador.animacion.getCuadro(), tirador.posicion);
+		Log.v("tiro x", String.valueOf(point.x));
+		Log.v("tiro y", String.valueOf(point.y));
 		return true;
-		
+		// TODO Auto-generated method stub
 	}
-	
 
 
 }
