@@ -5,7 +5,6 @@ import java.io.InputStream;
 
 import com.example.shootgoal.modelos.Portero;
 import com.example.shootgoal.modelos.Tirador;
-import com.example.shootgoal.vistas.PorteroView;
 import com.example.shootgoal.vistas.TiradorView;
 
 import android.app.Activity;

@@ -19,14 +19,13 @@ import android.widget.TextView;
  */
 public class ItemAdapter extends BaseAdapter {
 	private static List <Jugadores> itemsList;
-	private LayoutInflater inflator;
 	Context context; 
     int layoutResourceId;
 
 	public ItemAdapter(Context context, int layoutResourceId, List<Jugadores> results) {
 		itemsList = results;
 		this.context = context;
-		inflator = LayoutInflater.from(context);
+		LayoutInflater inflator = LayoutInflater.from(context);
 		this.layoutResourceId = layoutResourceId;
 	}
 	
