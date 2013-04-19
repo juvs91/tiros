@@ -30,27 +30,33 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 	Point point=new Point();
 	private int anchoCancha=0;
 	private int altoCancha=0;
-	private int mitad;
+	private int tercera;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		AssetManager assetManager = getAssets();
-		InputStream is;
-		Bitmap cuadro = null;
+		InputStream is,porteriaImagen;
+		Bitmap cuadro = null,cuadroPorteria=null;
 		try {
 			is = assetManager.open("fondo/FondoShotComp.png");
+			porteriaImagen=assetManager.open("PorteriaAlone.png");
 			cuadro = BitmapFactory.decodeStream(is);
+			cuadroPorteria=BitmapFactory.decodeStream(porteriaImagen);
 			is.close();
+			porteriaImagen.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			//is.close();
 		} 
+		
+		
 			
 		viewTirador= new TiradorView(this);
 		viewTirador.fondo =cuadro;
+		viewTirador.porteria=cuadroPorteria;
 		viewTirador.setOnTouchListener(this);
 		
 		Point pointBalon=new Point();
@@ -66,6 +72,8 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 		Point porteroPos = new Point(viewTirador.frameBuffer.getWidth()/2, viewTirador.frameBuffer.getHeight()/2);
 		portero = new Portero(porteroPos, getAssets());
 		viewTirador.setPorteroScreenContext(portero.animacion.getCuadro(), portero.posicion);
+		
+		
 		Point balonPos = new Point(viewTirador.frameBuffer.getWidth()/2, viewTirador.frameBuffer.getHeight()/2+120);
 		tirador = new Tirador(balonPos, getAssets());
 		viewTirador.setTiradorScreenContext(tirador.animacion.getCuadro(), tirador.posicion);
@@ -101,10 +109,10 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 	
 	private void tiro(Point point){
 		try{
-		viewTirador= new TiradorView(this);
-		anchoCancha=viewTirador.fondo.getWidth();
-		altoCancha=viewTirador.fondo.getHeight();
-		mitad=anchoCancha/2;
+		/*viewTirador= new TiradorView(this);
+		anchoCancha=viewTirador.porteria.getWidth();
+		altoCancha=viewTirador.porteria.getHeight();
+		tercera=anchoCancha/3;*/
 		
 		
 

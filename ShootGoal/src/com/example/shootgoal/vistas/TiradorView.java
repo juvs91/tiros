@@ -11,12 +11,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.view.View.OnTouchListener;
+
 
 public class TiradorView extends SurfaceView implements Runnable {
-	private int x;
-	private int y;
+
 	
 	Thread renderThread = null;             //Thread de la vista
     SurfaceHolder holder;                   //Contenedor de la vista
@@ -30,6 +28,7 @@ public class TiradorView extends SurfaceView implements Runnable {
     Bitmap balonImagen;
     Point balonPos;
     Point porteroPos;
+    Point porteriaPos;
 	public TiradorView(Context context) {
 		super(context);
 		
@@ -41,6 +40,7 @@ public class TiradorView extends SurfaceView implements Runnable {
         int frameBufferHeight = isLandscape ? 320 : 480;
         //Crea el buffer
         frameBuffer = Bitmap.createBitmap(frameBufferWidth, frameBufferHeight, Config.RGB_565);
+        
         
         
 		
@@ -69,6 +69,7 @@ public class TiradorView extends SurfaceView implements Runnable {
 		this.balonImagen = balonImage;
 		this.balonPos = balonPos;
 	}
+	
 
 	@Override
 	public void run() {
@@ -83,12 +84,16 @@ public class TiradorView extends SurfaceView implements Runnable {
             canvas.drawRGB(0, 255, 0);
             Bitmap resized = Bitmap.createScaledBitmap(fondo, frameBuffer.getWidth(), frameBuffer.getHeight(), true);
             canvas.drawBitmap(resized, 0, 0, null);
-            resized= Bitmap.createScaledBitmap(porteria, porteria.getWidth(),porteria.getHeight(), true);
+            
+            resized= Bitmap.createScaledBitmap(porteria, porteria.getWidth()/2,porteria.getHeight()/2, true);
+            canvas.drawBitmap(resized, porteria.getWidth()/15,porteria.getHeight()/8,null);
             
             resized = Bitmap.createScaledBitmap(porteroImagen, porteroImagen.getWidth()/3, porteroImagen.getHeight()/3, true);
             canvas.drawBitmap(resized, porteroPos.x, porteroPos.y, null);
+            
             resized=Bitmap.createScaledBitmap(balonImagen, balonImagen.getWidth()/3, balonImagen.getHeight()/3, true);
             canvas.drawBitmap(resized, balonPos.x, balonPos.y, null);
+            
             Canvas pantalla = holder.lockCanvas();
             
             //Determina la resoluci��n de la pantalla
@@ -114,10 +119,7 @@ public class TiradorView extends SurfaceView implements Runnable {
         //Inicializa el thread de la vista
         renderThread.start();
     }
-    public void posicionTiro(MotionEvent e){
-    	this.x=(int)e.getX();
-    	this.y=(int)e.getY();
-    }
+    
     
     public void pause() {
         //La bandera indica que la Actividad no esta en ejecucion
