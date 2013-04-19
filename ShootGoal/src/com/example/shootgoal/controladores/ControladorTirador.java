@@ -71,6 +71,8 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 
 		Point porteroPos = new Point(viewTirador.frameBuffer.getWidth()/2, viewTirador.frameBuffer.getHeight()/2);
 		portero = new Portero(porteroPos, getAssets());
+		//escoger el portero transparente
+		portero.animacion.indice = 0;
 		viewTirador.setPorteroScreenContext(portero.animacion.getCuadro(), portero.posicion);
 		
 		

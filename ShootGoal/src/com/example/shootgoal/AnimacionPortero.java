@@ -91,7 +91,7 @@ public class AnimacionPortero {
     		if (this.tiempo >= duracion) {
                 //Reinicia la animación
                 this.tiempo = this.tiempo % duracion;
-                indice = 0;
+                indice = 1;
                 return false;
             }
     		

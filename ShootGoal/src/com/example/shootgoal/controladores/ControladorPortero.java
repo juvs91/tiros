@@ -62,6 +62,8 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 
 		Point porteroPos = new Point(view.frameBuffer.getWidth()/2, view.frameBuffer.getHeight()/2);
 		portero = new Portero(porteroPos, getAssets());
+		//escoger portero solido posicion neutral
+		portero.animacion.indice = 1;
 		//view.setPorteroScreenContext(portero.animacion.getCuadro(), portero.posicion);
 		setContentView(view);
 
