@@ -28,7 +28,7 @@ public class TiradorView extends SurfaceView implements Runnable {
     Bitmap balonImagen;
     Point balonPos;
     Point porteroPos;
-    Point porteriaPos;
+
 	public TiradorView(Context context) {
 		super(context);
 		

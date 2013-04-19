@@ -22,7 +22,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	TiradorView view;
 	int currentView;
 	List<Jugadores> listaJugadores;
-	boolean esPortero = false;
+	boolean esPortero = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

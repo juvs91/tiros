@@ -19,13 +19,13 @@ public class Portero extends Jugador{
 		AnimacionPortero animacionPor = new AnimacionPortero();
 		try{
 			InputStream is = null;
-			for (int i = 1; i <= 1; i++) {
-				is = assetManager.open("portero/Mono" + i + ".png");
-				
+			for (int i = 1; i <= 11; i++) {
+				is = assetManager.open("portero/Frente" + i + ".png");
+				cuadro = BitmapFactory.decodeStream(is);
+				is.close();
+				animacionPor.sumaCuadro(cuadro, 0.3);
 			} 
-			cuadro = BitmapFactory.decodeStream(is);
-			is.close();
-			animacionPor.sumaCuadro(cuadro, 5);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

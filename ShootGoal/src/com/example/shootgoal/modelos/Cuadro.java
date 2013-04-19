@@ -9,7 +9,7 @@ import android.graphics.Rect;
  */
 public class Cuadro {
    public Bitmap imagen;           //Imagen del cuadro
-   float tiempo;            //Duración del cuadro
+   public double tiempo;            //Duración del cuadro
    Rect rectangulo;
 
    /**
@@ -30,7 +30,7 @@ public class Cuadro {
     * @param imagen es la imagen del cuadro
     * @param tiempo es la duración del cuadro
     */
-   public Cuadro(Bitmap imagen, float tiempo) {
+   public Cuadro(Bitmap imagen, double tiempo) {
        this.imagen = imagen;
        this.tiempo = tiempo;
        rectangulo = new Rect(0,0,imagen.getWidth(), imagen.getHeight());
