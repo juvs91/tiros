@@ -31,19 +31,23 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		super.onCreate(savedInstanceState);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		AssetManager assetManager = getAssets();
-		InputStream is;
-		Bitmap cuadro = null;
+		InputStream is,porteriaImagen;
+		Bitmap cuadro = null,cuadroPorteria=null;
 		try {
 			is = assetManager.open("fondo/FondoShotComp.png");
+			porteriaImagen=assetManager.open("PorteriaAlone.png");
 			cuadro = BitmapFactory.decodeStream(is);
+			cuadroPorteria=BitmapFactory.decodeStream(porteriaImagen);
 			is.close();
+			porteriaImagen.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			//is.close();
 		} 
 		view = new PorteroView(this);
-		view.fondo = cuadro;		
+		view.fondo = cuadro;	
+		view.porteria=cuadroPorteria;
 		view.controlador = this;
 		view.setOnTouchListener(this);
 		

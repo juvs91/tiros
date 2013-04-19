@@ -22,6 +22,7 @@ public class PorteroView extends SurfaceView implements Runnable {
     float tiempoTick = 0, tick = 0.1f;      //Controladores de tiempo
     public Bitmap frameBuffer;				//Objetos Bitmap para el manejo de im��genes
     public Bitmap fondo;
+    public Bitmap porteria;
     //Bitmap porteroImagen;
     //Point porteroPos;
     public ControladorPortero controlador;
@@ -93,10 +94,15 @@ public class PorteroView extends SurfaceView implements Runnable {
             canvas.drawBitmap(resized, 0, 0, null);
             //resized = Bitmap.createScaledBitmap(porteroImagen, porteroImagen.getWidth()/3, porteroImagen.getHeight()/3, true);
             //canvas.drawBitmap(resized, porteroPos.x, porteroPos.y, null);
+            resized= Bitmap.createScaledBitmap(porteria, porteria.getWidth()/2,porteria.getHeight()/2, true);
+            canvas.drawBitmap(resized, porteria.getWidth()/15,porteria.getHeight()/8,null);
+            
             Bitmap porteroImagen = controlador.portero.animacion.getCuadro();
             resized = Bitmap.createScaledBitmap(porteroImagen, porteroImagen.getWidth()/3, porteroImagen.getHeight()/3, true);
             canvas.drawBitmap(resized, controlador.portero.posicion.x, controlador.portero.posicion.y, null);
             Canvas pantalla = holder.lockCanvas();
+            
+            
             
             //Determina la resolucin de la pantalla
             pantalla.getClipBounds(dstRect);
