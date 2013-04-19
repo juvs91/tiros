@@ -16,8 +16,8 @@ import com.example.shootgoal.modelos.Cuadro;
 public class AnimacionPortero {
     public List<Cuadro> cuadros;            //Lista de objetos Cuadro para los cuadros de la animación
     public int indice;                      //Índice del cuadro actual
-    public float tiempo;                    //Tiempo transcurrido
-    public float duracion;                  //Duración de la animación
+    public double tiempo;                    //Tiempo transcurrido
+    public double duracion;                  //Duración de la animación
 
     /**
      * Método constructor de la clase Animacion
@@ -40,7 +40,7 @@ public class AnimacionPortero {
      * @param imagen es la imagen del cuadro
      * @param duracion es el tiempo que se muestra el cuadro
      */
-    public synchronized void sumaCuadro(Bitmap imagen, float duracion) {
+    public synchronized void sumaCuadro(Bitmap imagen, double duracion) {
         //Agrega la duración del cuadro a la duración de la animación
         this.duracion += duracion;
         //Crea un nuevo cuadro y lo agrega a la animación
@@ -84,14 +84,24 @@ public class AnimacionPortero {
         }
     }*/
     
-    public synchronized void pararEnLaIzquierda(float tiempo){
+    public synchronized boolean pararEnLaIzquierda(double tiempo){
     	if(cuadros.size() > 1){
     		this.tiempo += tiempo;
     		
-    		if (this.tiempo < duracion){
-    			
+    		if (this.tiempo >= duracion) {
+                //Reinicia la animación
+                this.tiempo = this.tiempo % duracion;
+                indice = 0;
+                return false;
+            }
+    		
+    		while (this.tiempo > cuadros.get(indice).tiempo){
+    			indice ++;
     		}
+    		
+    		
     	}
+    	return true;
     }
 
     /**

@@ -28,6 +28,8 @@ public class TiradorView extends SurfaceView implements Runnable {
     Bitmap balonImagen;
     Point balonPos;
     Point porteroPos;
+    
+    
 	public TiradorView(Context context) {
 		super(context);
 		
@@ -81,7 +83,7 @@ public class TiradorView extends SurfaceView implements Runnable {
             canvas.drawBitmap(resized, 0, 0, null);
             resized = Bitmap.createScaledBitmap(porteroImagen, porteroImagen.getWidth()/3, porteroImagen.getHeight()/3, true);
             canvas.drawBitmap(resized, porteroPos.x, porteroPos.y, null);
-            resized=Bitmap.createScaledBitmap(balonImagen, balonImagen.getWidth()/3, balonImagen.getHeight()/3, true);
+            resized = Bitmap.createScaledBitmap(balonImagen, balonImagen.getWidth()/3, balonImagen.getHeight()/3, true);
             canvas.drawBitmap(resized, balonPos.x, balonPos.y, null);
             Canvas pantalla = holder.lockCanvas();
             
