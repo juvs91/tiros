@@ -1,11 +1,11 @@
-package com.example.shootgoal.controladores;
+package shootgoal.controladores;
 
 import java.io.IOException;
 import java.io.InputStream;
+import shootgoal.modelos.Porteria;
+import shootgoal.modelos.Portero;
+import shootgoal.vistas.PorteroView;
 
-import com.example.shootgoal.modelos.Porteria;
-import com.example.shootgoal.modelos.Portero;
-import com.example.shootgoal.vistas.PorteroView;
 
 
 import android.app.Activity;

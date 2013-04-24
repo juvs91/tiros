@@ -1,12 +1,26 @@
-package com.example.shootgoal.controladores;
+package shootgoal.controladores;
 
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.example.shootgoal.modelos.Portero;
-import com.example.shootgoal.modelos.Tirador;
-import com.example.shootgoal.vistas.TiradorView;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+
+import shootgoal.modelos.Portero;
+import shootgoal.modelos.Tirador;
+import shootgoal.vistas.TiradorView;
+
 
 import android.app.Activity;
 import android.content.res.AssetManager;
@@ -111,13 +125,25 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 	
 	private void tiro(Point point){
 		try{
-		/*viewTirador= new TiradorView(this);
+		/*
 		anchoCancha=viewTirador.porteria.getWidth();
 		altoCancha=viewTirador.porteria.getHeight();
 		*/
 		
-		
-
+		//se empiesa a madnar los datos del tiro 
+		HttpClient client = new DefaultHttpClient();  
+		String postURL = "http://localhost/servidorShootGoal/tirador.php";
+		HttpPost post = new HttpPost(postURL); 
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tiro", "valorDelTiro"));
+        UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params,HTTP.UTF_8);
+        post.setEntity(ent);
+        HttpResponse responsePOST = client.execute(post);  
+        HttpEntity resEntity = responsePOST.getEntity();  
+        Log.v("entro en tiro","asdf");
+        if (resEntity != null) {    
+            Log.i("RESPONSE",EntityUtils.toString(resEntity));
+        }
 
 		}catch(Exception e){
 

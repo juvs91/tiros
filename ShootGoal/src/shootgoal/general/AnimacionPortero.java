@@ -1,11 +1,12 @@
-package com.example.shootgoal;
+package shootgoal.general;
 
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.shootgoal.modelos.Cuadro;
+import shootgoal.modelos.Cuadro;
+
 
 /**
  * Clase Animacion
@@ -88,9 +89,9 @@ public class AnimacionPortero {
     	if(cuadros.size() > 1){
     		this.tiempo += tiempo;
     		
-    		if (this.tiempo >= duracion-0.3*6) {
+    		if (this.tiempo >= duracion-0.3*10) {
                 //Reinicia la animación
-                this.tiempo = this.tiempo % (duracion-0.3*6);
+                this.tiempo = this.tiempo % (duracion-0.3*10);
                 indice = 1;
                 return false;
             }
@@ -116,9 +117,9 @@ public class AnimacionPortero {
             }
     		
     		while (this.tiempo > cuadros.get(indice).tiempo){
-    			if(indice == 5){
+    			if(indice == 1){
     				indice = 12;
-    				this.tiempo += 0.3*6;
+    				this.tiempo += 0.3*10;
     			} else {
     				indice ++;
     			}

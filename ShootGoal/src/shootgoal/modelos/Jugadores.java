@@ -1,4 +1,4 @@
-package com.example.shootgoal.modelos;
+package shootgoal.modelos;
 
 public class Jugadores {
 	private String nombre;

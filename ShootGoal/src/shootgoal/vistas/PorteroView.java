@@ -1,7 +1,7 @@
-package com.example.shootgoal.vistas;
+package shootgoal.vistas;
 
 
-import com.example.shootgoal.controladores.ControladorPortero;
+import shootgoal.controladores.ControladorPortero;
 
 import android.content.Context;
 import android.content.res.Configuration;

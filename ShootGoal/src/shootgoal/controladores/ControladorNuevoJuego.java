@@ -1,7 +1,10 @@
-package com.example.shootgoal.controladores;
+package shootgoal.controladores;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import shootgoal.modelos.Jugadores;
+import shootgoal.vistas.TiradorView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,9 +16,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.example.shootgoal.R;
-import com.example.shootgoal.modelos.Jugadores;
-import com.example.shootgoal.vistas.TiradorView;
+import shootgoal.build.R;
 
 public class ControladorNuevoJuego  extends Activity implements OnItemClickListener,OnClickListener  {
 	WakeLock wakeLock;
