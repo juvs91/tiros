@@ -1,23 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="fill_parent"
+     android:id="@+id/list_item_lo"
+     android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:layout_alignLeft="@+id/textView2"
      android:layout_below="@+id/textView2"
-     android:orientation="vertical" >
+     android:baselineAligned="false"
+     android:gravity="fill_horizontal"
+     android:orientation="horizontal" 
+     android:descendantFocusability="blocksDescendants">
+
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:gravity="left" >
+
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:orientation="vertical" >
+
+             <ImageButton
+                 android:id="@+id/butPlay"
+                 android:layout_width="62dp"
+                 android:layout_height="match_parent"
+                 android:background="@color/transparent"
+                 android:src="@drawable/player_icon" />
+         </LinearLayout>
+     </LinearLayout>
 
      <TextView
          android:id="@+id/textView1"
          android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="Large Text"
+         android:layout_height="match_parent"
+         android:layout_weight="0.60"
+         android:text="@string/Player"
          android:textAppearance="?android:attr/textAppearanceLarge" />
 
-     <TextView
-         android:id="@+id/textView2"
+     <LinearLayout
          android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="Small Text"
-         android:textAppearance="?android:attr/textAppearanceSmall" />
+         android:layout_height="58dp"
+         android:gravity="left|right" >
+
+         <TextView
+             android:id="@+id/textView2"
+             android:layout_width="100dp"
+             android:layout_height="match_parent"
+             android:text="@string/score"
+             android:textAppearance="?android:attr/textAppearanceLarge" />
+     </LinearLayout>
+
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="match_parent"
+         android:gravity="right" >
+
+         <ImageButton
+             android:id="@+id/imgBtnStatus"
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:background="@color/transparent"
+             android:src="@drawable/status" />
+
+         <ImageButton
+             android:id="@+id/imgBtnGoal"
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:background="@color/transparent"
+             android:src="@drawable/ic_ball" />
+
+         <ImageButton
+             android:id="@+id/imgBtnBall"
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:background="@color/transparent"
+             android:src="@drawable/ic_shoot" />
+     </LinearLayout>
 
  </LinearLayout>

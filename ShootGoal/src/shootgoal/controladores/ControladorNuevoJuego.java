@@ -10,20 +10,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PowerManager.WakeLock;
+import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import shootgoal.build.R;
 
-public class ControladorNuevoJuego  extends Activity implements OnItemClickListener,OnClickListener  {
+public class ControladorNuevoJuego  extends Activity implements 
+	OnItemClickListener  {
 	WakeLock wakeLock;
 	TiradorView view;
 	int currentView;
 	List<Jugadores> listaJugadores;
-	boolean esPortero = true;
+	boolean esPortero = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,9 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		setContentView(R.layout.nuevo_juego);
 		listaJugadores=new LinkedList<Jugadores>();
 		Jugadores jugador=new Jugadores(100,"gordo",1);
+		Jugadores jugador2 = new Jugadores(9999, "tu mama", 0);
 		listaJugadores.add(jugador);
+		listaJugadores.add(jugador2);
 		currentView = R.layout.nuevo_juego;
 		final ListView lv = (ListView) findViewById(R.id.mylistview);
 		lv.setAdapter(new ItemAdapter(this, R.layout.list_item ,listaJugadores));
@@ -44,10 +47,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		lv.setOnItemClickListener(this);
 		//setContentView(R.layout.nuevo_juego);
 	}
-	public void onClick(View view) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
 		// TODO Auto-generated method stub
@@ -56,13 +56,15 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		launchGame = new Intent(this, ControladorPortero.class);
 		startActivity(launchGame);*/
 		//Intent launchGame = new Intent(this,ControladorTirador.class);
-			
+		Log.v("Hoolis", "Entre on click");
 
 		Intent launchGame = null;
 
 		if(esPortero){
+			Log.v("Hoolis", "Soy portero");
 			launchGame = new Intent(this, ControladorPortero.class);
 		} else {
+			Log.v("Hoolis", "No soy portero");
 			launchGame = new Intent(this, ControladorTirador.class);
 		}
 		esPortero=!esPortero;
