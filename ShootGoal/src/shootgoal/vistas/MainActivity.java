@@ -1,14 +1,14 @@
-package com.example.shootgoal.vistas;
+package shootgoal.vistas;
 
 
 
+import shootgoal.controladores.ControladorMenu;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
 import com.example.shootgoal.R;
-import com.example.shootgoal.controladores.ControladorMenu;
 
 public class MainActivity extends Activity{
 

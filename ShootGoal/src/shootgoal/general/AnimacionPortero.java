@@ -1,11 +1,12 @@
-package com.example.shootgoal;
+package shootgoal.general;
 
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.shootgoal.modelos.Cuadro;
+import shootgoal.modelos.Cuadro;
+
 
 /**
  * Clase Animacion

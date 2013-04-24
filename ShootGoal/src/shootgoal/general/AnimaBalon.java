@@ -1,9 +1,10 @@
-package com.example.shootgoal;
+package shootgoal.general;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.shootgoal.modelos.Cuadro;
+import shootgoal.modelos.Cuadro;
+
 
 import android.graphics.Bitmap;
 

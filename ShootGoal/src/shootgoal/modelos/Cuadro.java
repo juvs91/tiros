@@ -1,4 +1,4 @@
-package com.example.shootgoal.modelos;
+package shootgoal.modelos;
 
 import android.graphics.Bitmap;
 import android.graphics.Rect;

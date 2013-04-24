@@ -1,4 +1,4 @@
-package com.example.shootgoal.vistas;
+package shootgoal.vistas;
 
 import android.content.Context;
 import android.content.res.Configuration;
