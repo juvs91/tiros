@@ -114,7 +114,7 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 		/*viewTirador= new TiradorView(this);
 		anchoCancha=viewTirador.porteria.getWidth();
 		altoCancha=viewTirador.porteria.getHeight();
-		tercera=anchoCancha/3;*/
+		*/
 		
 		
 

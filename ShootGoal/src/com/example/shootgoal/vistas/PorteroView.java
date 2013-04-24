@@ -22,11 +22,12 @@ public class PorteroView extends SurfaceView implements Runnable {
     float tiempoTick = 0, tick = 0.1f;      //Controladores de tiempo
     public Bitmap frameBuffer;				//Objetos Bitmap para el manejo de im��genes
     public Bitmap fondo;
-    public Bitmap porteria;
+    //public Bitmap porteria;
     //Bitmap porteroImagen;
     //Point porteroPos;
     public ControladorPortero controlador;
     public boolean paraPorIzquierda = false;
+    public boolean paraPorDerecha = false;
     public boolean bloqueado = false;
     
     
@@ -87,6 +88,10 @@ public class PorteroView extends SurfaceView implements Runnable {
             	bloqueado = paraPorIzquierda = controlador.portero.animacion.pararEnLaIzquierda(tiempo);
             }
             
+            if(paraPorDerecha){
+            	bloqueado = paraPorDerecha = controlador.portero.animacion.pararEnLaDerecha(tiempo);
+            }
+            
             //Pinta un fondo amarillo
             //canvas.drawRGB(200, 200, 245);
             //canvas.drawRGB(0, 255, 0);
@@ -94,8 +99,9 @@ public class PorteroView extends SurfaceView implements Runnable {
             canvas.drawBitmap(resized, 0, 0, null);
             //resized = Bitmap.createScaledBitmap(porteroImagen, porteroImagen.getWidth()/3, porteroImagen.getHeight()/3, true);
             //canvas.drawBitmap(resized, porteroPos.x, porteroPos.y, null);
-            resized= Bitmap.createScaledBitmap(porteria, porteria.getWidth()/2,porteria.getHeight()/2, true);
-            canvas.drawBitmap(resized, porteria.getWidth()/15,porteria.getHeight()/8,null);
+            Bitmap porteriaImagen = controlador.porteria.imagen;
+            resized= Bitmap.createScaledBitmap(porteriaImagen, porteriaImagen.getWidth()/2,porteriaImagen.getHeight()/2, true);
+            canvas.drawBitmap(resized, controlador.porteria.posicion.x , controlador.porteria.posicion.y,null);
             
             Bitmap porteroImagen = controlador.portero.animacion.getCuadro();
             resized = Bitmap.createScaledBitmap(porteroImagen, porteroImagen.getWidth()/3, porteroImagen.getHeight()/3, true);
