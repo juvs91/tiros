@@ -24,7 +24,7 @@ public class ControladorNuevoJuego  extends Activity implements
 	TiradorView view;
 	int currentView;
 	List<Jugadores> listaJugadores;
-	boolean esPortero = false;
+	boolean esPortero;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class ControladorNuevoJuego  extends Activity implements
 		
 	}
 	public void init(){
+		esPortero = true;
 		setContentView(R.layout.nuevo_juego);
 		listaJugadores=new LinkedList<Jugadores>();
 		Jugadores jugador=new Jugadores(100,"Eleazar Cortes",1);
