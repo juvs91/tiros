@@ -14,5 +14,8 @@
 
     <string name="ScoreStr">Score</string>
     <string name="AboutStr">About</string>
+    <string name="Player">New player</string>
+    <string name="score">-999999</string>
+    <color name="transparent">#00FFFFFF</color>
 
 </resources>

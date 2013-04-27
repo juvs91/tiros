@@ -29,6 +29,7 @@ public class PorteroView extends SurfaceView implements Runnable {
     public boolean paraPorIzquierda = false;
     public boolean paraPorDerecha = false;
     public boolean bloqueado = false;
+    public Bitmap botonGo;
     
     
 	public PorteroView(Context context) {
@@ -83,20 +84,31 @@ public class PorteroView extends SurfaceView implements Runnable {
             float tiempo = (System.nanoTime() - tiempoI) / 1000000000.0f;
             //Obtiene el tiempo actual
             tiempoI = System.nanoTime();
+            
+            Bitmap resized = Bitmap.createScaledBitmap(fondo, frameBuffer.getWidth(), frameBuffer.getHeight(), true);
+            canvas.drawBitmap(resized, 0, 0, null);
 
+            if(!bloqueado){
+            	resized = Bitmap.createScaledBitmap(botonGo, botonGo.getWidth()/5, botonGo.getHeight()/5, true);
+            	canvas.drawBitmap(resized, frameBuffer.getWidth()-resized.getWidth()-20, frameBuffer.getHeight()-resized.getHeight()-20, null);
+            }
+            
             if(paraPorIzquierda){
             	bloqueado = paraPorIzquierda = controlador.portero.animacion.pararEnLaIzquierda(tiempo);
+            	if(!bloqueado) controlador.finish();
             }
             
             if(paraPorDerecha){
             	bloqueado = paraPorDerecha = controlador.portero.animacion.pararEnLaDerecha(tiempo);
+            	if(!bloqueado) controlador.finish();
             }
             
             //Pinta un fondo amarillo
             //canvas.drawRGB(200, 200, 245);
             //canvas.drawRGB(0, 255, 0);
-            Bitmap resized = Bitmap.createScaledBitmap(fondo, frameBuffer.getWidth(), frameBuffer.getHeight(), true);
-            canvas.drawBitmap(resized, 0, 0, null);
+            
+            
+            
             //resized = Bitmap.createScaledBitmap(porteroImagen, porteroImagen.getWidth()/3, porteroImagen.getHeight()/3, true);
             //canvas.drawBitmap(resized, porteroPos.x, porteroPos.y, null);
             Bitmap porteriaImagen = controlador.porteria.imagen;
