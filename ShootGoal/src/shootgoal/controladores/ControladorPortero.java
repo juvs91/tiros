@@ -27,7 +27,12 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 	public Portero portero;
 	public Porteria porteria;
 	float scaleX, scaleY;
-
+	public enum ControllerStatus{
+		juegoAnteriorAnimacion, juegoActualDecidiendoPosicion, juegoActualAnimacion
+	} 
+	public ControllerStatus status;
+	public Bitmap botonGo;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,6 +44,8 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			is = assetManager.open("fondo/FondoShotComp.png");
 			//porteriaImagen=assetManager.open("PorteriaAlone.png");
 			cuadro = BitmapFactory.decodeStream(is);
+			is = assetManager.open("porteritoNaranjaGo.png");
+			botonGo = BitmapFactory.decodeStream(is);
 			//cuadroPorteria=BitmapFactory.decodeStream(porteriaImagen);
 			is.close();
 			//porteriaImagen.close();
@@ -47,8 +54,10 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			e.printStackTrace();
 			//is.close();
 		} 
+		
 		view = new PorteroView(this);
-		view.fondo = cuadro;	
+		view.fondo = cuadro;
+		view.botonGo = botonGo;
 		//view.porteria=cuadroPorteria;
 		view.controlador = this;
 		view.setOnTouchListener(this);
@@ -68,6 +77,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		porteria = new Porteria(porteriaPos, getAssets());
 		//escoger portero solido posicion neutral
 		portero.animacion.indice = 1;
+		status = ControllerStatus.juegoActualDecidiendoPosicion;
 		//view.setPorteroScreenContext(portero.animacion.getCuadro(), portero.posicion);
 		setContentView(view);
 
@@ -89,7 +99,94 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		super.onResume();
 		view.resume();
 	}
+	
+	public Point obtenerCoordenadasReales(Portero.PosicionRelativa posicionRelativa){
+		Point punto = new Point();
+		
+		int porteriaOrigenX = porteria.posicion.x;
+		int porteriaScaledWidth = porteria.imagen.getWidth()/2;
+		int porteriaExtremoX = porteriaOrigenX + porteriaScaledWidth;
+		int porteriaOrigenY = porteria.posicion.y;
+		int porteriaScaledHeight = porteria.imagen.getHeight()/2;
+		int porteriaExtremoY = porteriaOrigenY + porteriaScaledHeight;
+		
+		//punto.y = (porteriaExtremoY-porteriaOrigenY)/2+porteriaOrigenY;
+		punto.y = view.frameBuffer.getHeight()/2;
+		
+		switch(posicionRelativa){
+			case IZQUIERDA:
+				punto.x = (int)(porteriaScaledWidth/3) - 25 + porteriaOrigenX;
+			break;
+			case CENTRO:
+				punto.x = porteriaScaledWidth/2 + porteriaOrigenX;
+			break;
+			case DERECHA:
+				punto.x = porteriaExtremoX - (int)(porteriaScaledWidth/3) + 25;
+			break;
+		}
+		return punto;
+	}
+	
+	public Portero.PosicionRelativa posicionRelativaBasadaEnPuntoReal(Point touchPoint){
+		int porteriaOrigenX = porteria.posicion.x;
+		int porteriaExtremoX = porteriaOrigenX + porteria.imagen.getWidth()/2;
+		int porteriaOrigenY = porteria.posicion.y;
+		int porteriaExtremoY = porteriaOrigenY + porteria.imagen.getHeight()/2;
+		if((touchPoint.x < porteriaOrigenX) || (touchPoint.x > porteriaExtremoX) || (touchPoint.y < porteriaOrigenY) || (touchPoint.y > porteriaExtremoY)){
+			Log.v("dentroDePorteria","no");
+			return Portero.PosicionRelativa.FUERA;
+		} else {
+			Log.v("dentroDePorteria", "si");
+			int tama–oDivisionX = porteria.imagen.getWidth()/2/3;
+			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tama–oDivisionX){
+				/*if(!view.bloqueado){
+					view.paraPorIzquierda = true;
+				}*/
+				return Portero.PosicionRelativa.IZQUIERDA;
+			} else if(touchPoint.x >= porteriaExtremoX-tama–oDivisionX && touchPoint.x <= porteriaExtremoX){
+				/*if(!view.bloqueado){
+					view.paraPorDerecha = true;
+				}*/
+				return Portero.PosicionRelativa.DERECHA;
+			} else {
+				return Portero.PosicionRelativa.CENTRO;
+			}
+		}
+	}
 
+	public void moverPorteroAPosicionElegida(Point touchPoint){
+		if(!view.bloqueado){
+		Point punto = null;
+		Portero.PosicionRelativa posRel = posicionRelativaBasadaEnPuntoReal(touchPoint);
+		if(posRel!=Portero.PosicionRelativa.FUERA){
+			punto = obtenerCoordenadasReales(posRel);
+			punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
+			portero.posicion = punto;
+			portero.posRelativa = posRel;
+			return;
+		}
+		//si se dio click en el boton
+		if((touchPoint.x >= view.frameBuffer.getWidth()-botonGo.getWidth()/5-20 && touchPoint.x <= view.frameBuffer.getWidth()-20)
+				|| (touchPoint.y >= view.frameBuffer.getHeight()-botonGo.getHeight()/5-20 && touchPoint.y <= view.frameBuffer.getHeight()-20)){
+			switch(portero.posRelativa){
+				case IZQUIERDA: 
+					portero.posRelativa = Portero.PosicionRelativa.CENTRO;
+					punto = obtenerCoordenadasReales(portero.posRelativa);
+					punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
+					portero.posicion = punto;
+					view.paraPorIzquierda = true;
+					break;
+				case DERECHA:
+					portero.posRelativa = Portero.PosicionRelativa.CENTRO;
+					punto = obtenerCoordenadasReales(portero.posRelativa);
+					punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
+					portero.posicion = punto;
+					view.paraPorDerecha = true;
+			}
+		}
+		}
+	}
+	
 	@Override
 	public boolean onTouch(View v, MotionEvent event){
 		Point point=new Point();
@@ -98,11 +195,13 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		Log.v("tiro y", String.valueOf(point.y));
 		Point touchPoint = new Point();
 		touchPoint.set((int)(event.getX()*scaleX), (int)(event.getY()*scaleY));
-		int porteriaOrigenX = porteria.posicion.x;
-		int porteriaExtremoX = porteriaOrigenX + porteria.imagen.getWidth()/2;
-		int porteriaOrigenY = porteria.posicion.y;
-		int porteriaExtremoY = porteriaOrigenY + porteria.imagen.getHeight()/2;
-		if((touchPoint.x < porteriaOrigenX) || (touchPoint.x > porteriaExtremoX) || (touchPoint.y < porteriaOrigenY) || (touchPoint.y > porteriaExtremoY)){
+		
+		if(status==ControllerStatus.juegoActualDecidiendoPosicion){
+			moverPorteroAPosicionElegida(touchPoint);
+		}
+		
+		
+		/*if((touchPoint.x < porteriaOrigenX) || (touchPoint.x > porteriaExtremoX) || (touchPoint.y < porteriaOrigenY) || (touchPoint.y > porteriaExtremoY)){
 			Log.v("dentroDePorteria","no");
 		} else {
 			Log.v("dentroDePorteria", "si");
@@ -116,7 +215,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 					view.paraPorDerecha = true;
 				}
 			}
-		}
+		}*/
 		return true;
 	}
 }
