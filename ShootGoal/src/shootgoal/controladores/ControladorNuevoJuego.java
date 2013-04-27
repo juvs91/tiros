@@ -36,10 +36,12 @@ public class ControladorNuevoJuego  extends Activity implements
 	public void init(){
 		setContentView(R.layout.nuevo_juego);
 		listaJugadores=new LinkedList<Jugadores>();
-		Jugadores jugador=new Jugadores(100,"gordo",1);
-		Jugadores jugador2 = new Jugadores(9999, "tu mama", 0);
+		Jugadores jugador=new Jugadores(100,"Eleazar Cortes",1);
+		Jugadores jugador2 = new Jugadores(9999, "Carlos Compean", 0);
+		Jugadores jugador3 = new Jugadores (1234, "David Turing", 1);
 		listaJugadores.add(jugador);
 		listaJugadores.add(jugador2);
+		listaJugadores.add(jugador3);
 		currentView = R.layout.nuevo_juego;
 		final ListView lv = (ListView) findViewById(R.id.mylistview);
 		lv.setAdapter(new ItemAdapter(this, R.layout.list_item ,listaJugadores));
