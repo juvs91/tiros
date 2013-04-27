@@ -1,9 +1,10 @@
-package com.example.shootgoal.modelos;
+package shootgoal.modelos;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.example.shootgoal.AnimacionPortero;
+import shootgoal.general.AnimacionPortero;
+
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -19,7 +20,7 @@ public class Portero extends Jugador{
 		AnimacionPortero animacionPor = new AnimacionPortero();
 		try{
 			InputStream is = null;
-			for (int i = 0; i <= 11; i++) {
+			for (int i = 0; i <= 21; i++) {
 				is = assetManager.open("portero/Frente" + i + ".png");
 				cuadro = BitmapFactory.decodeStream(is);
 				is.close();
@@ -27,6 +28,7 @@ public class Portero extends Jugador{
 					animacionPor.sumaCuadro(cuadro, 0.3);
 				} else {
 					animacionPor.sumaCuadro(cuadro, 0);
+					//animacion.duracion -= 0.3;
 				}
 			} 
 			

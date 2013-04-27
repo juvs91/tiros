@@ -1,10 +1,11 @@
-package com.example.shootgoal.controladores;
+package shootgoal.controladores;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.example.shootgoal.R;
-import com.example.shootgoal.vistas.MenuView;
+import shootgoal.vistas.MenuView;
+
+import shootgoal.build.R;
 
 import android.app.Activity;
 import android.content.Intent;

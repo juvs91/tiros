@@ -1,10 +1,11 @@
-package com.example.shootgoal.controladores;
+package shootgoal.controladores;
 
 import java.io.IOException;
 import java.io.InputStream;
+import shootgoal.modelos.Porteria;
+import shootgoal.modelos.Portero;
+import shootgoal.vistas.PorteroView;
 
-import com.example.shootgoal.modelos.Portero;
-import com.example.shootgoal.vistas.PorteroView;
 
 
 import android.app.Activity;
@@ -24,6 +25,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 	WakeLock wakeLock;
 	PorteroView view;
 	public Portero portero;
+	public Porteria porteria;
 	float scaleX, scaleY;
 
 	@Override
@@ -31,15 +33,15 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		super.onCreate(savedInstanceState);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		AssetManager assetManager = getAssets();
-		InputStream is,porteriaImagen;
-		Bitmap cuadro = null,cuadroPorteria=null;
+		InputStream is;
+		Bitmap cuadro = null;
 		try {
 			is = assetManager.open("fondo/FondoShotComp.png");
-			porteriaImagen=assetManager.open("PorteriaAlone.png");
+			//porteriaImagen=assetManager.open("PorteriaAlone.png");
 			cuadro = BitmapFactory.decodeStream(is);
-			cuadroPorteria=BitmapFactory.decodeStream(porteriaImagen);
+			//cuadroPorteria=BitmapFactory.decodeStream(porteriaImagen);
 			is.close();
-			porteriaImagen.close();
+			//porteriaImagen.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,7 +49,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		} 
 		view = new PorteroView(this);
 		view.fondo = cuadro;	
-		view.porteria=cuadroPorteria;
+		//view.porteria=cuadroPorteria;
 		view.controlador = this;
 		view.setOnTouchListener(this);
 		
@@ -62,6 +64,8 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 
 		Point porteroPos = new Point(view.frameBuffer.getWidth()/2, view.frameBuffer.getHeight()/2);
 		portero = new Portero(porteroPos, getAssets());
+		Point porteriaPos = new Point(view.frameBuffer.getWidth()/2, view.frameBuffer.getHeight()/2-25);
+		porteria = new Porteria(porteriaPos, getAssets());
 		//escoger portero solido posicion neutral
 		portero.animacion.indice = 1;
 		//view.setPorteroScreenContext(portero.animacion.getCuadro(), portero.posicion);
@@ -90,31 +94,29 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 	public boolean onTouch(View v, MotionEvent event){
 		Point point=new Point();
 		point.set((int)(event.getX()*scaleX-portero.animacion.getCuadro().getWidth()/3/2),(int)(event.getY()*scaleY-portero.animacion.getCuadro().getHeight()/3/2));
-		if(!view.bloqueado){
-			view.paraPorIzquierda = true;
-		}
 		Log.v("tiro x", String.valueOf(point.x));
 		Log.v("tiro y", String.valueOf(point.y));
-		//Maneja los eventos de contacto
-		/*switch (event.getAction()) {
-		//Cuando se hace contacto con el dedo
-		case MotionEvent.ACTION_DOWN:
-			//
-			break;
-			//Cuando se mueve el dedo haciendo contacto
-		case MotionEvent.ACTION_MOVE:
-			//
-			break;
-		case MotionEvent.ACTION_CANCEL:
-			//
-			break;
-			//Cuando se deja de hacer contacto
-		case MotionEvent.ACTION_UP:
-			//Cambia la direccin de movimiento del objeto Elefante
-			//dependiendo del punto de contacto
-			portero.posicion.x = (int)(event.getX() * scaleX);
-			portero.posicion.y = (int)(event.getY() * scaleY);
-		}*/
+		Point touchPoint = new Point();
+		touchPoint.set((int)(event.getX()*scaleX), (int)(event.getY()*scaleY));
+		int porteriaOrigenX = porteria.posicion.x;
+		int porteriaExtremoX = porteriaOrigenX + porteria.imagen.getWidth()/2;
+		int porteriaOrigenY = porteria.posicion.y;
+		int porteriaExtremoY = porteriaOrigenY + porteria.imagen.getHeight()/2;
+		if((touchPoint.x < porteriaOrigenX) || (touchPoint.x > porteriaExtremoX) || (touchPoint.y < porteriaOrigenY) || (touchPoint.y > porteriaExtremoY)){
+			Log.v("dentroDePorteria","no");
+		} else {
+			Log.v("dentroDePorteria", "si");
+			int tama–oDivisionX = porteria.imagen.getWidth()/2/3;
+			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tama–oDivisionX){
+				if(!view.bloqueado){
+					view.paraPorIzquierda = true;
+				}
+			} else if(touchPoint.x >= porteriaExtremoX-tama–oDivisionX && touchPoint.x <= porteriaExtremoX){
+				if(!view.bloqueado){
+					view.paraPorDerecha = true;
+				}
+			}
+		}
 		return true;
 	}
 }

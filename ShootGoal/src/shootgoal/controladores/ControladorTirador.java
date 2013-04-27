@@ -1,4 +1,4 @@
-package com.example.shootgoal.controladores;
+package shootgoal.controladores;
 
 import java.io.Console;
 import java.io.IOException;
@@ -17,9 +17,10 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-import com.example.shootgoal.modelos.Portero;
-import com.example.shootgoal.modelos.Tirador;
-import com.example.shootgoal.vistas.TiradorView;
+import shootgoal.modelos.Portero;
+import shootgoal.modelos.Tirador;
+import shootgoal.vistas.TiradorView;
+
 
 import android.app.Activity;
 import android.content.res.AssetManager;
@@ -129,7 +130,7 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 		/*
 		anchoCancha=viewTirador.porteria.getWidth();
 		altoCancha=viewTirador.porteria.getHeight();
-		tercera=anchoCancha/3;*/
+		*/
 		
 		//se empiesa a madnar los datos del tiro 
 		HttpClient client = new DefaultHttpClient();  

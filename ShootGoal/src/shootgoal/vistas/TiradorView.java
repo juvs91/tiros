@@ -1,4 +1,4 @@
-package com.example.shootgoal.vistas;
+package shootgoal.vistas;
 
 import com.example.shootgoal.controladores.ControladorTirador;
 
