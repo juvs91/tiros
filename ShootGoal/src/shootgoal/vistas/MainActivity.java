@@ -2,13 +2,12 @@ package shootgoal.vistas;
 
 
 
+import shootgoal.build.R;
 import shootgoal.controladores.ControladorMenu;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
-
-import shootgoal.build.R;
 
 public class MainActivity extends Activity{
 
