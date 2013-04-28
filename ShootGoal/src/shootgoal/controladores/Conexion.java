@@ -19,6 +19,9 @@ import com.loopj.android.http.RequestParams;
 public class Conexion {
 	//link donde se encuentra el php con las acciones a realizar
 	private static String amigosUrl = "amigos.php";//"http://code.systheam.com/webServices/amigos.php";
+	private static String tiroUrl = "tiro.php";
+	private static String loginUrl = "login.php";
+	private static String signUpUrl = "signUp.php";
 	//tad para la accion a realiza
 	private static String amigosTag = "amigos";
 	private static String juegoPendiente = "pendiente";
@@ -31,6 +34,30 @@ public class Conexion {
 			params.put("id", id+"");
 			Conexion.post(resource, params, responseHandler);				
 	}
+	public static void tiro(int idPortero,int idTirador, AsyncHttpResponseHandler responseHandler){
+			RequestParams params = new RequestParams();
+			String resource = tiroUrl;
+			params.put("idPortero", idPortero+"");
+			params.put("idTirador", idTirador+"");
+			Conexion.post(resource, params, responseHandler);	
+	}
+	public static void login(String usuario,String password, AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		String resource = loginUrl;
+		params.put("usuario", usuario+"");
+		params.put("password", password+"");
+		Conexion.post(resource, params, responseHandler);	
+	}
+	public static void signUp(String usuario,String password,String mail, AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		String resource = signUpUrl;
+		params.put("usuario", usuario+"");
+		params.put("password", password+"");
+		params.put("mail", mail+"");
+		Conexion.post(resource, params, responseHandler);	
+	}
+
+	
 	public static void get(String url, RequestParams params,
 			AsyncHttpResponseHandler responseHandler) {
 				String fullUrl = getAbsoluteUrl(url);
@@ -54,6 +81,6 @@ public class Conexion {
 		}
 		
 		private static String getAbsoluteUrl(String relativeUrl) {
-			return BASE_URL + relativeUrl;
+ 			return BASE_URL + relativeUrl;
 		}
 }

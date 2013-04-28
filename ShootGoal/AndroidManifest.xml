@@ -66,6 +66,29 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="shootgoal.controladores.ControladorLogin"
+            android:label="@string/controlador_login"
+            android:permission="android.permission.PERSISTENT_ACTIVITY"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="shootgoal.controladores.ControladorSignUp"
+            android:label="@string/controlador_login"
+            android:permission="android.permission.PERSISTENT_ACTIVITY"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
     </application>
 
 </manifest>
