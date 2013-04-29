@@ -22,9 +22,9 @@ public class Conexion {
 	private static String tiroUrl = "tiro.php";
 	private static String loginUrl = "login.php";
 	private static String signUpUrl = "signUp.php";
+	private static String buscarUrl= "buscar.php";
 	//tad para la accion a realiza
-	private static String amigosTag = "amigos";
-	private static String juegoPendiente = "pendiente";
+
 	private static final String BASE_URL = "http://goalshootout.comoj.com/";
 	private static AsyncHttpClient client = new AsyncHttpClient();
 	
@@ -56,6 +56,12 @@ public class Conexion {
 		params.put("mail", mail+"");
 		Conexion.post(resource, params, responseHandler);	
 	}
+	public static void buscar(String mail, AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		String resource = buscarUrl;
+		params.put("mail", mail+"");
+		Conexion.post(resource, params, responseHandler);	
+	}
 
 	
 	public static void get(String url, RequestParams params,
@@ -66,6 +72,7 @@ public class Conexion {
 
 		public static void post(String url, RequestParams params,
 				AsyncHttpResponseHandler responseHandler) {
+			 String test=  getAbsoluteUrl(url);
 				client.post(getAbsoluteUrl(url), params, responseHandler);
 			
 		}
