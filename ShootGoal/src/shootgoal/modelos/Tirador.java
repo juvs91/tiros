@@ -28,6 +28,7 @@ public class Tirador extends Jugador {
 			e.printStackTrace();
 		}
 		this.animacion = animacionBalon;
+		this.animacion.balon = this;
 		TiradorPos.x -= animacion.getCuadro().getWidth()/3/2;
 		TiradorPos.y -= animacion.getCuadro().getHeight()/3/2;
 		this.posicion = TiradorPos;

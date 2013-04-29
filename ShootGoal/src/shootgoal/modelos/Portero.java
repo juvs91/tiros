@@ -25,7 +25,7 @@ public class Portero extends Jugador{
 				cuadro = BitmapFactory.decodeStream(is);
 				is.close();
 				if (i!=0){
-					animacionPor.sumaCuadro(cuadro, 0.3);
+					animacionPor.sumaCuadro(cuadro, 0.2);
 				} else {
 					animacionPor.sumaCuadro(cuadro, 0);
 					//animacion.duracion -= 0.3;

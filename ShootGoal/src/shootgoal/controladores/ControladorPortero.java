@@ -2,8 +2,11 @@ package shootgoal.controladores;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import shootgoal.modelos.Jugador;
 import shootgoal.modelos.Porteria;
 import shootgoal.modelos.Portero;
+import shootgoal.modelos.Tirador;
 import shootgoal.vistas.PorteroView;
 
 
@@ -24,6 +27,7 @@ import android.view.WindowManager;
 public class ControladorPortero extends Activity implements OnTouchListener {
 	WakeLock wakeLock;
 	PorteroView view;
+	public Tirador tirador;
 	public Portero portero;
 	public Porteria porteria;
 	float scaleX, scaleY;
@@ -32,6 +36,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 	} 
 	public ControllerStatus status;
 	public Bitmap botonGo;
+	public Bitmap letrasGol;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,9 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			cuadro = BitmapFactory.decodeStream(is);
 			is = assetManager.open("porteritoNaranjaGo.png");
 			botonGo = BitmapFactory.decodeStream(is);
+			
+			is = assetManager.open("LetrasGol.png");
+			letrasGol = BitmapFactory.decodeStream(is);
 			//cuadroPorteria=BitmapFactory.decodeStream(porteriaImagen);
 			is.close();
 			//porteriaImagen.close();
@@ -58,6 +66,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		view = new PorteroView(this);
 		view.fondo = cuadro;
 		view.botonGo = botonGo;
+		view.letrasGol = letrasGol;
 		//view.porteria=cuadroPorteria;
 		view.controlador = this;
 		view.setOnTouchListener(this);
@@ -73,6 +82,10 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 
 		Point porteroPos = new Point(view.frameBuffer.getWidth()/2, view.frameBuffer.getHeight()/2);
 		portero = new Portero(porteroPos, getAssets());
+		
+		Point balonPos = new Point(view.frameBuffer.getWidth()/2, view.frameBuffer.getHeight()/2+120);
+		tirador = new Tirador(balonPos, getAssets());
+		
 		Point porteriaPos = new Point(view.frameBuffer.getWidth()/2, view.frameBuffer.getHeight()/2-25);
 		porteria = new Porteria(porteriaPos, getAssets());
 		//escoger portero solido posicion neutral
@@ -106,9 +119,9 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		int porteriaOrigenX = porteria.posicion.x;
 		int porteriaScaledWidth = porteria.imagen.getWidth()/2;
 		int porteriaExtremoX = porteriaOrigenX + porteriaScaledWidth;
-		int porteriaOrigenY = porteria.posicion.y;
-		int porteriaScaledHeight = porteria.imagen.getHeight()/2;
-		int porteriaExtremoY = porteriaOrigenY + porteriaScaledHeight;
+		//int porteriaOrigenY = porteria.posicion.y;
+		//int porteriaScaledHeight = porteria.imagen.getHeight()/2;
+		//int porteriaExtremoY = porteriaOrigenY + porteriaScaledHeight;
 		
 		//punto.y = (porteriaExtremoY-porteriaOrigenY)/2+porteriaOrigenY;
 		punto.y = view.frameBuffer.getHeight()/2;
@@ -156,34 +169,45 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 
 	public void moverPorteroAPosicionElegida(Point touchPoint){
 		if(!view.bloqueado){
-		Point punto = null;
-		Portero.PosicionRelativa posRel = posicionRelativaBasadaEnPuntoReal(touchPoint);
-		if(posRel!=Portero.PosicionRelativa.FUERA){
-			punto = obtenerCoordenadasReales(posRel);
-			punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
-			portero.posicion = punto;
-			portero.posRelativa = posRel;
-			return;
-		}
-		//si se dio click en el boton
-		if((touchPoint.x >= view.frameBuffer.getWidth()-botonGo.getWidth()/5-20 && touchPoint.x <= view.frameBuffer.getWidth()-20)
-				|| (touchPoint.y >= view.frameBuffer.getHeight()-botonGo.getHeight()/5-20 && touchPoint.y <= view.frameBuffer.getHeight()-20)){
-			switch(portero.posRelativa){
-				case IZQUIERDA: 
-					portero.posRelativa = Portero.PosicionRelativa.CENTRO;
-					punto = obtenerCoordenadasReales(portero.posRelativa);
-					punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
-					portero.posicion = punto;
-					view.paraPorIzquierda = true;
-					break;
-				case DERECHA:
-					portero.posRelativa = Portero.PosicionRelativa.CENTRO;
-					punto = obtenerCoordenadasReales(portero.posRelativa);
-					punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
-					portero.posicion = punto;
-					view.paraPorDerecha = true;
+			Point punto = null;
+			Portero.PosicionRelativa posRel = posicionRelativaBasadaEnPuntoReal(touchPoint);
+			if(posRel!=Portero.PosicionRelativa.FUERA){
+				punto = obtenerCoordenadasReales(posRel);
+				punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
+				portero.posicion = punto;
+				portero.posRelativa = posRel;
+				return;
 			}
-		}
+			//si se dio click en el boton
+			if((touchPoint.x >= view.frameBuffer.getWidth()-botonGo.getWidth()/5-20 && touchPoint.x <= view.frameBuffer.getWidth()-20)
+					|| (touchPoint.y >= view.frameBuffer.getHeight()-botonGo.getHeight()/5-20 && touchPoint.y <= view.frameBuffer.getHeight()-20)){
+				switch(portero.posRelativa){
+					case IZQUIERDA: 
+						portero.posRelativa = Portero.PosicionRelativa.CENTRO;
+						punto = obtenerCoordenadasReales(portero.posRelativa);
+						punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
+						portero.posicion = punto;
+						
+						tirador.posRelativa = Jugador.PosicionRelativa.IZQUIERDA;
+						Point posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
+						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
+						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
+						view.posFinalBalon = posFinalBalon;
+						view.paraPorIzquierda = true;
+						break;
+					case DERECHA:
+						portero.posRelativa = Portero.PosicionRelativa.CENTRO;
+						punto = obtenerCoordenadasReales(portero.posRelativa);
+						punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
+						portero.posicion = punto;
+						tirador.posRelativa = Jugador.PosicionRelativa.IZQUIERDA;
+						posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
+						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
+						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
+						view.posFinalBalon = posFinalBalon;
+						view.paraPorDerecha = true;
+				}
+			}
 		}
 	}
 	

@@ -89,10 +89,10 @@ public class AnimacionPortero {
     	if(cuadros.size() > 1){
     		this.tiempo += tiempo;
     		
-    		if (this.tiempo >= duracion-0.3*10) {
+    		if (this.tiempo >= duracion-0.2*10) {
                 //Reinicia la animación
-                this.tiempo = this.tiempo % (duracion-0.3*10);
-                indice = 1;
+                this.tiempo = this.tiempo % (duracion-0.2*10);
+                //indice = 1;
                 return false;
             }
     		
@@ -119,7 +119,7 @@ public class AnimacionPortero {
     		while (this.tiempo > cuadros.get(indice).tiempo){
     			if(indice == 1){
     				indice = 12;
-    				this.tiempo += 0.3*10;
+    				this.tiempo += 0.2*10;
     			} else {
     				indice ++;
     			}
