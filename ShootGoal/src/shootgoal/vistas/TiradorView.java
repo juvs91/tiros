@@ -1,5 +1,7 @@
 package shootgoal.vistas;
 
+import shootgoal.controladores.ControladorTirador;
+
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -26,9 +28,14 @@ public class TiradorView extends SurfaceView implements Runnable {
     public Bitmap porteria;
     Bitmap porteroImagen;
     Bitmap balonImagen;
-    Point balonPos;
-    Point porteroPos;
-
+    public Point balonPos;
+    public Point porteroPos;
+    public Point diferencia;
+    public Point balonPosFinal;
+    public ControladorTirador controlador;
+    boolean tiro;
+    
+    
 	public TiradorView(Context context) {
 		super(context);
 		
@@ -65,9 +72,11 @@ public class TiradorView extends SurfaceView implements Runnable {
 		this.porteroImagen = porteroImage;
 		this.porteroPos = porteroPos;
 	}
-	public void setTiradorScreenContext(Bitmap balonImage, Point balonPos){
+	public void setTiradorScreenContext(Bitmap balonImage, Point balonPos,Point diferencia, Point balonPosFinal){
 		this.balonImagen = balonImage;
 		this.balonPos = balonPos;
+		this.diferencia=diferencia;
+		this.balonPosFinal=balonPosFinal;
 	}
 	
 
@@ -78,9 +87,20 @@ public class TiradorView extends SurfaceView implements Runnable {
         Rect dstRect = new Rect();
         //El ciclo se ejecuta cuando la Actividad esta en ejecucion
         while (running) {
+            long tiempoI = System.nanoTime();
             //Verifica que exista una vista valida
             if(!holder.getSurface().isValid()) 
             	continue;
+            
+            //Calcula el tiempo transcurrido
+            float tiempo = (System.nanoTime() - tiempoI) / 1000000000.0f;
+            //Obtiene el tiempo actual
+            tiempoI = System.nanoTime();
+            
+            if(balonPosFinal.x>balonPos.x||balonPosFinal.y>balonPos.y||balonPosFinal.x<balonPos.x||balonPosFinal.y<balonPos.y){
+            	//tiro=controlador.tirador.animacion.lanzaBalon(tiempo,balonPos,diferencia);
+            }
+            
             canvas.drawRGB(0, 255, 0);
             Bitmap resized = Bitmap.createScaledBitmap(fondo, frameBuffer.getWidth(), frameBuffer.getHeight(), true);
             canvas.drawBitmap(resized, 0, 0, null);
@@ -92,6 +112,7 @@ public class TiradorView extends SurfaceView implements Runnable {
             canvas.drawBitmap(resized, porteroPos.x, porteroPos.y, null);
             
             resized=Bitmap.createScaledBitmap(balonImagen, balonImagen.getWidth()/3, balonImagen.getHeight()/3, true);
+            
             canvas.drawBitmap(resized, balonPos.x, balonPos.y, null);
             
             Canvas pantalla = holder.lockCanvas();
