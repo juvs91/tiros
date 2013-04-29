@@ -35,6 +35,11 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 
+/**
+ * Es el controlador de todas las acciones del tirador
+ * @author Tuye
+ *
+ */
 public class ControladorTirador extends Activity implements OnTouchListener{
 	WakeLock wakeLock;
 	public TiradorView viewTirador;
@@ -125,6 +130,11 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 		//wakeLock.acquire();
 	}
 	
+	/**
+	 * Mueve el balon hacia la posicion y actualiza la posicion del tiro
+	 * en el servidor
+	 * @param point
+	 */
 	private void tiro(Point point){
 		try{
 		/*

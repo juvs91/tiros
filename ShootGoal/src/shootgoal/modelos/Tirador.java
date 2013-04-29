@@ -10,7 +10,10 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
-
+/**
+ * Clase hija del jugador pero que le agrega funcionalidades al tirador
+ *
+ */
 public class Tirador extends Jugador {
 	public AnimaBalon animacion;
 	Bitmap cuadro;

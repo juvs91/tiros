@@ -14,7 +14,10 @@ import android.graphics.Bitmap.Config;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
+/**
+ * Renderiza todo lo que tiene que ver con el portero
+ *
+ */
 public class PorteroView extends SurfaceView implements Runnable {
 
 	Thread renderThread = null;             //Thread de la vista

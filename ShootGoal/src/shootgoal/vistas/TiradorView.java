@@ -13,7 +13,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
+/**
+ * Renderiza todo lo que tiene que ver con el tirador y sus funciones 
+ *
+ */
 
 public class TiradorView extends SurfaceView implements Runnable {
 

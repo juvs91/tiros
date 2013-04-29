@@ -9,7 +9,12 @@ import android.graphics.Bitmap.Config;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
+/**
+ * Carga el fondo y las propiedades del juego
+ * asi como tambien el layout principal del menu
+ * @author Tuye
+ *
+ */
 public class MenuView extends SurfaceView implements Runnable {
 
 	Thread renderThread = null;             //Thread de la vista

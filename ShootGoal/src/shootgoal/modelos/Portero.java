@@ -11,6 +11,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 
+/**
+ * Clase hija del jugador que le agrega mas especificaciones al portero
+ *
+ */
 public class Portero extends Jugador{
 	
 	public AnimacionPortero animacion;

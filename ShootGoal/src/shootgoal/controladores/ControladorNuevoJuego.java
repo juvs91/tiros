@@ -27,7 +27,16 @@ import android.widget.Toast;
 
 import shootgoal.build.R;
 
+
 public class ControladorNuevoJuego  extends Activity implements OnItemClickListener,OnClickListener  {
+
+/**
+ * 
+ * Carga la lista de los jugadores con su score y se encarga de determinar si es 
+ * portero o tirador.
+ *
+ */
+
 	WakeLock wakeLock;
 	TiradorView view;
 	int currentView;
@@ -54,6 +63,9 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 			
 		
 	}
+	/**
+	 * inicializa los valores por default
+	 */
 	public void init(){
 		int id = 1;
 		Conexion.amigos(id, new JsonHttpResponseHandler() {

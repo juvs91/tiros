@@ -1,5 +1,8 @@
 package shootgoal.modelos;
-
+/**
+ * Carga los jugadores con los que puedes jugar
+ *
+ */
 public class Jugadores {
 	private String nombre;
 	private int puntaje;
