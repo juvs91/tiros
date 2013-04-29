@@ -167,8 +167,6 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		
 		idContrincante=listaJugadores.get(pos).getId();
 		
-		
-		
 		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putInt("id amigo", idContrincante);
