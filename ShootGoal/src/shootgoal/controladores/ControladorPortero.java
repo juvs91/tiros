@@ -137,13 +137,13 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			return Portero.PosicionRelativa.FUERA;
 		} else {
 			Log.v("dentroDePorteria", "si");
-			int tama–oDivisionX = porteria.imagen.getWidth()/2/3;
-			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tama–oDivisionX){
+			int tamanoDivisionX = porteria.imagen.getWidth()/2/3;
+			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tamanoDivisionX){
 				/*if(!view.bloqueado){
 					view.paraPorIzquierda = true;
 				}*/
 				return Portero.PosicionRelativa.IZQUIERDA;
-			} else if(touchPoint.x >= porteriaExtremoX-tama–oDivisionX && touchPoint.x <= porteriaExtremoX){
+			} else if(touchPoint.x >= porteriaExtremoX-tamanoDivisionX && touchPoint.x <= porteriaExtremoX){
 				/*if(!view.bloqueado){
 					view.paraPorDerecha = true;
 				}*/
@@ -205,12 +205,12 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			Log.v("dentroDePorteria","no");
 		} else {
 			Log.v("dentroDePorteria", "si");
-			int tama–oDivisionX = porteria.imagen.getWidth()/2/3;
-			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tama–oDivisionX){
+			int tamaï¿½oDivisionX = porteria.imagen.getWidth()/2/3;
+			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tamaï¿½oDivisionX){
 				if(!view.bloqueado){
 					view.paraPorIzquierda = true;
 				}
-			} else if(touchPoint.x >= porteriaExtremoX-tama–oDivisionX && touchPoint.x <= porteriaExtremoX){
+			} else if(touchPoint.x >= porteriaExtremoX-tamaï¿½oDivisionX && touchPoint.x <= porteriaExtremoX){
 				if(!view.bloqueado){
 					view.paraPorDerecha = true;
 				}

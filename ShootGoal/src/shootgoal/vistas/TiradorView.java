@@ -1,6 +1,6 @@
 package shootgoal.vistas;
 
-import com.example.shootgoal.controladores.ControladorTirador;
+import shootgoal.controladores.ControladorTirador;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -98,7 +98,7 @@ public class TiradorView extends SurfaceView implements Runnable {
             tiempoI = System.nanoTime();
             
             if(balonPosFinal.x>balonPos.x||balonPosFinal.y>balonPos.y||balonPosFinal.x<balonPos.x||balonPosFinal.y<balonPos.y){
-            	tiro=controlador.tirador.animacion.lanzaBalon(tiempo,balonPos,diferencia);
+            	//tiro=controlador.tirador.animacion.lanzaBalon(tiempo,balonPos,diferencia);
             }
             
             canvas.drawRGB(0, 255, 0);
@@ -117,9 +117,9 @@ public class TiradorView extends SurfaceView implements Runnable {
             
             Canvas pantalla = holder.lockCanvas();
             
-            //Determina la resoluci��n de la pantalla
+            //Determina la resoluci������n de la pantalla
             pantalla.getClipBounds(dstRect);
-            //Dibuja el buffer en la pantalla con el tama��o de la pantalla
+            //Dibuja el buffer en la pantalla con el tama������o de la pantalla
             pantalla.drawBitmap(frameBuffer, null, dstRect, null);
             holder.unlockCanvasAndPost(pantalla);
         }

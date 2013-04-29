@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">ShootGoal</string>
@@ -17,5 +18,6 @@
     <string name="Player">New player</string>
     <string name="score">-999999</string>
     <color name="transparent">#00FFFFFF</color>
+    <string name="controlador_login">ControladorLogin</string>
 
 </resources>
