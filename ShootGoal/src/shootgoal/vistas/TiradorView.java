@@ -100,10 +100,11 @@ public class TiradorView extends SurfaceView implements Runnable {
             //Obtiene el tiempo actual
             tiempoI = System.nanoTime();
             
-            if(balonPosFinal.x>balonPos.x||balonPosFinal.y>balonPos.y||balonPosFinal.x<balonPos.x||balonPosFinal.y<balonPos.y){
-            	//tiro=controlador.tirador.animacion.lanzaBalon(tiempo,balonPos,diferencia);
+  /*          if(balonPosFinal.x>balonPos.x||balonPosFinal.y>balonPos.y||balonPosFinal.x<balonPos.x||balonPosFinal.y<balonPos.y){
+            	tiro=controlador.tirador.animacion.lanzaBalon(tiempo,balonPos,diferencia);
+>>>>>>> Agregar libreria
             }
-            
+  */          
             canvas.drawRGB(0, 255, 0);
             Bitmap resized = Bitmap.createScaledBitmap(fondo, frameBuffer.getWidth(), frameBuffer.getHeight(), true);
             canvas.drawBitmap(resized, 0, 0, null);
