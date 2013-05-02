@@ -52,7 +52,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			is = assetManager.open("porteritoNaranjaGo.png");
 			botonGo = BitmapFactory.decodeStream(is);
 			
-			is = assetManager.open("LetrasGol.png");
+			is = assetManager.open("LetrasGolRojas.png");
 			letrasGol = BitmapFactory.decodeStream(is);
 			//cuadroPorteria=BitmapFactory.decodeStream(porteriaImagen);
 			is.close();
