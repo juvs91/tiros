@@ -14,8 +14,27 @@
 
     <ListView
         android:id="@+id/mylistview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_width="wrap_content"
+        android:layout_height="234dp" >
     </ListView>
+
+    <TextView
+        android:id="@+id/buscar_mail_texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="teclea el mail de tu amigo " />
+
+    <EditText
+        android:id="@+id/buscar_mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/buscar_nuevo_juego"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="buscar" />
 
 </LinearLayout>

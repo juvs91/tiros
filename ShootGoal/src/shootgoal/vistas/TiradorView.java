@@ -120,9 +120,9 @@ public class TiradorView extends SurfaceView implements Runnable {
             
             Canvas pantalla = holder.lockCanvas();
             
-            //Determina la resoluci��n de la pantalla
+            //Determina la resoluci������n de la pantalla
             pantalla.getClipBounds(dstRect);
-            //Dibuja el buffer en la pantalla con el tama��o de la pantalla
+            //Dibuja el buffer en la pantalla con el tama������o de la pantalla
             pantalla.drawBitmap(frameBuffer, null, dstRect, null);
             holder.unlockCanvasAndPost(pantalla);
         }

@@ -1,13 +1,14 @@
 package shootgoal.controladores;
 
+import java.util.LinkedList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
-
 import shootgoal.build.R;
 import shootgoal.modelos.Jugadores;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,10 +19,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class ControladorSignUp extends Activity{
-	ControladorSignUp controlador;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+public class ControladorLogin extends Activity{
+	
 	String nombre;
 	String password;
 	String puntaje;
@@ -31,23 +35,25 @@ public class ControladorSignUp extends Activity{
 	JSONObject item;
 	Jugadores jugador;
 	boolean usuarioCorrecto=false;
+	ControladorLogin controlador;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		 setContentView(R.layout.sign_up);
+		 setContentView(R.layout.login);
 		 controlador = this;
-	       ((Button) findViewById(R.id.submit_sign_up)).setOnClickListener(new OnClickListener(){
+	       ((Button) findViewById(R.id.submit)).setOnClickListener(new OnClickListener(){
 	        	public void onClick(View view){
-	        		nombre= ((EditText) findViewById(R.id.usuario_texto_sign_up)).getText().toString();
-	        		password= ((EditText) findViewById(R.id.pasword_texto_sign_up)).getText().toString();
-	        		mail= ((EditText) findViewById(R.id.mail_sign_up_text)).getText().toString();
-	        		controlador.signUp(nombre, password,mail);
+	        		nombre= ((EditText) findViewById(R.id.userNameText)).getText().toString();
+	        		password= ((EditText) findViewById(R.id.passwordText)).getText().toString();
+	        		controlador.login(nombre, password);
 	        	}
 	        });
 	}
-	public void signUp(String nombre,String password,String mail){
-		Conexion.signUp(nombre,password,mail, new JsonHttpResponseHandler() {
+	
+	
+	public void login(String nombre,String password){
+		Conexion.login(nombre,password, new JsonHttpResponseHandler() {
 			@Override
 			public void onFailure(Throwable arg0) {
 				Toast.makeText(getApplicationContext(), "Network error, please try again later.",Toast.LENGTH_LONG).show();
@@ -58,6 +64,7 @@ public class ControladorSignUp extends Activity{
 			}
 		});
 	}
+	
 	public void jsonHandler(JSONArray usuario){
 		Log.v("json", json+"");
 		jugador=new Jugadores();
@@ -68,8 +75,8 @@ public class ControladorSignUp extends Activity{
 				  item = json.getJSONObject(i);
 				  nombre=item.getString("nombre");
 				  puntaje = item.getString("puntaje");
-				  mail=item.getString("mail");
 				  id=Integer.parseInt(item.getString("id"));
+				  mail=item.getString("mail");
 				  jugador.setId(id);
 				  jugador.setNombre(nombre);
 				  jugador.setPuntaje(Integer.parseInt(puntaje));
@@ -80,13 +87,13 @@ public class ControladorSignUp extends Activity{
 					e.printStackTrace();
 				}
 			}
-			//falta poner que redirija a la pantalla de exito 
 			
 		}else{
-			Toast.makeText(getApplicationContext(), "Create an account.",Toast.LENGTH_LONG).show();
-			//falta poner que rediriga al controlador de signUp
+			Toast.makeText(getApplicationContext(), "NetworkError.",Toast.LENGTH_LONG).show();
 			
 		}
+		
+		
 		if(usuarioCorrecto){
 			
 			//guardo en los shared preferences los valores del login 
@@ -99,12 +106,14 @@ public class ControladorSignUp extends Activity{
 			Intent launchGame = new Intent(this,ControladorMenu.class);
 			startActivity(launchGame);
 		}else{
-			Toast.makeText(getApplicationContext(), "usuario incorrecto .",Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "usuario incorrecto.",Toast.LENGTH_LONG).show();
 			Intent launchGame = new Intent(this,ControladorSignUp.class);
 			startActivity(launchGame);
 		}
 		
 	}
 	
-
+	
+	
+	
 }

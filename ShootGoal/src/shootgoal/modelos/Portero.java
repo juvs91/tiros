@@ -3,6 +3,11 @@ package shootgoal.modelos;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.json.JSONArray;
+
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import shootgoal.controladores.Conexion;
 import shootgoal.general.AnimacionPortero;
 
 
@@ -45,5 +50,25 @@ public class Portero extends Jugador{
 		porteroPos.y -= animacion.getCuadro().getHeight()/3/2;
 		this.posicion = porteroPos;
 	}
+	public boolean save (Juego juego){
+		Conexion.paro(juego.getJugador1(),juego.getJugador2(),juego.getStatus(),juego.getPosTiro(),juego.isAceptado(),juego.getPorParada(), new JsonHttpResponseHandler(){
+			@Override
+			public void onFailure(Throwable arg0) {
+				//Toast.makeText(getBaseContext(), "Network error, please try again later.",Toast.LENGTH_LONG).show();
+			}
+			@Override
+			public void onSuccess(JSONArray amigo) {
+				jsonHandlerSave(amigo);
+			}
+		});
+		return false;	
+	}
+	
+	public void jsonHandlerSave(JSONArray amigo){
+	
+		
+	}
+
+	
 
 }

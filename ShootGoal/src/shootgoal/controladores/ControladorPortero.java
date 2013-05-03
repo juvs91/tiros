@@ -166,13 +166,13 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			return Portero.PosicionRelativa.FUERA;
 		} else {
 			Log.v("dentroDePorteria", "si");
-			int tama–oDivisionX = porteria.imagen.getWidth()/2/3;
-			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tama–oDivisionX){
+			int tamanoDivisionX = porteria.imagen.getWidth()/2/3;
+			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tamanoDivisionX){
 				/*if(!view.bloqueado){
 					view.paraPorIzquierda = true;
 				}*/
 				return Portero.PosicionRelativa.IZQUIERDA;
-			} else if(touchPoint.x >= porteriaExtremoX-tama–oDivisionX && touchPoint.x <= porteriaExtremoX){
+			} else if(touchPoint.x >= porteriaExtremoX-tamanoDivisionX && touchPoint.x <= porteriaExtremoX){
 				/*if(!view.bloqueado){
 					view.paraPorDerecha = true;
 				}*/
@@ -200,7 +200,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			//si se dio click en el boton
 			if((touchPoint.x >= view.frameBuffer.getWidth()-botonGo.getWidth()/5-20 && touchPoint.x <= view.frameBuffer.getWidth()-20)
 					|| (touchPoint.y >= view.frameBuffer.getHeight()-botonGo.getHeight()/5-20 && touchPoint.y <= view.frameBuffer.getHeight()-20)){
-				switch(portero.posRelativa){
+				/*switch(portero.posRelativa){
 					case IZQUIERDA: 
 						portero.posRelativa = Portero.PosicionRelativa.CENTRO;
 						punto = obtenerCoordenadasReales(portero.posRelativa);
@@ -225,7 +225,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
 						view.posFinalBalon = posFinalBalon;
 						view.paraPorDerecha = true;
-				}
+				}*/
 			}
 		}
 	}
@@ -248,12 +248,12 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			Log.v("dentroDePorteria","no");
 		} else {
 			Log.v("dentroDePorteria", "si");
-			int tama–oDivisionX = porteria.imagen.getWidth()/2/3;
-			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tama–oDivisionX){
+			int tamaï¿½oDivisionX = porteria.imagen.getWidth()/2/3;
+			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tamaï¿½oDivisionX){
 				if(!view.bloqueado){
 					view.paraPorIzquierda = true;
 				}
-			} else if(touchPoint.x >= porteriaExtremoX-tama–oDivisionX && touchPoint.x <= porteriaExtremoX){
+			} else if(touchPoint.x >= porteriaExtremoX-tamaï¿½oDivisionX && touchPoint.x <= porteriaExtremoX){
 				if(!view.bloqueado){
 					view.paraPorDerecha = true;
 				}
