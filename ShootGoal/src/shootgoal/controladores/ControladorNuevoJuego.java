@@ -57,8 +57,6 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
     String mail;
     int idContrincante;
    
-
-
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +66,6 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		 Button buscar= ((Button) findViewById(R.id.buscar_nuevo_juego));
 		 buscar.setOnClickListener(this);
 
-	     
-			
-			
 		
 	}
 	/**
@@ -185,7 +180,6 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int pos, long idClick) {
 		// TODO Auto-generated method stub
-		
 		idContrincante=listaJugadores.get(pos).getId();
 		
 		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
@@ -206,6 +200,8 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		 Log.e("App", "mama de juve2");
+
 		if(v.getId()==R.id.buscar_nuevo_juego){
 			mail=((EditText) findViewById(R.id.buscar_mail)).getText().toString();
     		buscar(mail);

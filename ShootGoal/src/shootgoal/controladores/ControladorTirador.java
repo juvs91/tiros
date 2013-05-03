@@ -17,6 +17,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import shootgoal.controladores.ControladorPortero.ControllerStatus;
 import shootgoal.modelos.Portero;
 import shootgoal.modelos.Tirador;
 import shootgoal.vistas.TiradorView;
@@ -46,25 +47,31 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 	Portero portero;
 	float scaleX, scaleY;
 	public Tirador tirador;
-	Point point=new Point();
-	private int anchoCancha=0;
-	private int altoCancha=0;
+	Point point = new Point();
+	private int anchoCancha = 0;
+	private int altoCancha = 0;
 	private int tercera;
 	Point balonPos;
-	int i=0;
+	int i = 0;
+	public enum ControllerStatus{
+		juegoAnteriorAnimacion, juegoActualDecidiendoPosicion, juegoActualAnimacion
+	} 
+	public ControllerStatus status;
+	public Bitmap botonGo;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		AssetManager assetManager = getAssets();
-		InputStream is,porteriaImagen;
-		Bitmap cuadro = null,cuadroPorteria=null;
+		InputStream is, porteriaImagen;
+		Bitmap cuadro = null, cuadroPorteria = null;
 		try {
 			is = assetManager.open("fondo/FondoShotComp.png");
-			porteriaImagen=assetManager.open("PorteriaAlone.png");
+			porteriaImagen = assetManager.open("PorteriaAlone.png");
 			cuadro = BitmapFactory.decodeStream(is);
-			cuadroPorteria=BitmapFactory.decodeStream(porteriaImagen);
+			cuadroPorteria = BitmapFactory.decodeStream(porteriaImagen);
 			is.close();
 			porteriaImagen.close();
 		} catch (IOException e) {
@@ -80,14 +87,14 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 		viewTirador.porteria=cuadroPorteria;
 		viewTirador.setOnTouchListener(this);
 		
-		Point pointBalon=new Point();
+		Point pointBalon = new Point();
 
 		getWindowManager().getDefaultDisplay().getSize(pointBalon);
 
 		
 		
-		scaleX=(float) viewTirador.frameBuffer.getWidth() / pointBalon.x;
-		scaleY=(float) viewTirador.frameBuffer.getHeight() / pointBalon.y;
+		scaleX = (float) viewTirador.frameBuffer.getWidth() / pointBalon.x;
+		scaleY = (float) viewTirador.frameBuffer.getHeight() / pointBalon.y;
 
 
 		Point porteroPos = new Point(viewTirador.frameBuffer.getWidth()/2, viewTirador.frameBuffer.getHeight()/2);
