@@ -29,14 +29,21 @@ public class TiradorView extends SurfaceView implements Runnable {
     public Bitmap frameBuffer;						//Objetos Bitmap para el manejo de imagenes
     public Bitmap fondo;
     public Bitmap porteria;
+    public Bitmap botonGo;
     Bitmap porteroImagen;
     Bitmap balonImagen;
     public Point balonPos;
     public Point porteroPos;
     public Point diferencia;
     public Point balonPosFinal;
+    public Point posFinalBalon;
     public ControladorTirador controlador;
     boolean tiro;
+    public boolean paraPorIzquierda = false;
+    public boolean paraPorDerecha = false;
+    public boolean bloqueado = false;
+    public boolean balonBloqueado = false;
+
     
     
 	public TiradorView(Context context) {
@@ -78,8 +85,8 @@ public class TiradorView extends SurfaceView implements Runnable {
 	public void setTiradorScreenContext(Bitmap balonImage, Point balonPos,Point diferencia, Point balonPosFinal){
 		this.balonImagen = balonImage;
 		this.balonPos = balonPos;
-		this.diferencia=diferencia;
-		this.balonPosFinal=balonPosFinal;
+		this.diferencia = diferencia;
+		this.balonPosFinal = 	balonPosFinal;
 	}
 	
 
@@ -114,13 +121,15 @@ public class TiradorView extends SurfaceView implements Runnable {
             resized = Bitmap.createScaledBitmap(porteroImagen, porteroImagen.getWidth()/3, porteroImagen.getHeight()/3, true);
             canvas.drawBitmap(resized, porteroPos.x, porteroPos.y, null);
             
-            resized=Bitmap.createScaledBitmap(balonImagen, balonImagen.getWidth()/3, balonImagen.getHeight()/3, true);
-            
+            resized = Bitmap.createScaledBitmap(balonImagen, balonImagen.getWidth()/3, balonImagen.getHeight()/3, true);          
             canvas.drawBitmap(resized, balonPos.x, balonPos.y, null);
+            
+            resized = Bitmap.createScaledBitmap(botonGo, botonGo.getWidth()/5, botonGo.getHeight()/5, true);
+        	canvas.drawBitmap(resized, frameBuffer.getWidth()-resized.getWidth()-20, frameBuffer.getHeight()-resized.getHeight()-20, null);
             
             Canvas pantalla = holder.lockCanvas();
             
-            //Determina la resoluci������n de la pantalla
+            //Determina la resolucion de la pantalla
             pantalla.getClipBounds(dstRect);
             //Dibuja el buffer en la pantalla con el tama������o de la pantalla
             pantalla.drawBitmap(frameBuffer, null, dstRect, null);
