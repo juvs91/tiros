@@ -47,6 +47,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/cookies" />
 
+        
     </RelativeLayout>
 
 </LinearLayout>

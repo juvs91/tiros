@@ -61,7 +61,9 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		listaJugadores=new LinkedList<Jugadores>();
 		this.init();
+
 	 	setContentView(R.layout.nuevo_juego);
 		 Button buscar= ((Button) findViewById(R.id.buscar_nuevo_juego));
 		 buscar.setOnClickListener(this);
@@ -141,7 +143,6 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	
 	public void jsonHandler(JSONArray json){
 		Log.v("json", json+"");
-		listaJugadores=new LinkedList<Jugadores>();
 		if(json!=null){
 			for(int i=0;i<json.length();i++){
 			    try {
@@ -200,6 +201,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+
 		 Log.e("App", "mama de juve2");
 
 		if(v.getId()==R.id.buscar_nuevo_juego){
