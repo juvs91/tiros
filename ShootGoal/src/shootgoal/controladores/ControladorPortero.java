@@ -24,6 +24,11 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 
+/**
+ * 
+ * Controla los moviemientos del portero y hacia donde se aventara
+ *
+ */
 public class ControladorPortero extends Activity implements OnTouchListener {
 	WakeLock wakeLock;
 	PorteroView view;
@@ -113,6 +118,12 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		view.resume();
 	}
 	
+	/**
+	 * Obtiene las coordenadas reales del punto IZQ DER o CENTRO
+	 * para posicionar al portero
+	 * @param posicionRelativa
+	 * @return
+	 */
 	public Point obtenerCoordenadasReales(Portero.PosicionRelativa posicionRelativa){
 		Point punto = new Point();
 		
@@ -140,6 +151,11 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		return punto;
 	}
 	
+	/**
+	 * Regresa el punto de las coordenadas en IZQ, DER o CENTRO
+	 * @param touchPoint
+	 * @return
+	 */
 	public Portero.PosicionRelativa posicionRelativaBasadaEnPuntoReal(Point touchPoint){
 		int porteriaOrigenX = porteria.posicion.x;
 		int porteriaExtremoX = porteriaOrigenX + porteria.imagen.getWidth()/2;
@@ -166,7 +182,10 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			}
 		}
 	}
-
+	/**
+	 * Mueve la posicion del portero hacia el punto 
+	 * @param touchPoint
+	 */
 	public void moverPorteroAPosicionElegida(Point touchPoint){
 		if(!view.bloqueado){
 			Point punto = null;
@@ -181,7 +200,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			//si se dio click en el boton
 			if((touchPoint.x >= view.frameBuffer.getWidth()-botonGo.getWidth()/5-20 && touchPoint.x <= view.frameBuffer.getWidth()-20)
 					|| (touchPoint.y >= view.frameBuffer.getHeight()-botonGo.getHeight()/5-20 && touchPoint.y <= view.frameBuffer.getHeight()-20)){
-				/*switch(portero.posRelativa){
+				switch(portero.posRelativa){
 					case IZQUIERDA: 
 						portero.posRelativa = Portero.PosicionRelativa.CENTRO;
 						punto = obtenerCoordenadasReales(portero.posRelativa);
@@ -206,7 +225,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
 						view.posFinalBalon = posFinalBalon;
 						view.paraPorDerecha = true;
-				}*/
+				}
 			}
 		}
 	}

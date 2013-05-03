@@ -1,26 +1,27 @@
 package shootgoal.modelos;
 
 public class Juego {
-	private int jugador1;
-	private int jugador2;
+	
+
+	private Tirador portero;
+	private Portero tirador;
 	private int status;
 	private int posTiro;
 	private int porParada;
 	public enum posicionRelativa{IZQUIERDA, CENTRO, DERECHA, FUERA};
 	private boolean aceptado;
 	
-	
-	public int getJugador1() {
-		return jugador1;
+	public Tirador getPortero() {
+		return portero;
 	}
-	public void setJugador1(int jugador1) {
-		this.jugador1 = jugador1;
+	public void setPortero(Tirador portero) {
+		this.portero = portero;
 	}
-	public int getJugador2() {
-		return jugador2;
+	public Portero getTirador() {
+		return tirador;
 	}
-	public void setJugador2(int jugador2) {
-		this.jugador2 = jugador2;
+	public void setTirador(Portero tirador) {
+		this.tirador = tirador;
 	}
 	public int getStatus() {
 		return status;
@@ -45,6 +46,12 @@ public class Juego {
 	}
 	public void setAceptado(boolean aceptado) {
 		this.aceptado = aceptado;
+	}
+	
+	public static Juego fetch(int idJuegador1,int idJugador2){
+		
+		return null;
+		
 	}
 
 	

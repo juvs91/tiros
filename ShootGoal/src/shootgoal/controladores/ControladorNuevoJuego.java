@@ -32,7 +32,16 @@ import android.widget.Toast;
 
 import shootgoal.build.R;
 
+
 public class ControladorNuevoJuego  extends Activity implements OnItemClickListener,OnClickListener  {
+
+/**
+ * 
+ * Carga la lista de los jugadores con su score y se encarga de determinar si es 
+ * portero o tirador.
+ *
+ */
+
 	WakeLock wakeLock;
 	TiradorView view;
 	int currentView;
@@ -48,22 +57,22 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
     String mail;
     int idContrincante;
    
-
-
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		listaJugadores=new LinkedList<Jugadores>();
 		this.init();
 	 	 setContentView(R.layout.nuevo_juego);
-		 Button botonBuscar= ((Button) findViewById(R.id.buscar_nuevo_juego_email));
+		 Button botonBuscar= ((Button) findViewById(R.id.buscar_nuevo_juego));
 		 botonBuscar.setOnClickListener(this);
 
-	     
-			
-			
 		
 	}
+	/**
+	 * inicializa los valores por default
+	 */
+
 	public void buscar(String mail){
 		Conexion.buscar(mail, new JsonHttpResponseHandler(){
 			@Override
@@ -77,8 +86,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		});
 	}
 	
-	
-	
+
 	public void init(){
 		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
 		int id  = prefs.getInt("id", 0);
@@ -96,9 +104,11 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		
 		//setContentView(R.layout.nuevo_juego);
 	}
+	
 	public void errorAmigos(){
 		Toast.makeText(getBaseContext(), "Network error, please try again later.",Toast.LENGTH_LONG).show();
 	}
+	
 	public void jsonHandlerBusqueda(JSONArray json){
 		Log.v("json", json+"");
 		if(json!=null){
@@ -132,7 +142,6 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	
 	public void jsonHandler(JSONArray json){
 		Log.v("json", json+"");
-		listaJugadores=new LinkedList<Jugadores>();
 		if(json!=null){
 			for(int i=0;i<json.length();i++){
 			    try {
@@ -171,7 +180,6 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int pos, long idClick) {
 		// TODO Auto-generated method stub
-		
 		idContrincante=listaJugadores.get(pos).getId();
 		
 		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
@@ -192,7 +200,10 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if(v.getId()==R.id.buscar_nuevo_juego_email){
+
+		 Log.e("App", "mama de juve2");
+
+		if(v.getId()==R.id.buscar_nuevo_juego){
 			mail=((EditText) findViewById(R.id.buscar_mail)).getText().toString();
     		buscar(mail);
 		}
