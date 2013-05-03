@@ -102,7 +102,6 @@ public class TiradorView extends SurfaceView implements Runnable {
             
   /*          if(balonPosFinal.x>balonPos.x||balonPosFinal.y>balonPos.y||balonPosFinal.x<balonPos.x||balonPosFinal.y<balonPos.y){
             	tiro=controlador.tirador.animacion.lanzaBalon(tiempo,balonPos,diferencia);
->>>>>>> Agregar libreria
             }
   */          
             canvas.drawRGB(0, 255, 0);
