@@ -206,11 +206,12 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			if((touchPoint.x >= view.frameBuffer.getWidth()-botonGo.getWidth()/5-20 && touchPoint.x <= view.frameBuffer.getWidth()-20)
 					|| (touchPoint.y >= view.frameBuffer.getHeight()-botonGo.getHeight()/5-20 && touchPoint.y <= view.frameBuffer.getHeight()-20)){
 				if(portero.posRelativa == null){
-					portero.posRelativa = Portero.PosicionRelativa.CENTRO;
+					portero.posRelativa = Jugador.PosicionRelativa.CENTRO;
 				}
 				switch(portero.posRelativa){
 					case CENTRO:
-						tirador.posRelativa = Jugador.PosicionRelativa.CENTRO;
+						view.bloqueado = true;
+						tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
 						Point posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
 						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
 						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
@@ -220,9 +221,11 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 						} else {
 							view.letrasGol = letrasGol;
 						}
+						
 						view.paraPorCentro = true;
 						break;
 					case IZQUIERDA: 
+						view.bloqueado = true;
 						tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
 						posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
 						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
@@ -233,7 +236,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 						} else {
 							view.letrasGol = letrasGol;
 						}
-						portero.posRelativa = Portero.PosicionRelativa.CENTRO;
+						portero.posRelativa = Jugador.PosicionRelativa.CENTRO;
 						punto = obtenerCoordenadasReales(portero.posRelativa);
 						punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
 						portero.posicion = punto;
@@ -247,9 +250,11 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 						} else {
 							view.letrasGol = letrasGol;
 						}*/
+						
 						view.paraPorIzquierda = true;
 						break;
 					case DERECHA:
+						view.bloqueado = true;
 						tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
 						posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
 						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
@@ -260,7 +265,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 						} else {
 							view.letrasGol = letrasGol;
 						}
-						portero.posRelativa = Portero.PosicionRelativa.CENTRO;
+						portero.posRelativa = Jugador.PosicionRelativa.CENTRO;
 						punto = obtenerCoordenadasReales(portero.posRelativa);
 						punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
 						portero.posicion = punto;
