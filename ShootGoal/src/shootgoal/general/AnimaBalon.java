@@ -4,11 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import shootgoal.modelos.Cuadro;
+
 import shootgoal.modelos.Tirador;
 
 
 import android.graphics.Bitmap;
 import android.graphics.Point;
+
+
+import android.graphics.Bitmap;
+
+/**
+ * Libreria para poder animar el balon
+ *
+ */
 
 public class AnimaBalon {
 	   public List<Cuadro> cuadros;            //Lista de objetos Cuadro para los cuadros de la animaci��n
@@ -18,6 +27,7 @@ public class AnimaBalon {
 	    public Tirador balon;
 	    public int movimientosBalon;
 	    public Point posicionInicial;
+
 	    
 	    public AnimaBalon(){
 	    	 //Crea el arreglo de cuadros
@@ -26,6 +36,7 @@ public class AnimaBalon {
 	        duracion = 0;
 	        movimientosBalon = 1;
 	        posicionInicial = new Point();
+
 	        //Inicializa la animaci��n
 	    }
 	    
@@ -44,6 +55,7 @@ public class AnimaBalon {
 	        cuadros.add(new Cuadro(imagen, this.duracion));
 	    }
 	    
+
 	    public synchronized boolean moverBalonAPosicion(Point posicionFinal, double tiempo){
 	    	this.tiempo += tiempo;
 	    	
@@ -104,7 +116,7 @@ public class AnimaBalon {
     }*/
     
     public synchronized void lanzaBalon(float tiempo){
-    	 
+
     }
 
     /**

@@ -8,6 +8,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 
+/**
+ * El modelo de la imagen de la porteria
+ * su posicion y su tamanio
+ *
+ */
 public class Porteria {
 	public Point posicion;
 	public Bitmap imagen;

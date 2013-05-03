@@ -13,7 +13,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
+/**
+ * Renderiza todo lo que tiene que ver con el tirador y sus funciones 
+ *
+ */
 
 public class TiradorView extends SurfaceView implements Runnable {
 
@@ -97,10 +100,10 @@ public class TiradorView extends SurfaceView implements Runnable {
             //Obtiene el tiempo actual
             tiempoI = System.nanoTime();
             
-            if(balonPosFinal.x>balonPos.x||balonPosFinal.y>balonPos.y||balonPosFinal.x<balonPos.x||balonPosFinal.y<balonPos.y){
-            	//tiro=controlador.tirador.animacion.lanzaBalon(tiempo,balonPos,diferencia);
+  /*          if(balonPosFinal.x>balonPos.x||balonPosFinal.y>balonPos.y||balonPosFinal.x<balonPos.x||balonPosFinal.y<balonPos.y){
+            	tiro=controlador.tirador.animacion.lanzaBalon(tiempo,balonPos,diferencia);
             }
-            
+  */          
             canvas.drawRGB(0, 255, 0);
             Bitmap resized = Bitmap.createScaledBitmap(fondo, frameBuffer.getWidth(), frameBuffer.getHeight(), true);
             canvas.drawBitmap(resized, 0, 0, null);
@@ -117,9 +120,9 @@ public class TiradorView extends SurfaceView implements Runnable {
             
             Canvas pantalla = holder.lockCanvas();
             
-            //Determina la resoluci��n de la pantalla
+            //Determina la resoluci������n de la pantalla
             pantalla.getClipBounds(dstRect);
-            //Dibuja el buffer en la pantalla con el tama��o de la pantalla
+            //Dibuja el buffer en la pantalla con el tama������o de la pantalla
             pantalla.drawBitmap(frameBuffer, null, dstRect, null);
             holder.unlockCanvasAndPost(pantalla);
         }

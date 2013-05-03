@@ -5,6 +5,10 @@ package shootgoal.modelos;
 
 import android.graphics.Point;
 
+/**
+ * Modelo que contiene las caracteristicas del jugador asi como sus propiedas
+ *
+ */
 public abstract class Jugador {
 	public Point posicion;
 	public enum PosicionRelativa{

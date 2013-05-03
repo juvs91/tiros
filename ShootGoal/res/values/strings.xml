@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">ShootGoal</string>
@@ -7,6 +8,8 @@
     <string name="controlador_portero">ControladorPortero</string>
     <string name="controlador_menu">ControladorMenu</string>
     <string name="controlador_nuevo_juego">ControladorNuevoJuego</string>
+    <string name="controlador_login">ControladorLogin</string>
+    
     <string name="imgBut_jugar">Play</string>
 
     <color name="ButsColors">#515151</color>
@@ -17,6 +20,5 @@
     <string name="Player">New player</string>
     <string name="score">-999999</string>
     <color name="transparent">#00FFFFFF</color>
-    <string name="controlador_login">controlador_login</string>
 
 </resources>

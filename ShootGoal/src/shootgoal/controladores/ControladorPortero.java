@@ -25,6 +25,11 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 
+/**
+ * 
+ * Controla los moviemientos del portero y hacia donde se aventara
+ *
+ */
 public class ControladorPortero extends Activity implements OnTouchListener {
 	WakeLock wakeLock;
 	PorteroView view;
@@ -118,6 +123,12 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		view.resume();
 	}
 	
+	/**
+	 * Obtiene las coordenadas reales del punto IZQ DER o CENTRO
+	 * para posicionar al portero
+	 * @param posicionRelativa
+	 * @return
+	 */
 	public Point obtenerCoordenadasReales(Portero.PosicionRelativa posicionRelativa){
 		Point punto = new Point();
 		
@@ -145,6 +156,11 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		return punto;
 	}
 	
+	/**
+	 * Regresa el punto de las coordenadas en IZQ, DER o CENTRO
+	 * @param touchPoint
+	 * @return
+	 */
 	public Portero.PosicionRelativa posicionRelativaBasadaEnPuntoReal(Point touchPoint){
 		int porteriaOrigenX = porteria.posicion.x;
 		int porteriaExtremoX = porteriaOrigenX + porteria.imagen.getWidth()/2;
@@ -155,13 +171,13 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			return Portero.PosicionRelativa.FUERA;
 		} else {
 			Log.v("dentroDePorteria", "si");
-			int tama–oDivisionX = porteria.imagen.getWidth()/2/3;
-			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tama–oDivisionX){
+			int tamanoDivisionX = porteria.imagen.getWidth()/2/3;
+			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tamanoDivisionX){
 				/*if(!view.bloqueado){
 					view.paraPorIzquierda = true;
 				}*/
 				return Portero.PosicionRelativa.IZQUIERDA;
-			} else if(touchPoint.x >= porteriaExtremoX-tama–oDivisionX && touchPoint.x <= porteriaExtremoX){
+			} else if(touchPoint.x >= porteriaExtremoX-tamanoDivisionX && touchPoint.x <= porteriaExtremoX){
 				/*if(!view.bloqueado){
 					view.paraPorDerecha = true;
 				}*/
@@ -171,7 +187,10 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			}
 		}
 	}
-
+	/**
+	 * Mueve la posicion del portero hacia el punto 
+	 * @param touchPoint
+	 */
 	public void moverPorteroAPosicionElegida(Point touchPoint){
 		if(!view.bloqueado){
 			Point punto = null;
@@ -272,12 +291,12 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			Log.v("dentroDePorteria","no");
 		} else {
 			Log.v("dentroDePorteria", "si");
-			int tama–oDivisionX = porteria.imagen.getWidth()/2/3;
-			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tama–oDivisionX){
+			int tamaï¿½oDivisionX = porteria.imagen.getWidth()/2/3;
+			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tamaï¿½oDivisionX){
 				if(!view.bloqueado){
 					view.paraPorIzquierda = true;
 				}
-			} else if(touchPoint.x >= porteriaExtremoX-tama–oDivisionX && touchPoint.x <= porteriaExtremoX){
+			} else if(touchPoint.x >= porteriaExtremoX-tamaï¿½oDivisionX && touchPoint.x <= porteriaExtremoX){
 				if(!view.bloqueado){
 					view.paraPorDerecha = true;
 				}

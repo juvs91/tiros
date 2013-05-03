@@ -9,7 +9,9 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import shootgoal.build.R;
 import shootgoal.modelos.Jugadores;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -86,10 +88,18 @@ public class ControladorSignUp extends Activity{
 			
 		}
 		if(usuarioCorrecto){
+			
+			//guardo en los shared preferences los valores del login 
+			SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putString("mail", mail);
+			editor.putInt("id", id);
+			editor.commit();
+			
 			Intent launchGame = new Intent(this,ControladorMenu.class);
 			startActivity(launchGame);
 		}else{
-			Toast.makeText(getApplicationContext(), "usuario incorrecto.",Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "usuario incorrecto .",Toast.LENGTH_LONG).show();
 			Intent launchGame = new Intent(this,ControladorSignUp.class);
 			startActivity(launchGame);
 		}

@@ -20,11 +20,12 @@ public class Conexion {
 	//link donde se encuentra el php con las acciones a realizar
 	private static String amigosUrl = "amigos.php";//"http://code.systheam.com/webServices/amigos.php";
 	private static String tiroUrl = "tiro.php";
+	private static String paroUrl = "paro.php";
 	private static String loginUrl = "login.php";
 	private static String signUpUrl = "signUp.php";
+	private static String buscarUrl= "buscar.php";
 	//tad para la accion a realiza
-	private static String amigosTag = "amigos";
-	private static String juegoPendiente = "pendiente";
+
 	private static final String BASE_URL = "http://goalshootout.comoj.com/";
 	private static AsyncHttpClient client = new AsyncHttpClient();
 	
@@ -34,13 +35,28 @@ public class Conexion {
 			params.put("id", id+"");
 			Conexion.post(resource, params, responseHandler);				
 	}
-	public static void tiro(int idPortero,int idTirador, AsyncHttpResponseHandler responseHandler){
-			RequestParams params = new RequestParams();
-			String resource = tiroUrl;
-			params.put("idPortero", idPortero+"");
-			params.put("idTirador", idTirador+"");
-			Conexion.post(resource, params, responseHandler);	
+	public static void tiro(int jugador1,int jugador2,int status,int posTiro,boolean aceptado,int posParo, AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		String resource = tiroUrl;
+		params.put("jugador1", jugador1+"");
+		params.put("jugador2", jugador2+"");
+		params.put("status", status+"");
+		params.put("posTiro", posTiro+"");
+		params.put("aceptado", aceptado+"");
+		params.put("posParo", posParo+"");
+		Conexion.post(resource, params, responseHandler);	
 	}
+	public static void paro(int jugador1,int jugador2,int status,int posTiro,boolean aceptado,int posParo, AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		String resource = paroUrl;
+		params.put("jueagor1", jugador1+"");
+		params.put("jueagor2", jugador2+"");
+		params.put("status", status+"");
+		params.put("posTiro", posTiro+"");
+		params.put("aceptado", aceptado+"");
+		params.put("posParo", posParo+"");
+		Conexion.post(resource, params, responseHandler);	
+}
 	public static void login(String usuario,String password, AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
 		String resource = loginUrl;
@@ -56,6 +72,12 @@ public class Conexion {
 		params.put("mail", mail+"");
 		Conexion.post(resource, params, responseHandler);	
 	}
+	public static void buscar(String mail, AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		String resource = buscarUrl;
+		params.put("mail", mail+"");
+		Conexion.post(resource, params, responseHandler);	
+	}
 
 	
 	public static void get(String url, RequestParams params,
@@ -66,6 +88,7 @@ public class Conexion {
 
 		public static void post(String url, RequestParams params,
 				AsyncHttpResponseHandler responseHandler) {
+			 String test=  getAbsoluteUrl(url);
 				client.post(getAbsoluteUrl(url), params, responseHandler);
 			
 		}
