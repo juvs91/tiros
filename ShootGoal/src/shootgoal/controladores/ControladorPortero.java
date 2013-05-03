@@ -7,6 +7,7 @@ import shootgoal.modelos.Jugador;
 import shootgoal.modelos.Porteria;
 import shootgoal.modelos.Portero;
 import shootgoal.modelos.Tirador;
+import shootgoal.modelos.Jugador.PosicionRelativa;
 import shootgoal.vistas.PorteroView;
 
 
@@ -42,6 +43,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 	public ControllerStatus status;
 	public Bitmap botonGo;
 	public Bitmap letrasGol;
+	public Bitmap letrasFallo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,9 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			botonGo = BitmapFactory.decodeStream(is);			
 			is = assetManager.open("LetrasGolRojas.png");
 			letrasGol = BitmapFactory.decodeStream(is);
+			
+			is = assetManager.open("missed.png");
+			letrasFallo = BitmapFactory.decodeStream(is);
 			//cuadroPorteria=BitmapFactory.decodeStream(porteriaImagen);
 			is.close();
 			//porteriaImagen.close();
@@ -70,7 +75,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		view = new PorteroView(this);
 		view.fondo = cuadro;
 		view.botonGo = botonGo;
-		view.letrasGol = letrasGol;
+		//view.letrasGol = letrasGol;
 		//view.porteria=cuadroPorteria;
 		view.controlador = this;
 		view.setOnTouchListener(this);
@@ -141,7 +146,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 				punto.x = (int)(porteriaScaledWidth/3) - 25 + porteriaOrigenX;
 			break;
 			case CENTRO:
-				punto.x = porteriaScaledWidth/2 + porteriaOrigenX;
+				punto.x = (int)(porteriaScaledWidth/2) + porteriaOrigenX;
 			break;
 			case DERECHA:
 				punto.x = porteriaExtremoX - (int)(porteriaScaledWidth/3) + 25;
@@ -200,31 +205,74 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			//si se dio click en el boton
 			if((touchPoint.x >= view.frameBuffer.getWidth()-botonGo.getWidth()/5-20 && touchPoint.x <= view.frameBuffer.getWidth()-20)
 					|| (touchPoint.y >= view.frameBuffer.getHeight()-botonGo.getHeight()/5-20 && touchPoint.y <= view.frameBuffer.getHeight()-20)){
+				if(portero.posRelativa == null){
+					portero.posRelativa = Jugador.PosicionRelativa.CENTRO;
+				}
 				switch(portero.posRelativa){
-					case IZQUIERDA: 
-						portero.posRelativa = Portero.PosicionRelativa.CENTRO;
-						punto = obtenerCoordenadasReales(portero.posRelativa);
-						punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
-						portero.posicion = punto;
-						
-						tirador.posRelativa = Jugador.PosicionRelativa.IZQUIERDA;
+					case CENTRO:
+						view.bloqueado = true;
+						tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
 						Point posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
 						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
 						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
 						view.posFinalBalon = posFinalBalon;
-						view.paraPorIzquierda = true;
+						if(portero.posRelativa==tirador.posRelativa){
+							view.letrasGol = letrasFallo;
+						} else {
+							view.letrasGol = letrasGol;
+						}
+						
+						view.paraPorCentro = true;
 						break;
-					case DERECHA:
-						portero.posRelativa = Portero.PosicionRelativa.CENTRO;
-						punto = obtenerCoordenadasReales(portero.posRelativa);
-						punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
-						portero.posicion = punto;
-						tirador.posRelativa = Jugador.PosicionRelativa.IZQUIERDA;
+					case IZQUIERDA: 
+						view.bloqueado = true;
+						tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
 						posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
 						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
 						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
 						view.posFinalBalon = posFinalBalon;
+						if(portero.posRelativa==tirador.posRelativa){
+							view.letrasGol = letrasFallo;
+						} else {
+							view.letrasGol = letrasGol;
+						}
+						portero.posRelativa = Jugador.PosicionRelativa.CENTRO;
+						punto = obtenerCoordenadasReales(portero.posRelativa);
+						punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
+						portero.posicion = punto;
+						/*tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
+						Point posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
+						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
+						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
+						view.posFinalBalon = posFinalBalon;
+						if(portero.posRelativa==tirador.posRelativa){
+							view.letrasGol = letrasFallo;
+						} else {
+							view.letrasGol = letrasGol;
+						}*/
+						
+						view.paraPorIzquierda = true;
+						break;
+					case DERECHA:
+						view.bloqueado = true;
+						tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
+						posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
+						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
+						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
+						view.posFinalBalon = posFinalBalon;
+						if(portero.posRelativa==tirador.posRelativa){
+							view.letrasGol = letrasFallo;
+						} else {
+							view.letrasGol = letrasGol;
+						}
+						portero.posRelativa = Jugador.PosicionRelativa.CENTRO;
+						punto = obtenerCoordenadasReales(portero.posRelativa);
+						punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
+						portero.posicion = punto;
+						
 						view.paraPorDerecha = true;
+						
+						break;
 				}
 			}
 		}

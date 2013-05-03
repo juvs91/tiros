@@ -10,7 +10,7 @@ public class Jugadores {
 	public Jugadores(){
 
 	}
-	
+
 	// constructor
 	public Jugadores(int puntaje, String nombre,int id){
 		this.puntaje = puntaje;
@@ -41,5 +41,5 @@ public class Jugadores {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 }

@@ -46,7 +46,7 @@ public class Tirador extends Jugador {
 	}
 	
 	public boolean save (Juego juego){
-		Conexion.tiro(juego.getJugador1(),juego.getJugador2(),juego.getStatus(),juego.getPosTiro(),juego.isAceptado(),juego.getPorParada(), new JsonHttpResponseHandler(){
+		Conexion.tiro(juego.getPortero().getId(),juego.getTirador().getId(),juego.getStatus(),juego.getPosTiro(),juego.isAceptado(),juego.getPorParada(), new JsonHttpResponseHandler(){
 			@Override
 			public void onFailure(Throwable arg0) {
 				//Toast.makeText(getBaseContext(), "Network error, please try again later.",Toast.LENGTH_LONG).show();
