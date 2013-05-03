@@ -67,7 +67,6 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	 	setContentView(R.layout.nuevo_juego);
 		 Button buscar= ((Button) findViewById(R.id.buscar_nuevo_juego));
 		 buscar.setOnClickListener(this);
-		 listaJugadores = new LinkedList<Jugadores>();
 		
 	}
 	/**
