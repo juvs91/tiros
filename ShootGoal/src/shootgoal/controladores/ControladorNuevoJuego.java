@@ -42,6 +42,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	JSONArray json;
 	JSONObject item;
     String nombre,puntaje,id;
+    int estado;
     Jugadores jugador;
     ControladorNuevoJuego controlador;
     String mail;
@@ -95,7 +96,9 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		
 		//setContentView(R.layout.nuevo_juego);
 	}
-	
+	public void errorAmigos(){
+		Toast.makeText(getBaseContext(), "Network error, please try again later.",Toast.LENGTH_LONG).show();
+	}
 	public void jsonHandlerBusqueda(JSONArray json){
 		Log.v("json", json+"");
 		if(json!=null){
@@ -155,8 +158,12 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		}
 		lista(listaJugadores);
 	}
+
 	
-	public synchronized void lista(final List<Jugadores> listaJugadores){
+	public synchronized void lista(List<Jugadores> listaJugadores){
+		
+		setContentView(R.layout.nuevo_juego);
+		currentView = R.layout.nuevo_juego;
 		final ListView lv = (ListView) findViewById(R.id.mylistview);
 		lv.setAdapter(new ItemAdapter(this, R.layout.list_item ,listaJugadores));
 		lv.setOnItemClickListener(this);
