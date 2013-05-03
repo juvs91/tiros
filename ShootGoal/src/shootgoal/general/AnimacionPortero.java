@@ -85,6 +85,24 @@ public class AnimacionPortero {
         }
     }*/
     
+    public synchronized boolean pararEnElCentro(double tiempo){
+    	if(cuadros.size() > 1){
+    		this.tiempo += tiempo;
+    		
+    		if (this.tiempo >= 0.2*12) {
+                //Reinicia la animación
+                this.tiempo = this.tiempo % 0.2*12;
+                //indice = 1;
+                return false;
+            }
+    		
+    		//while (this.tiempo > cuadros.get(indice).tiempo){
+    			//indice ++;
+    		//}
+    	}
+    	return true;
+    }
+    
     public synchronized boolean pararEnLaIzquierda(double tiempo){
     	if(cuadros.size() > 1){
     		this.tiempo += tiempo;

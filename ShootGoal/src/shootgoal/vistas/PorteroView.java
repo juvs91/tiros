@@ -33,6 +33,7 @@ public class PorteroView extends SurfaceView implements Runnable {
     public ControladorPortero controlador;
     public boolean paraPorIzquierda = false;
     public boolean paraPorDerecha = false;
+    public boolean paraPorCentro = false;
     public boolean bloqueado = false;
     public boolean balonBloqueado = false;
     public Bitmap botonGo;
@@ -107,6 +108,26 @@ public class PorteroView extends SurfaceView implements Runnable {
             	canvas.drawBitmap(resized, frameBuffer.getWidth()-resized.getWidth()-20, frameBuffer.getHeight()-resized.getHeight()-20, null);
             }
             
+            if(paraPorCentro){
+            	controlador.portero.animacion.pararEnElCentro(tiempo);
+            	bloqueado = paraPorCentro = controlador.tirador.animacion.moverBalonAPosicion(posFinalBalon, tiempo);
+            	int mostrar = mostrarLetreroResultados(tiempo);
+            	if(mostrar>0){
+            		resized = Bitmap.createScaledBitmap(letrasGol, (int)(letrasGol.getWidth()/1.5), (int)(letrasGol.getHeight()/1.5), true);
+                    Paint paint = new Paint();
+                    paint.setAlpha(mostrar);
+                    canvas.drawBitmap(resized, (int)(frameBuffer.getWidth()/2-letrasGol.getWidth()/2/1.5), (int)(frameBuffer.getHeight()/2-letrasGol.getHeight()/2/1.5-20), paint);
+            	}
+            	/*if(!balonBloqueado && !controlador.tirador.animacion.moverBalonAPosicion(posFinalBalon, tiempo)){
+            		balonBloqueado = true;
+            	}*/
+            	if(!bloqueado){
+            		controlador.finish();
+            		
+            		//balonBloqueado = false;
+            	}
+            }
+            
             if(paraPorIzquierda){
             	//bloqueado = paraPorIzquierda = controlador.portero.animacion.pararEnLaIzquierda(tiempo);
             	controlador.portero.animacion.pararEnLaIzquierda(tiempo);
@@ -130,11 +151,19 @@ public class PorteroView extends SurfaceView implements Runnable {
             
             if(paraPorDerecha){
             	//bloqueado = paraPorDerecha = controlador.portero.animacion.pararEnLaDerecha(tiempo);
-            	paraPorDerecha = controlador.portero.animacion.pararEnLaDerecha(tiempo);
-            	//bloqueado = controlador.tirador.animacion.moverBalonAPosicion(posFinalBalon, tiempo);
+            	controlador.portero.animacion.pararEnLaDerecha(tiempo);
+            	bloqueado = paraPorDerecha = controlador.tirador.animacion.moverBalonAPosicion(posFinalBalon, tiempo);
             	/*if(!balonBloqueado && !controlador.tirador.animacion.moverBalonAPosicion(posFinalBalon, tiempo)){
             		balonBloqueado = true;
             	}*/
+            	int mostrar = mostrarLetreroResultados(tiempo);
+            	if(mostrar>0){
+            		resized = Bitmap.createScaledBitmap(letrasGol, (int)(letrasGol.getWidth()/1.5), (int)(letrasGol.getHeight()/1.5), true);
+                    Paint paint = new Paint();
+                    paint.setAlpha(mostrar);
+                    canvas.drawBitmap(resized, (int)(frameBuffer.getWidth()/2-letrasGol.getWidth()/2/1.5), (int)(frameBuffer.getHeight()/2-letrasGol.getHeight()/2/1.5-20), paint);
+            	}
+            	
             	if(!bloqueado){
             		controlador.finish();
             		//balonBloqueado = false;

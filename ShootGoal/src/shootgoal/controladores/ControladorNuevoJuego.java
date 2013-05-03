@@ -63,10 +63,11 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		super.onCreate(savedInstanceState);
 		listaJugadores=new LinkedList<Jugadores>();
 		this.init();
-	 	 setContentView(R.layout.nuevo_juego);
-		 Button botonBuscar= ((Button) findViewById(R.id.buscar_nuevo_juego));
-		 botonBuscar.setOnClickListener(this);
 
+	 	setContentView(R.layout.nuevo_juego);
+		 Button buscar= ((Button) findViewById(R.id.buscar_nuevo_juego));
+		 buscar.setOnClickListener(this);
+		 listaJugadores = new LinkedList<Jugadores>();
 		
 	}
 	/**
