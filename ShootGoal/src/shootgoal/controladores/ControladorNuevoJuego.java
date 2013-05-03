@@ -55,9 +55,9 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.init();
-	 	setContentView(R.layout.nuevo_juego);
-		 Button buscar= ((Button) findViewById(R.id.buscar_nuevo_juego));
-		 buscar.setOnClickListener(this);
+	 	 setContentView(R.layout.nuevo_juego);
+		 Button botonBuscar= ((Button) findViewById(R.id.buscar_nuevo_juego_email));
+		 botonBuscar.setOnClickListener(this);
 
 	     
 			
@@ -192,7 +192,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if(v.getId()==R.id.buscar_nuevo_juego){
+		if(v.getId()==R.id.buscar_nuevo_juego_email){
 			mail=((EditText) findViewById(R.id.buscar_mail)).getText().toString();
     		buscar(mail);
 		}

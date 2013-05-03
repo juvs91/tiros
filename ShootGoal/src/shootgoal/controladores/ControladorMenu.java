@@ -19,6 +19,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 public class ControladorMenu extends Activity implements OnClickListener {
@@ -35,6 +36,7 @@ public class ControladorMenu extends Activity implements OnClickListener {
 		Bitmap cuadro = null;
 		ImageButton botonPlay= ((ImageButton) findViewById(R.id.butPlay));
 		botonPlay.setOnClickListener(this);
+	
 		
 		try {
 			is = assetManager.open("fondo/principal.jpg");
@@ -62,9 +64,10 @@ public class ControladorMenu extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View arg0) {
-
-		Intent launchGame = new Intent(this, ControladorNuevoJuego.class);
-		startActivity(launchGame);
+		if(arg0.getId()==R.id.butPlay){
+			Intent launchGame = new Intent(this, ControladorNuevoJuego.class);
+			startActivity(launchGame);	
+		}
 		
 		
 	}

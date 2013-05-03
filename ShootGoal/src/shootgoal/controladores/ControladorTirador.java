@@ -94,7 +94,7 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 		
 	    balonPos = new Point(viewTirador.frameBuffer.getWidth()/2, viewTirador.frameBuffer.getHeight()/2+120);
 		tirador = new Tirador(balonPos, getAssets());
-		viewTirador.setTiradorScreenContext(tirador.animacion.getCuadro(), tirador.posicion,tirador.posicion,tirador.posicion);
+		//viewTirador.setTiradorScreenContext(tirador.animacion.getCuadro(), tirador.posicion,tirador.posicion,tirador.posicion);
 		setContentView(viewTirador);
 
 
@@ -112,7 +112,7 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 	}
 
 	/**
-	 * M������todo onResume sobrescrito de la clase Activity
+	 * M������������������todo onResume sobrescrito de la clase Activity
 	 * LLamado cuando la Actividad vuelve a primer plano
 	 */
 	@Override
@@ -159,13 +159,13 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
     	Point point=new Point();
-		point.set((int)(event.getX()*scaleX-tirador.animacion.getCuadro().getWidth()/3/2),(int)(event.getY()*scaleY-tirador.animacion.getCuadro().getHeight()/3/2));
+		//point.set((int)(event.getX()*scaleX-tirador.animacion.getCuadro().getWidth()/3/2),(int)(event.getY()*scaleY-tirador.animacion.getCuadro().getHeight()/3/2));
 		
 		Point diferencia=new Point();
 		diferencia.set((int) (point.x-balonPos.x),point.y-balonPos.y);
 		
 		tirador.setPosicion(diferencia);
-		viewTirador.setTiradorScreenContext(tirador.animacion.getCuadro(), point,tirador.posicion,balonPos);
+		//viewTirador.setTiradorScreenContext(tirador.animacion.getCuadro(), point,tirador.posicion,balonPos);
 		//tiro(point);
 		Log.v("tiro x", String.valueOf(point.x));
 		Log.v("tiro y", String.valueOf(point.y));

@@ -1,6 +1,6 @@
 <?php
 //todos los includes
-include 'GlobalInfo.php';
+include 'baseDatos.php';
 
 //todos los datos que viene en el header (body)
 $id=$_POST["id"];

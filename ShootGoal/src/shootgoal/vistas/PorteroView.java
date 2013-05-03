@@ -22,7 +22,7 @@ public class PorteroView extends SurfaceView implements Runnable {
     Canvas canvas;                          //Canvas para dibujar
     volatile boolean running = false;       //Bandera para conocer el estado de la Actividad
     float tiempoTick = 0, tick = 0.1f;      //Controladores de tiempo
-    public Bitmap frameBuffer;				//Objetos Bitmap para el manejo de im��genes
+    public Bitmap frameBuffer;				//Objetos Bitmap para el manejo de im������genes
     public Bitmap fondo;
     //public Bitmap porteria;
     //Bitmap porteroImagen;
@@ -107,7 +107,7 @@ public class PorteroView extends SurfaceView implements Runnable {
             if(paraPorIzquierda){
             	//bloqueado = paraPorIzquierda = controlador.portero.animacion.pararEnLaIzquierda(tiempo);
             	controlador.portero.animacion.pararEnLaIzquierda(tiempo);
-            	bloqueado = paraPorIzquierda = controlador.tirador.animacion.moverBalonAPosicion(posFinalBalon, tiempo);
+            	//bloqueado = paraPorIzquierda = controlador.tirador.animacion.moverBalonAPosicion(posFinalBalon, tiempo);
             	int mostrar = mostrarLetreroResultados(tiempo);
             	if(mostrar>0){
             		resized = Bitmap.createScaledBitmap(letrasGol, (int)(letrasGol.getWidth()/1.5), (int)(letrasGol.getHeight()/1.5), true);
@@ -128,7 +128,7 @@ public class PorteroView extends SurfaceView implements Runnable {
             if(paraPorDerecha){
             	//bloqueado = paraPorDerecha = controlador.portero.animacion.pararEnLaDerecha(tiempo);
             	paraPorDerecha = controlador.portero.animacion.pararEnLaDerecha(tiempo);
-            	bloqueado = controlador.tirador.animacion.moverBalonAPosicion(posFinalBalon, tiempo);
+            	//bloqueado = controlador.tirador.animacion.moverBalonAPosicion(posFinalBalon, tiempo);
             	/*if(!balonBloqueado && !controlador.tirador.animacion.moverBalonAPosicion(posFinalBalon, tiempo)){
             		balonBloqueado = true;
             	}*/
@@ -153,9 +153,9 @@ public class PorteroView extends SurfaceView implements Runnable {
             canvas.drawBitmap(resized, controlador.portero.posicion.x, controlador.portero.posicion.y, null);
             Canvas pantalla = holder.lockCanvas();
             
-            Bitmap balonImagen = controlador.tirador.animacion.getCuadro();
+            /*Bitmap balonImagen = controlador.tirador.animacion.getCuadro();
             resized = Bitmap.createScaledBitmap(balonImagen, balonImagen.getWidth()/3, balonImagen.getHeight()/3, true);
-            canvas.drawBitmap(resized, controlador.tirador.posicion.x, controlador.tirador.posicion.y, null);
+            canvas.drawBitmap(resized, controlador.tirador.posicion.x, controlador.tirador.posicion.y, null);*/
             
             
             
@@ -176,7 +176,7 @@ public class PorteroView extends SurfaceView implements Runnable {
     	}
     	
 		if (iteraciones >= 14) {
-            //Reinicia la animaci√≥n
+            //Reinicia la animaci������n
             //this.tiempoAux = (float) (this.tiempoAux % (0.2*10));
             //iteraciones = 1;
             //alfa = 0;
@@ -205,7 +205,7 @@ public class PorteroView extends SurfaceView implements Runnable {
      * inicia el thread de la vista
      */
     public void resume() {
-        //La bandera indica que la Actividad esta en ejecuci��n
+        //La bandera indica que la Actividad esta en ejecuci������n
 
         running = true;
         //Crea un nuevo thread para la vista
