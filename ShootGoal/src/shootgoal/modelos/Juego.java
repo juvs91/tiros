@@ -48,7 +48,7 @@ public class Juego {
 	}
 
 	public void setPortero(Portero portero) {
-		this.portero = portero;
+		Juego.portero = portero;
 	}
 
 	public JSONArray getJson() {
@@ -129,6 +129,21 @@ public class Juego {
 			Jugadores jugador=new Jugadores(100,"gordo",1);
 		}
 	}
-	
+	public void update(){
+		Conexion.juegoUpdate(this.getTirador().getId(),this.getPortero().getId(),this.getStatus(),this.getPosTiro(),this.getPosTiro(), new JsonHttpResponseHandler() {
+			@Override
+			public void onFailure(Throwable arg0) {
+				//Toast.makeText(this, "Network error, please try again later.",Toast.LENGTH_LONG).show();
+			}
+			@Override
+			public void onSuccess(JSONArray amigos) {
+				jsonHandlerUpdate(amigos);
+			}
+		});
+	}
+	public  void jsonHandlerUpdate(JSONArray json){
+		
+	}
+
 	
 }

@@ -25,6 +25,7 @@ public class Conexion {
 	private static String signUpUrl = "signUp.php";
 	private static String buscarUrl= "buscar.php";
 	private static String juego= "juego.php";
+	private static String juegoUpdateUrl= "juegoUpdate.php";
 
 	//tad para la accion a realiza
 
@@ -51,8 +52,8 @@ public class Conexion {
 	public static void paro(int jugador1,int jugador2,int status,int posTiro,boolean aceptado,int posParo, AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
 		String resource = paroUrl;
-		params.put("jueagor1", jugador1+"");
-		params.put("jueagor2", jugador2+"");
+		params.put("juagor1", jugador1+"");
+		params.put("juagor2", jugador2+"");
 		params.put("status", status+"");
 		params.put("posTiro", posTiro+"");
 		params.put("aceptado", aceptado+"");
@@ -86,6 +87,17 @@ public class Conexion {
 		String resource = juego;
 		params.put("idJugador1", idJugador1+"");
 		params.put("idJugador2", idJugador2+"");
+		Conexion.post(resource, params, responseHandler);	
+	}
+	public static void juegoUpdate(int idJugador1,int idJugador2,int estado,int posTiro,int posParo, AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		String resource = juegoUpdateUrl;
+		params.put("idJugador1", idJugador1+"");
+		params.put("idJugador2", idJugador2+"");
+		params.put("estado", estado+"");
+		params.put("posTiro", posTiro+"");
+		params.put("posParo", posParo+"");
+
 		Conexion.post(resource, params, responseHandler);	
 	}
 
