@@ -57,8 +57,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			//porteriaImagen=assetManager.open("PorteriaAlone.png");
 			cuadro = BitmapFactory.decodeStream(is);
 			is = assetManager.open("porteritoNaranjaGo.png");
-			botonGo = BitmapFactory.decodeStream(is);
-			
+			botonGo = BitmapFactory.decodeStream(is);			
 			is = assetManager.open("LetrasGolRojas.png");
 			letrasGol = BitmapFactory.decodeStream(is);
 			
@@ -187,6 +186,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			}
 		}
 	}
+	
 	/**
 	 * Mueve la posicion del portero hacia el punto 
 	 * @param touchPoint
@@ -291,22 +291,6 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			moverPorteroAPosicionElegida(touchPoint);
 		}
 		
-		
-		/*if((touchPoint.x < porteriaOrigenX) || (touchPoint.x > porteriaExtremoX) || (touchPoint.y < porteriaOrigenY) || (touchPoint.y > porteriaExtremoY)){
-			Log.v("dentroDePorteria","no");
-		} else {
-			Log.v("dentroDePorteria", "si");
-			int tama�oDivisionX = porteria.imagen.getWidth()/2/3;
-			if(touchPoint.x >= porteriaOrigenX && touchPoint.x <= porteriaOrigenX+tama�oDivisionX){
-				if(!view.bloqueado){
-					view.paraPorIzquierda = true;
-				}
-			} else if(touchPoint.x >= porteriaExtremoX-tama�oDivisionX && touchPoint.x <= porteriaExtremoX){
-				if(!view.bloqueado){
-					view.paraPorDerecha = true;
-				}
-			}
-		}*/
 		return true;
 	}
 }

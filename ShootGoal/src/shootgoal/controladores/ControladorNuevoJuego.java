@@ -90,6 +90,8 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	public void init(){
 		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
 		int id  = prefs.getInt("id", 0);
+		listaJugadores=new LinkedList<Jugadores>();
+
 		
 		Conexion.amigos(id, new JsonHttpResponseHandler() {
 			@Override
@@ -102,7 +104,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 			}
 		});
 		
-		//setContentView(R.layout.nuevo_juego);
+		setContentView(R.layout.nuevo_juego);
 	}
 	
 	public void errorAmigos(){
@@ -200,8 +202,6 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-
-		 Log.e("App", "mama de juve2");
 
 		if(v.getId()==R.id.buscar_nuevo_juego){
 			mail=((EditText) findViewById(R.id.buscar_mail)).getText().toString();
