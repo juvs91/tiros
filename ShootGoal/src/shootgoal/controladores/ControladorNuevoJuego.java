@@ -104,7 +104,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 			}
 		});
 		
-		//setContentView(R.layout.nuevo_juego);
+		setContentView(R.layout.nuevo_juego);
 	}
 	
 	public void errorAmigos(){
