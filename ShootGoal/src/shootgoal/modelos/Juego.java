@@ -40,7 +40,7 @@ public class Juego {
 	}
 
 	public void setTirador(Tirador tirador) {
-		this.tirador = tirador;
+		Juego.tirador = tirador;
 	}
 
 	public Portero getPortero() {

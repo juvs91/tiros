@@ -131,7 +131,7 @@ public class PorteroView extends SurfaceView implements Runnable {
             if(paraPorIzquierda){
             	//bloqueado = paraPorIzquierda = controlador.portero.animacion.pararEnLaIzquierda(tiempo);
             	controlador.portero.animacion.pararEnLaIzquierda(tiempo);
-            	//bloqueado = paraPorIzquierda = controlador.tirador.animacion.moverBalonAPosicion(posFinalBalon, tiempo);
+            	bloqueado = paraPorIzquierda = controlador.tirador.animacion.moverBalonAPosicion(posFinalBalon, tiempo);
             	int mostrar = mostrarLetreroResultados(tiempo);
             	if(mostrar>0){
             		resized = Bitmap.createScaledBitmap(letrasGol, (int)(letrasGol.getWidth()/1.5), (int)(letrasGol.getHeight()/1.5), true);
@@ -185,9 +185,9 @@ public class PorteroView extends SurfaceView implements Runnable {
             canvas.drawBitmap(resized, controlador.portero.posicion.x, controlador.portero.posicion.y, null);
             Canvas pantalla = holder.lockCanvas();
             
-            /*Bitmap balonImagen = controlador.tirador.animacion.getCuadro();
+            Bitmap balonImagen = controlador.tirador.animacion.getCuadro();
             resized = Bitmap.createScaledBitmap(balonImagen, balonImagen.getWidth()/3, balonImagen.getHeight()/3, true);
-            canvas.drawBitmap(resized, controlador.tirador.posicion.x, controlador.tirador.posicion.y, null);*/
+            canvas.drawBitmap(resized, controlador.tirador.posicion.x, controlador.tirador.posicion.y, null);
             
             
             
