@@ -26,6 +26,8 @@ public class Conexion {
 	private static String buscarUrl= "buscar.php";
 	private static String juego= "juego.php";
 	private static String juegoUpdateUrl= "juegoUpdate.php";
+	private static String juegoNuevoUrl= "nuevoJuego.php";
+
 
 	//tad para la accion a realiza
 
@@ -99,7 +101,15 @@ public class Conexion {
 
 		Conexion.post(resource, params, responseHandler);	
 	}
+	public static void nuevoJuego(int idJugador1,int idJugador2, AsyncHttpResponseHandler responseHandler){
+		RequestParams params = new RequestParams();
+		String resource = juegoNuevoUrl;
+		params.put("jugador1", idJugador1+"");
+		params.put("jugador2", idJugador2+"");
 
+		Conexion.post(resource, params, responseHandler);	
+	}
+	
 	
 	public static void get(String url, RequestParams params,
 			AsyncHttpResponseHandler responseHandler) {

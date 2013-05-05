@@ -56,6 +56,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
     ControladorNuevoJuego controlador;
     String mail;
     int idContrincante;
+    int miId;
    
 	
 	@Override
@@ -124,6 +125,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				  jugador.setId(Integer.parseInt(id));
 				  jugador.setNombre(nombre);
 				  jugador.setPuntaje(Integer.parseInt(puntaje));
+				  jugador.setEstado(0);
 				  listaJugadores.add(jugador);
 				  Log.v("json", nombre+" "+puntaje+" "+id);
 				} catch (JSONException e) {
@@ -152,9 +154,11 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				  nombre=item.getString("nombre");
 				  puntaje=item.getString("puntaje");
 				  id=item.getString("id");
+				  estado=Integer.parseInt(item.getString("estado"));
 				  jugador.setId(Integer.parseInt(id));
 				  jugador.setNombre(nombre);
 				  jugador.setPuntaje(Integer.parseInt(puntaje));
+				  jugador.setEstado(estado);
 				  listaJugadores.add(jugador);
 				  Log.v("json", nombre+" "+puntaje+" "+id);
 				} catch (JSONException e) {
@@ -187,17 +191,32 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putInt("id amigo", idContrincante);
+		miId = prefs.getInt("id", 0);
 		editor.commit();
 
 		Intent launchGame = null;
-
-		if(esPortero){
-			launchGame = new Intent(this, ControladorPortero.class);
-		} else {
-			launchGame = new Intent(this, ControladorTirador.class);
+		if(listaJugadores.get(pos).getEstado()==0){
+			//significa que fue un usuaria buscado y se agregara a la base de datos actual 
+			Conexion.nuevoJuego(miId,idContrincante, new JsonHttpResponseHandler() {
+				@Override
+				public void onFailure(Throwable arg0) {
+					Toast.makeText(getBaseContext(), "Network error, please try again later.",Toast.LENGTH_LONG).show();
+				}
+				@Override
+				public void onSuccess(JSONArray amigos) {
+					agregoJuego(amigos);
+				}
+			});
+		}else{
+			if(esPortero){
+				launchGame = new Intent(this, ControladorPortero.class);
+			} else {
+				launchGame = new Intent(this, ControladorTirador.class);
+			}
+			esPortero=!esPortero;
+			startActivity(launchGame);
 		}
-		esPortero=!esPortero;
-		startActivity(launchGame);
+	
 	}
 	@Override
 	public void onClick(View v) {
@@ -210,7 +229,17 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		
 	}
 	
-	
+	public void agregoJuego(JSONArray amigos){
+		Intent launchGame = null;
+
+		if(esPortero){
+			launchGame = new Intent(this, ControladorPortero.class);
+		} else {
+			launchGame = new Intent(this, ControladorTirador.class);
+		}
+		esPortero=!esPortero;
+		startActivity(launchGame);
+	}
 
 	
 }
