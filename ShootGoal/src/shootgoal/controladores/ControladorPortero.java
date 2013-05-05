@@ -204,7 +204,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			}
 			//si se dio click en el boton
 			if((touchPoint.x >= view.frameBuffer.getWidth()-botonGo.getWidth()/5-20 && touchPoint.x <= view.frameBuffer.getWidth()-20)
-					|| (touchPoint.y >= view.frameBuffer.getHeight()-botonGo.getHeight()/5-20 && touchPoint.y <= view.frameBuffer.getHeight()-20)){
+					&& (touchPoint.y >= view.frameBuffer.getHeight()-botonGo.getHeight()/5-20 && touchPoint.y <= view.frameBuffer.getHeight()-20)){
 				if(portero.posRelativa == null){
 					portero.posRelativa = Jugador.PosicionRelativa.CENTRO;
 				}
@@ -280,10 +280,10 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 	
 	@Override
 	public boolean onTouch(View v, MotionEvent event){
-		Point point=new Point();
-		point.set((int)(event.getX()*scaleX-portero.animacion.getCuadro().getWidth()/3/2),(int)(event.getY()*scaleY-portero.animacion.getCuadro().getHeight()/3/2));
-		Log.v("tiro x", String.valueOf(point.x));
-		Log.v("tiro y", String.valueOf(point.y));
+		//Point point=new Point();
+		//point.set((int)(event.getX()*scaleX-portero.animacion.getCuadro().getWidth()/3/2),(int)(event.getY()*scaleY-portero.animacion.getCuadro().getHeight()/3/2));
+		//Log.v("tiro x", String.valueOf(point.x));
+		//Log.v("tiro y", String.valueOf(point.y));
 		Point touchPoint = new Point();
 		touchPoint.set((int)(event.getX()*scaleX), (int)(event.getY()*scaleY));
 		

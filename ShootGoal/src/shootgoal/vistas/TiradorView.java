@@ -30,19 +30,19 @@ public class TiradorView extends SurfaceView implements Runnable {
     public Bitmap fondo;
     public Bitmap porteria;
     public Bitmap botonGo;
-    Bitmap porteroImagen;
-    Bitmap balonImagen;
-    public Point balonPos;
-    public Point porteroPos;
-    public Point diferencia;
-    public Point balonPosFinal;
-    public Point posFinalBalon;
+    //Bitmap porteroImagen;
+    //Bitmap balonImagen;
+    //public Point balonPos;
+    //public Point porteroPos;
+    //public Point diferencia;
+    //public Point balonPosFinal;
+    //public Point posFinalBalon;
     public ControladorTirador controlador;
-    boolean tiro;
-    public boolean paraPorIzquierda = false;
-    public boolean paraPorDerecha = false;
-    public boolean bloqueado = false;
-    public boolean balonBloqueado = false;
+    //boolean tiro;
+    //public boolean paraPorIzquierda = false;
+    //public boolean paraPorDerecha = false;
+    //public boolean bloqueado = false;
+    //public boolean balonBloqueado = false;
 
     
     
@@ -78,7 +78,7 @@ public class TiradorView extends SurfaceView implements Runnable {
 		super(context, attrs, defStyle);
 		// TODO Auto-generated constructor stub
 	}
-	public void setPorteroScreenContext(Bitmap porteroImage, Point porteroPos){
+	/*public void setPorteroScreenContext(Bitmap porteroImage, Point porteroPos){
 		this.porteroImagen = porteroImage;
 		this.porteroPos = porteroPos;
 	}
@@ -87,7 +87,7 @@ public class TiradorView extends SurfaceView implements Runnable {
 		this.balonPos = balonPos;
 		this.diferencia = diferencia;
 		this.balonPosFinal = 	balonPosFinal;
-	}
+	}*/
 	
 
 	@Override
@@ -110,7 +110,13 @@ public class TiradorView extends SurfaceView implements Runnable {
   /*          if(balonPosFinal.x>balonPos.x||balonPosFinal.y>balonPos.y||balonPosFinal.x<balonPos.x||balonPosFinal.y<balonPos.y){
             	tiro=controlador.tirador.animacion.lanzaBalon(tiempo,balonPos,diferencia);
             }
-  */          
+  */         
+            Bitmap porteroImagen = controlador.portero.animacion.getCuadro();
+            Point porteroPos = controlador.portero.posicion;
+            
+            Point balonPos = controlador.tirador.posicion;
+            Bitmap balonImagen = controlador.tirador.animacion.getCuadro();
+            
             canvas.drawRGB(0, 255, 0);
             Bitmap resized = Bitmap.createScaledBitmap(fondo, frameBuffer.getWidth(), frameBuffer.getHeight(), true);
             canvas.drawBitmap(resized, 0, 0, null);
