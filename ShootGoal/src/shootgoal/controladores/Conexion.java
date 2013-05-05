@@ -84,6 +84,7 @@ public class Conexion {
 		Conexion.post(resource, params, responseHandler);	
 	}
 	public static void juego(int idJugador1,int idJugador2, AsyncHttpResponseHandler responseHandler){
+		
 		RequestParams params = new RequestParams();
 		String resource = juego;
 		params.put("idJugador1", idJugador1+"");

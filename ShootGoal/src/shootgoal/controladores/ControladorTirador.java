@@ -16,6 +16,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import shootgoal.controladores.ControladorPortero.ControllerStatus;
+import shootgoal.modelos.Jugador;
 import shootgoal.modelos.Porteria;
 import shootgoal.modelos.Portero;
 import shootgoal.modelos.Tirador;
@@ -41,7 +43,7 @@ import android.view.WindowManager;
 public class ControladorTirador extends Activity implements OnTouchListener{
 	WakeLock wakeLock;
 	public TiradorView viewTirador;
-	Portero portero;
+	public Portero portero;
 	public Porteria porteria;
 	float scaleX, scaleY;
 	public Tirador tirador;
@@ -50,6 +52,7 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 	private int altoCancha=0;
 	private int tercera;
 	Point balonPos;
+	Bitmap botonGo;
 	int i=0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +61,7 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		AssetManager assetManager = getAssets();
 		InputStream is,porteriaImagen;
-		Bitmap cuadro = null, cuadroPorteria = null, botonGo = null;
+		Bitmap cuadro = null, cuadroPorteria = null;
 		try {
 			is = assetManager.open("fondo/FondoShotComp.png");
 			cuadro = BitmapFactory.decodeStream(is);
@@ -76,10 +79,12 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 		}		
 			
 		viewTirador= new TiradorView(this);
+		viewTirador.controlador = this;
 		viewTirador.fondo =cuadro;
 		viewTirador.porteria=cuadroPorteria;
 		viewTirador.setOnTouchListener(this);
 		viewTirador.botonGo = botonGo;
+		
 		
 		Point pointBalon=new Point();
 
@@ -92,14 +97,14 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 		portero = new Portero(porteroPos, getAssets());
 		//escoger el portero transparente
 		portero.animacion.indice = 0;
-		viewTirador.setPorteroScreenContext(portero.animacion.getCuadro(), portero.posicion);
+		//viewTirador.setPorteroScreenContext(portero.animacion.getCuadro(), portero.posicion);
 		
 	    balonPos = new Point(viewTirador.frameBuffer.getWidth()/2, viewTirador.frameBuffer.getHeight()/2+120);
 		tirador = new Tirador(balonPos, getAssets());
 
 		Point porteriaPos = new Point(viewTirador.frameBuffer.getWidth()/2, viewTirador.frameBuffer.getHeight()/2-25);
 		porteria = new Porteria(porteriaPos, getAssets());
-		viewTirador.setTiradorScreenContext(tirador.animacion.getCuadro(), tirador.posicion,tirador.posicion,tirador.posicion);
+		//viewTirador.setTiradorScreenContext(tirador.animacion.getCuadro(), tirador.posicion,tirador.posicion,tirador.posicion);
 		setContentView(viewTirador);
 
 	}
@@ -134,12 +139,12 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 	 * en el servidor
 	 * @param point
 	 */
-	private void tiro(Point point){
+	/*private void tiro(Point point){
 		try{
 		/*
 		anchoCancha=viewTirador.porteria.getWidth();
 		altoCancha=viewTirador.porteria.getHeight();
-		*/
+		*
 		
 		//se empiesa a madnar los datos del tiro 
 		HttpClient client = new DefaultHttpClient();  
@@ -160,13 +165,13 @@ public class ControladorTirador extends Activity implements OnTouchListener{
             Log.v("RESPONSE","fallo");
 		}
 
-	}
+	}*/
 	
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 
-    	Point touchPoint = new Point();
+    	/*Point touchPoint = new Point();
 		touchPoint.set((int)(event.getX()*scaleX-tirador.animacion.getCuadro().getWidth()/3/2),
 				(int)(event.getY()*scaleY-tirador.animacion.getCuadro().getHeight()/3/2));
 
@@ -182,7 +187,7 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 		if(!tirar(point)) {
 			diferencia.set((int) (point.x - balonPos.x), point.y - balonPos.y);
 			tirador.setPosicion(diferencia);
-			viewTirador.setTiradorScreenContext(tirador.animacion.getCuadro(), touchPoint,tirador.posicion,balonPos);
+			//viewTirador.setTiradorScreenContext(tirador.animacion.getCuadro(), touchPoint,tirador.posicion,balonPos);
 
 		tirador.setPosicion(diferencia);
 
@@ -193,7 +198,14 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 			Tirador.PosicionRelativa posRel = posicionRelativaBasadaEnPuntoReal(touchPoint);
 			Log.e("App", "lala: " + posRel);
 			
-		}
+		}*/
+		
+		Point touchPoint = new Point();
+		touchPoint.set((int)(event.getX()*scaleX), (int)(event.getY()*scaleY));
+		
+		//if(status==ControllerStatus.juegoActualDecidiendoPosicion){
+		moverBalonAPosicionElegida(touchPoint);
+		
 		return true;
 		// TODO Auto-generated method stub
 	}
@@ -244,6 +256,7 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 		if((touchPoint.x < porteriaOrigenX) || (touchPoint.x > porteriaExtremoX) || (touchPoint.y < porteriaOrigenY) || (touchPoint.y > porteriaExtremoY)){
 			Log.v("dentroDePorteria","no");
 			return Portero.PosicionRelativa.FUERA;
+			
 		} else {
 			Log.v("dentroDePorteria", "si");
 			int tamanoDivisionX = porteria.imagen.getWidth()/2/3;
@@ -251,30 +264,129 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 				/*if(!view.bloqueado){
 					view.paraPorIzquierda = true;
 				}*/
+				Log.v("posicion", "izquierda");
 				return Tirador.PosicionRelativa.IZQUIERDA;
 			} else if(touchPoint.x >= porteriaExtremoX-tamanoDivisionX && touchPoint.x <= porteriaExtremoX){
 				/*if(!view.bloqueado){
 					view.paraPorDerecha = true;
 				}*/
+				Log.v("posicion", "derecha");
 				return Tirador.PosicionRelativa.DERECHA;
 			} else {
+				Log.v("posicion", "centro");
 				return Tirador.PosicionRelativa.CENTRO;
 			}
 		}
 	}
 
-	private boolean tirar(Point touchPoint) {
+	/*private boolean tirar(Point touchPoint) {
 		// TODO Auto-generated method stub
 		Bitmap botonGo = viewTirador.botonGo;
 		if((touchPoint.x >= viewTirador.frameBuffer.getWidth()-botonGo.getWidth()/5-20 &&
 				touchPoint.x <= viewTirador.frameBuffer.getWidth()-20)
-				|| (touchPoint.y >= viewTirador.frameBuffer.getHeight()-botonGo.getHeight()/5-20 &&
+				&& (touchPoint.y >= viewTirador.frameBuffer.getHeight()-botonGo.getHeight()/5-20 &&
 				touchPoint.y <= viewTirador.frameBuffer.getHeight()-20)) {
 			return true;
 		}
 
 		return false;
+	}*/
+	
+	public void guardarTiro(){
+		//guardar en base de datos y al terminar hacer un callback a finish();
+		finish();
 	}
+	
+	public void moverBalonAPosicionElegida(Point touchPoint){
+		//if(!viewTirador.bloqueado){
+			Point punto = null;
+			Tirador.PosicionRelativa posRel = posicionRelativaBasadaEnPuntoReal(touchPoint);
+			if(posRel!=Tirador.PosicionRelativa.FUERA){
+				punto = obtenerCoordenadasReales(posRel);
+				punto.set(punto.x-tirador.animacion.getCuadro().getWidth()/3/2,punto.y-tirador.animacion.getCuadro().getHeight()/3/2);
+				tirador.posicion = punto;
+				tirador.posRelativa = posRel;
+				return;
+			}
+			//si se dio click en el boton
+			if((touchPoint.x >= viewTirador.frameBuffer.getWidth()-botonGo.getWidth()/5-20 && touchPoint.x <= viewTirador.frameBuffer.getWidth()-20)
+					&& (touchPoint.y >= viewTirador.frameBuffer.getHeight()-botonGo.getHeight()/5-20 && touchPoint.y <= viewTirador.frameBuffer.getHeight()-20)){
+				if(tirador.posRelativa == null){
+					tirador.posRelativa = Jugador.PosicionRelativa.FUERA;
+				}
+				if(tirador.posRelativa != Tirador.PosicionRelativa.FUERA){
+					guardarTiro();
+					//finish();
+				}
+				/*switch(portero.posRelativa){
+					case CENTRO:
+						view.bloqueado = true;
+						tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
+						Point posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
+						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
+						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
+						view.posFinalBalon = posFinalBalon;
+						if(portero.posRelativa==tirador.posRelativa){
+							view.letrasGol = letrasFallo;
+						} else {
+							view.letrasGol = letrasGol;
+						}
+						
+						view.paraPorCentro = true;
+						break;
+					case IZQUIERDA: 
+						view.bloqueado = true;
+						tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
+						posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
+						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
+						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
+						view.posFinalBalon = posFinalBalon;
+						if(portero.posRelativa==tirador.posRelativa){
+							view.letrasGol = letrasFallo;
+						} else {
+							view.letrasGol = letrasGol;
+						}
+						portero.posRelativa = Jugador.PosicionRelativa.CENTRO;
+						punto = obtenerCoordenadasReales(portero.posRelativa);
+						punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
+						portero.posicion = punto;
+						/*tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
+						Point posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
+						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
+						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
+						view.posFinalBalon = posFinalBalon;
+						if(portero.posRelativa==tirador.posRelativa){
+							view.letrasGol = letrasFallo;
+						} else {
+							view.letrasGol = letrasGol;
+						}*
+						
+						view.paraPorIzquierda = true;
+						break;
+					case DERECHA:
+						view.bloqueado = true;
+						tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
+						posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
+						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
+						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
+						view.posFinalBalon = posFinalBalon;
+						if(portero.posRelativa==tirador.posRelativa){
+							view.letrasGol = letrasFallo;
+						} else {
+							view.letrasGol = letrasGol;
+						}
+						portero.posRelativa = Jugador.PosicionRelativa.CENTRO;
+						punto = obtenerCoordenadasReales(portero.posRelativa);
+						punto.set(punto.x-portero.animacion.getCuadro().getWidth()/3/2,punto.y-portero.animacion.getCuadro().getHeight()/3/2);
+						portero.posicion = punto;
+						
+						view.paraPorDerecha = true;
+						
+						break;
+				}*/
+			}
+		}
+	//}
 
 
 }
