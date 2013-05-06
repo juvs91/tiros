@@ -56,11 +56,21 @@ public abstract class Jugador {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+	public int getTipoJugador() {
+		return tipoJugador;
+	}
+
+	public void setTipoJugador(int tipoJugador) {
+		this.tipoJugador = tipoJugador;
+	}
+
 
 	private String nombre;
 	private int puntaje;
 	private int id;
 	private String mail;
+	private int tipoJugador;
+
 	//protected Bitmap imagen; //es la imagen que se va a utilizar , en este caso el portero y el tirador
 	//protected float tiempo;  //es el tiempo que va a ir durando la animacion 
 	/**
