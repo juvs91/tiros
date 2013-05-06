@@ -127,14 +127,6 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				  id=item.getString("id");
 				  mail=item.getString("mail");
 				  jugador.setMail(mail);
-				  puntajeJugador1=Integer.parseInt(item.getString("puntajeJugador1"));
-				  jugador.setPuntajeJugador1(puntajeJugador1);
-				  puntajeJugador2=Integer.parseInt(item.getString("puntajeJugador2"));
-				  jugador.setPuntajeJugador1(puntajeJugador2);
-				  idJugador1=Integer.parseInt(item.getString("idJugador1"));
-				  idJugador2=Integer.parseInt(item.getString("idJugador2"));
-				  jugador.setIdJugador1(idJugador1);
-				  jugador.setIdJugador2(idJugador2);
 				  jugador.setId(Integer.parseInt(id));
 				  jugador.setNombre(nombre);
 				  jugador.setPuntaje(Integer.parseInt(puntaje));
