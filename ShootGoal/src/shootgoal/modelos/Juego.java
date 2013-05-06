@@ -24,6 +24,8 @@ public class Juego {
 	private JSONArray json;
 	private static JSONObject item;
 	private static Juego juego;
+	private static int puntajeJugador1;
+	private static int puntajeJugador2;
 	
 	public Juego(Tirador tirador, Portero portero, int status, int posTiro,
 			int porParada, boolean aceptado) {
@@ -34,6 +36,19 @@ public class Juego {
 		Juego.posTiro = posTiro;
 		Juego.porParada = porParada;
 		Juego.aceptado = aceptado;
+	}
+	
+	public static int getPuntajeJugador1() {
+		return puntajeJugador1;
+	}
+	public static void setPuntajeJugador1(int puntajeJugador1) {
+		Juego.puntajeJugador1 = puntajeJugador1;
+	}
+	public static int getPuntajeJugador2() {
+		return puntajeJugador2;
+	}
+	public static void setPuntajeJugador2(int puntajeJugador2) {
+		Juego.puntajeJugador2 = puntajeJugador2;
 	}
 	public Tirador getTirador() {
 		return tirador;
@@ -130,7 +145,7 @@ public class Juego {
 		}
 	}
 	public void update(){
-		Conexion.juegoUpdate(this.getTirador().getId(),this.getPortero().getId(),this.getStatus(),this.getPosTiro(),this.getPosTiro(), new JsonHttpResponseHandler() {
+		Conexion.juegoUpdate(this.getTirador().getId(),this.getPortero().getId(),this.getStatus(),this.getPosTiro(),this.getPorParada(),Juego.getPuntajeJugador1(),Juego.getPuntajeJugador2(), new JsonHttpResponseHandler() {
 			@Override
 			public void onFailure(Throwable arg0) {
 				//Toast.makeText(this, "Network error, please try again later.",Toast.LENGTH_LONG).show();

@@ -1,7 +1,6 @@
 package shootgoal.controladores;
 
-import java.util.Collection;
-import java.util.Iterator;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PowerManager.WakeLock;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,7 +24,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -57,6 +54,10 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
     String mail;
     int idContrincante;
     int miId;
+    int idJugador1;
+    int idJugador2;
+    boolean soyJugador1;
+    int statusGlobal;
    
 	
 	@Override
@@ -122,6 +123,10 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				  nombre=item.getString("nombre");
 				  puntaje=item.getString("puntaje");
 				  id=item.getString("id");
+				  idJugador1=Integer.parseInt(item.getString("idJugador1"));
+				  idJugador2=Integer.parseInt(item.getString("idJugador2"));
+				  jugador.setIdJugador1(idJugador1);
+				  jugador.setIdJugador2(idJugador2);
 				  jugador.setId(Integer.parseInt(id));
 				  jugador.setNombre(nombre);
 				  jugador.setPuntaje(Integer.parseInt(puntaje));
@@ -155,6 +160,10 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				  puntaje=item.getString("puntaje");
 				  id=item.getString("id");
 				  estado=Integer.parseInt(item.getString("estado"));
+				  idJugador1=Integer.parseInt(item.getString("idJugador1"));
+				  idJugador2=Integer.parseInt(item.getString("idJugador2"));
+				  jugador.setIdJugador1(idJugador1);
+				  jugador.setIdJugador2(idJugador2);
 				  jugador.setId(Integer.parseInt(id));
 				  jugador.setNombre(nombre);
 				  jugador.setPuntaje(Integer.parseInt(puntaje));
@@ -192,8 +201,20 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putInt("id amigo", idContrincante);
 		miId = prefs.getInt("id", 0);
+		statusGlobal=listaJugadores.get(pos).getEstado();
+		editor.putInt("status", listaJugadores.get(pos).getEstado());
+		editor.putInt("puntaje", listaJugadores.get(pos).getPuntaje());
+		editor.putInt("idJugador1", listaJugadores.get(pos).getIdJugador1());
+		editor.putInt("idJugador2", listaJugadores.get(pos).getIdJugador2());
 		editor.commit();
-
+		
+		if(miId==listaJugadores.get(pos).getIdJugador1()){
+			soyJugador1=true;
+		}else{
+			soyJugador1=false;
+		}
+		
+		
 		Intent launchGame = null;
 		if(listaJugadores.get(pos).getEstado()==0){
 			//significa que fue un usuaria buscado y se agregara a la base de datos actual 
@@ -231,14 +252,18 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	
 	public void agregoJuego(JSONArray amigos){
 		Intent launchGame = null;
+		if(!(soyJugador1&&(statusGlobal==1||statusGlobal==2)||!soyJugador1&&(statusGlobal==0||statusGlobal==3||statusGlobal==4))){
+			
+			if(soyJugador1&&statusGlobal==3||(!soyJugador1)&&statusGlobal==1){
+				launchGame = new Intent(this, ControladorPortero.class);
+			} else {
+				launchGame = new Intent(this, ControladorTirador.class);
+			}
+			startActivity(launchGame);
+		}else{
+			Toast.makeText(getBaseContext(), "esperando al otro jugador.",Toast.LENGTH_LONG).show();
 
-		if(esPortero){
-			launchGame = new Intent(this, ControladorPortero.class);
-		} else {
-			launchGame = new Intent(this, ControladorTirador.class);
 		}
-		esPortero=!esPortero;
-		startActivity(launchGame);
 	}
 
 	
