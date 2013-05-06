@@ -130,7 +130,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				  jugador.setId(Integer.parseInt(id));
 				  jugador.setNombre(nombre);
 				  jugador.setPuntaje(Integer.parseInt(puntaje));
-				  jugador.setEstado(0);
+				  jugador.setEstado(-1);
 				  listaJugadores.add(jugador);
 				  Log.v("json", nombre+" "+puntaje+" "+id);
 				} catch (JSONException e) {
@@ -224,7 +224,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		
 		
 		Intent launchGame = null;
-		if(listaJugadores.get(pos).getEstado()==0){
+		if(listaJugadores.get(pos).getEstado()==-1){
 			//significa que fue un usuaria buscado y se agregara a la base de datos actual 
 			Conexion.nuevoJuego(miId,idContrincante, new JsonHttpResponseHandler() {
 				@Override
