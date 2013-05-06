@@ -15,6 +15,18 @@ public abstract class Jugador {
 	public Jugador(){}
 	public enum PosicionRelativa{
 		IZQUIERDA, CENTRO, DERECHA, FUERA;
+		
+		public static int getPosicionValue(PosicionRelativa pos){
+			switch(pos){
+			case IZQUIERDA:
+				return 0;
+			case CENTRO:
+				return 1;
+			case DERECHA:
+				return 2;
+			}
+			return -1;
+		}
 	}
 	public PosicionRelativa posRelativa;
 	public PosicionRelativa getPosRelativa() {

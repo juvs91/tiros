@@ -17,12 +17,15 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import shootgoal.controladores.ControladorPortero.ControllerStatus;
+import shootgoal.modelos.Juego;
 import shootgoal.modelos.Jugador;
 import shootgoal.modelos.Porteria;
 import shootgoal.modelos.Portero;
 import shootgoal.modelos.Tirador;
 import shootgoal.vistas.TiradorView;
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -294,6 +297,27 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 	
 	public void guardarTiro(){
 		//guardar en base de datos y al terminar hacer un callback a finish();
+		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
+		int idTirador = prefs.getInt("id", 0);
+		int idJugador1 = prefs.getInt("idJugador1", 0);
+		int idJugador2 = prefs.getInt("idJugador2", 0);
+		int idPortero;
+		if(idTirador!=idJugador1){
+			idPortero = idJugador1;
+		} else {
+			idPortero = idJugador2;
+		}
+		int status = prefs.getInt("status", 0);
+		int puntaje = prefs.getInt("puntaje", 0);
+		status++;
+		/*Tirador tirador = new Tirador();*/
+		tirador.setId(idTirador);
+		/*Portero portero = new Portero();*/
+		portero.setId(idPortero);
+		int tiroPos = Jugador.PosicionRelativa.getPosicionValue(tirador.posRelativa);
+		
+		Juego juego = new Juego(tirador,portero,status,tiroPos,0,true);
+		juego.update();
 		finish();
 	}
 	

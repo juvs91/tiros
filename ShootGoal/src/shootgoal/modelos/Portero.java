@@ -25,6 +25,10 @@ public class Portero extends Jugador{
 	public AnimacionPortero animacion;
 	Bitmap cuadro;
 	
+	public Portero(){
+		
+	}
+	
 	public Portero(Point porteroPos, AssetManager assetManager){
 		AnimacionPortero animacionPor = new AnimacionPortero();
 		try{
