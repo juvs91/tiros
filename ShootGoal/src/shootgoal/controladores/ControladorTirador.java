@@ -56,14 +56,15 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 	private int tercera;
 	Point balonPos;
 	Bitmap botonGo;
+	boolean bloqueado;
 	int i=0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		AssetManager assetManager = getAssets();
 		InputStream is,porteriaImagen;
+		bloqueado = false;
 		Bitmap cuadro = null, cuadroPorteria = null;
 		try {
 			is = assetManager.open("fondo/FondoShotComp.png");
@@ -344,7 +345,8 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 				if(tirador.posRelativa == null){
 					tirador.posRelativa = Jugador.PosicionRelativa.FUERA;
 				}
-				if(tirador.posRelativa != Tirador.PosicionRelativa.FUERA){
+				if(!bloqueado && tirador.posRelativa != Tirador.PosicionRelativa.FUERA){
+					bloqueado = true;
 					guardarTiro();
 					//finish();
 				}

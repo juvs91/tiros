@@ -27,6 +27,18 @@ public abstract class Jugador {
 			}
 			return -1;
 		}
+		
+		public static PosicionRelativa getPosicionRelativa(int value){
+			switch(value){
+			case 0:
+				return IZQUIERDA;
+			case 1:
+				return CENTRO;
+			case 2:
+				return DERECHA;
+			}
+			return CENTRO;
+		}
 	}
 	public PosicionRelativa posRelativa;
 	public PosicionRelativa getPosRelativa() {
