@@ -131,6 +131,8 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				  jugador.setNombre(nombre);
 				  jugador.setPuntaje(Integer.parseInt(puntaje));
 				  jugador.setEstado(-1);
+				  jugador.setPosTiro(0);
+				  jugador.setPosParo(0);
 				  listaJugadores.add(jugador);
 				  Log.v("json", nombre+" "+puntaje+" "+id);
 				} catch (JSONException e) {
@@ -174,6 +176,8 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				  jugador.setNombre(nombre);
 				  jugador.setPuntaje(Integer.parseInt(puntaje));
 				  jugador.setEstado(estado);
+				  jugador.setPosTiro(Integer.parseInt(item.getString("posTiro")));
+				  jugador.setPosParo(Integer.parseInt(item.getString("posParo")));
 				  listaJugadores.add(jugador);
 				  Log.v("json", nombre+" "+puntaje+" "+id);
 				} catch (JSONException e) {
@@ -214,6 +218,8 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		editor.putInt("idJugador2", listaJugadores.get(pos).getIdJugador2());
 		editor.putInt("puntajeJugador1", listaJugadores.get(pos).getPuntajeJugador1());
 		editor.putInt("puntajeJugador2", listaJugadores.get(pos).getPuntajeJugador2());
+		editor.putInt("puntajeJugador2", listaJugadores.get(pos).getPosTiro());
+		editor.putInt("puntajeJugador2", listaJugadores.get(pos).getPosParo());
 		editor.commit();
 		
 		if(miId==listaJugadores.get(pos).getIdJugador1()){
