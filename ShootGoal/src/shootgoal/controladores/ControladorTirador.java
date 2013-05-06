@@ -302,21 +302,27 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 		int idJugador1 = prefs.getInt("idJugador1", 0);
 		int idJugador2 = prefs.getInt("idJugador2", 0);
 		int idPortero;
+		int puntajeJugador1 = prefs.getInt("puntajeJugador1", 0);
+		int puntajeJugador2 = prefs.getInt("puntajeJugador2", 0);
 		if(idTirador!=idJugador1){
 			idPortero = idJugador1;
 		} else {
 			idPortero = idJugador2;
 		}
 		int status = prefs.getInt("status", 0);
-		int puntaje = prefs.getInt("puntaje", 0);
-		status++;
+		
+		if(status == 4){
+			status = 1;
+		} else {
+			status++;
+		}
 		/*Tirador tirador = new Tirador();*/
 		tirador.setId(idTirador);
 		/*Portero portero = new Portero();*/
 		portero.setId(idPortero);
 		int tiroPos = Jugador.PosicionRelativa.getPosicionValue(tirador.posRelativa);
 		
-		Juego juego = new Juego(tirador,portero,status,tiroPos,0,true);
+		Juego juego = new Juego(tirador,portero,status,tiroPos,0,true,puntajeJugador1,puntajeJugador2);
 		juego.update();
 		finish();
 	}
