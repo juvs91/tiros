@@ -133,6 +133,8 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				  jugador.setEstado(-1);
 				  jugador.setPosTiro(0);
 				  jugador.setPosParo(0);
+				  jugador.setPuntajeJugador1(0);
+				  jugador.setPuntajeJugador2(0);
 				  listaJugadores.add(jugador);
 				  Log.v("json", nombre+" "+puntaje+" "+id);
 				} catch (JSONException e) {
@@ -166,7 +168,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				  puntajeJugador1=Integer.parseInt(item.getString("puntajeJugador1"));
 				  jugador.setPuntajeJugador1(puntajeJugador1);
 				  puntajeJugador2=Integer.parseInt(item.getString("puntajeJugador2"));
-				  jugador.setPuntajeJugador1(puntajeJugador2);
+				  jugador.setPuntajeJugador2(puntajeJugador2);
 				  estado=Integer.parseInt(item.getString("estado"));
 				  idJugador1=Integer.parseInt(item.getString("idJugador1"));
 				  idJugador2=Integer.parseInt(item.getString("idJugador2"));
