@@ -13,11 +13,25 @@ public class Jugadores {
 	private int idJugador2;
     private  int puntajeJugador1;
 	private  int puntajeJugador2;
+	private int posTiro;
+	private int posParo;
 	public Jugadores(){
 
 	}
 	public  int getPuntajeJugador1() {
 		return puntajeJugador1;
+	}
+	public int getPosTiro() {
+		return posTiro;
+	}
+	public void setPosTiro(int posTiro) {
+		this.posTiro = posTiro;
+	}
+	public int getPosParo() {
+		return posParo;
+	}
+	public void setPosParo(int posParo) {
+		this.posParo = posParo;
 	}
 
 	public  void setPuntajeJugador1(int puntajeJugador1) {
