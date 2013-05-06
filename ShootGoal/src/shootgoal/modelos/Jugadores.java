@@ -5,13 +5,31 @@ package shootgoal.modelos;
  */
 public class Jugadores {
 	private String nombre;
+	private String mail;
 	private int puntaje;
 	private int id;
 	private int estado;
 	private int idJugador1;
 	private int idJugador2;
+    private  int puntajeJugador1;
+	private  int puntajeJugador2;
 	public Jugadores(){
 
+	}
+	public  int getPuntajeJugador1() {
+		return puntajeJugador1;
+	}
+
+	public  void setPuntajeJugador1(int puntajeJugador1) {
+		this.puntajeJugador1 = puntajeJugador1;
+	}
+
+	public  int getPuntajeJugador2() {
+		return puntajeJugador2;
+	}
+
+	public void setPuntajeJugador2(int puntajeJugador2) {
+		this.puntajeJugador2 = puntajeJugador2;
 	}
 
 	// constructor
@@ -19,6 +37,13 @@ public class Jugadores {
 		this.puntaje = puntaje;
 		this.nombre = nombre; 
 		this.id=id;
+	}
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 	public int getIdJugador1() {
 		return idJugador1;
