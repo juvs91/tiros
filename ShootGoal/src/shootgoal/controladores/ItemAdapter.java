@@ -65,21 +65,25 @@ public class ItemAdapter extends BaseAdapter {
 	            view = inflater.inflate(layoutResourceId, parent, false);
 			holder = new ViewHolder();
 			holder.nombre = (TextView) view.findViewById(R.id.textView1);
-			holder.puntaje = (TextView) view.findViewById(R.id.textView2);
+			holder.jugador1 = (TextView) view.findViewById(R.id.textView2);
+			holder.jugador2 = (TextView) view.findViewById(R.id.textView3);
+
 			
 			view.setTag(holder);
 		} else {
 			holder = (ViewHolder) view.getTag();
 		}
 		holder.nombre.setText(itemsList.get(pos).getNombre());
-		holder.puntaje.setText(String.valueOf(itemsList.get(pos).getPuntaje()));
+		holder.jugador1.setText(String.valueOf(itemsList.get(pos).getPuntajeJugador1()));
+		holder.jugador2.setText(String.valueOf(itemsList.get(pos).getPuntajeJugador2()));
 		
 		return view;
 	}
 	
 	static class ViewHolder {
 		TextView nombre;
-		TextView puntaje;
+		TextView jugador1;
+		TextView jugador2;
 	}
 
 }
