@@ -249,10 +249,11 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			//si se dio click en el boton
 			if((touchPoint.x >= view.frameBuffer.getWidth()-botonGo.getWidth()/5-20 && touchPoint.x <= view.frameBuffer.getWidth()-20)
 					&& (touchPoint.y >= view.frameBuffer.getHeight()-botonGo.getHeight()/5-20 && touchPoint.y <= view.frameBuffer.getHeight()-20)){
-				saveDataToDatabase();
+				
 				if(portero.posRelativa == null){
 					portero.posRelativa = Jugador.PosicionRelativa.CENTRO;
 				}
+				saveDataToDatabase();
 				switch(portero.posRelativa){
 					case CENTRO:
 						
