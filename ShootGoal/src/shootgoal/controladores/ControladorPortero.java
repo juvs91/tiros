@@ -3,6 +3,7 @@ package shootgoal.controladores;
 import java.io.IOException;
 import java.io.InputStream;
 
+import shootgoal.modelos.Juego;
 import shootgoal.modelos.Jugador;
 import shootgoal.modelos.Porteria;
 import shootgoal.modelos.Portero;
@@ -13,6 +14,8 @@ import shootgoal.vistas.PorteroView;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -52,6 +55,11 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		AssetManager assetManager = getAssets();
 		InputStream is;
 		Bitmap cuadro = null;
+		
+		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
+		int posTiro = prefs.getInt("posTiro", 0);
+		tirador.posRelativa = Jugador.PosicionRelativa.getPosicionRelativa(posTiro);
+		
 		try {
 			is = assetManager.open("fondo/FondoShotComp.png");
 			//porteriaImagen=assetManager.open("PorteriaAlone.png");
@@ -187,6 +195,40 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		}
 	}
 	
+	public void saveDataToDatabase(){
+		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
+		int idPortero = prefs.getInt("id", 0);
+		int idJugador1 = prefs.getInt("idJugador1", 0);
+		int idJugador2 = prefs.getInt("idJugador2", 0);
+		int idTirador;
+		int puntajeJugador1 = prefs.getInt("puntajeJugador1", 0);
+		int puntajeJugador2 = prefs.getInt("puntajeJugador2", 0);
+		if(idPortero!=idJugador1){
+			idTirador = idJugador1;
+			if(tirador.posRelativa!=portero.posRelativa){
+				puntajeJugador1++;
+			}
+		} else {
+			idTirador = idJugador2;
+			if(tirador.posRelativa!=portero.posRelativa){
+				puntajeJugador2++;
+			}
+		}
+		int status = prefs.getInt("status", 0);
+		
+		status++;
+		/*Tirador tirador = new Tirador();*/
+		tirador.setId(idTirador);
+		/*Portero portero = new Portero();*/
+		portero.setId(idPortero);
+		int tiroPos = Jugador.PosicionRelativa.getPosicionValue(tirador.posRelativa);
+		int paradaPos = Jugador.PosicionRelativa.getPosicionValue(portero.posRelativa);
+		
+		Juego juego = new Juego(tirador,portero,status,tiroPos,paradaPos,true,puntajeJugador1,puntajeJugador2);
+		juego.update();
+		//finish();
+	}
+	
 	/**
 	 * Mueve la posicion del portero hacia el punto 
 	 * @param touchPoint
@@ -205,13 +247,15 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 			//si se dio click en el boton
 			if((touchPoint.x >= view.frameBuffer.getWidth()-botonGo.getWidth()/5-20 && touchPoint.x <= view.frameBuffer.getWidth()-20)
 					&& (touchPoint.y >= view.frameBuffer.getHeight()-botonGo.getHeight()/5-20 && touchPoint.y <= view.frameBuffer.getHeight()-20)){
+				saveDataToDatabase();
 				if(portero.posRelativa == null){
 					portero.posRelativa = Jugador.PosicionRelativa.CENTRO;
 				}
 				switch(portero.posRelativa){
 					case CENTRO:
+						
 						view.bloqueado = true;
-						tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
+						//tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
 						Point posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
 						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
 						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
@@ -226,7 +270,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 						break;
 					case IZQUIERDA: 
 						view.bloqueado = true;
-						tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
+						//tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
 						posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
 						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
 						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;
@@ -255,7 +299,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 						break;
 					case DERECHA:
 						view.bloqueado = true;
-						tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
+						//tirador.posRelativa = Jugador.PosicionRelativa.DERECHA;
 						posFinalBalon = obtenerCoordenadasReales(tirador.posRelativa);
 						posFinalBalon.x -= tirador.animacion.getCuadro().getWidth()/3/2;
 						posFinalBalon.y -= tirador.animacion.getCuadro().getHeight()/3/2;

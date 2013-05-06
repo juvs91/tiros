@@ -14,28 +14,30 @@ public class Juego {
 	
 
 
-	private static Tirador tirador;
-	private static Portero portero;
-	private static int status;
-	private static int posTiro;
-	private static int porParada;
-	public enum posicionRelativa{IZQUIERDA, CENTRO, DERECHA, FUERA};
-	private static boolean aceptado;
+	private Tirador tirador;
+	private Portero portero;
+	private int status;
+	private int posTiro;
+	private int porParada;
+	//public enum posicionRelativa{IZQUIERDA, CENTRO, DERECHA, FUERA};
+	private boolean aceptado;
 	private JSONArray json;
-	private static JSONObject item;
-	private static Juego juego;
-	private  int puntajeJugador1;
-	private  int puntajeJugador2;
+	private JSONObject item;
+	//private Juego juego;
+	private int puntajeJugador1;
+	private int puntajeJugador2;
 	
 	public Juego(Tirador tirador, Portero portero, int status, int posTiro,
-			int porParada, boolean aceptado) {
+			int porParada, boolean aceptado, int puntajeJugador1, int puntajeJugador2) {
 		super();
-		Juego.tirador = tirador;
-		Juego.portero = portero;
-		Juego.status = status;
-		Juego.posTiro = posTiro;
-		Juego.porParada = porParada;
-		Juego.aceptado = aceptado;
+		this.tirador = tirador;
+		this.portero = portero;
+		this.status = status;
+		this.posTiro = posTiro;
+		this.porParada = porParada;
+		this.aceptado = aceptado;
+		this.puntajeJugador1 = puntajeJugador1;
+		this.puntajeJugador2 = puntajeJugador2;
 	}
 	
 	public  int getPuntajeJugador1() {
@@ -55,7 +57,7 @@ public class Juego {
 	}
 
 	public void setTirador(Tirador tirador) {
-		Juego.tirador = tirador;
+		this.tirador = tirador;
 	}
 
 	public Portero getPortero() {
@@ -63,7 +65,7 @@ public class Juego {
 	}
 
 	public void setPortero(Portero portero) {
-		Juego.portero = portero;
+		this.portero = portero;
 	}
 
 	public JSONArray getJson() {
@@ -74,39 +76,39 @@ public class Juego {
 		this.json = json;
 	}
 
-	public static JSONObject getItem() {
+	public JSONObject getItem() {
 		return item;
 	}
 
-	public static void setItem(JSONObject item) {
-		Juego.item = item;
+	public void setItem(JSONObject item) {
+		this.item = item;
 	}
 	public int getStatus() {
 		return status;
 	}
 	public void setStatus(int status) {
-		Juego.status = status;
+		this.status = status;
 	}
 	public int getPosTiro() {
 		return posTiro;
 	}
 	public void setPosTiro(int posTiro) {
-		Juego.posTiro = posTiro;
+		this.posTiro = posTiro;
 	}
 	public int getPorParada() {
 		return porParada;
 	}
 	public void setPorParada(int porParada) {
-		Juego.porParada = porParada;
+		this.porParada = porParada;
 	}
 	public boolean isAceptado() {
 		return aceptado;
 	}
 	public void setAceptado(boolean aceptado) {
-		Juego.aceptado = aceptado;
+		this.aceptado = aceptado;
 	}
 	
-	public static Juego fetch(int idJugador1,int idJugador2){
+	public void fetch(int idJugador1,int idJugador2){
 		Conexion.juego(idJugador1,idJugador2, new JsonHttpResponseHandler() {
 			@Override
 			public void onFailure(Throwable arg0) {
@@ -118,10 +120,9 @@ public class Juego {
 			}
 		});
 		
-		return juego;
 		
 	}
-	public static void jsonHandler(JSONArray json){
+	public void jsonHandler(JSONArray json){
 		Log.v("json", json+"");
 		if(json!=null){
 			for(int i=0;i<json.length();i++){
@@ -134,7 +135,9 @@ public class Juego {
 			    	status=item.getInt("estado");
 			    	posTiro=item.getInt("posTiro");
 			    	porParada=item.getInt("posParo");
-			    	juego=new Juego(tirador,portero,status,posTiro,porParada,false);
+			    	puntajeJugador1 = item.getInt("puntajeJugador1");
+			    	puntajeJugador2 = item.getInt("puntajeJugador2");
+			    	//juego=new Juego(tirador,portero,status,posTiro,porParada,false,puntajeJugador1,puntajeJugador2);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

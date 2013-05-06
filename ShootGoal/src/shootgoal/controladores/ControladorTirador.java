@@ -17,12 +17,15 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import shootgoal.controladores.ControladorPortero.ControllerStatus;
+import shootgoal.modelos.Juego;
 import shootgoal.modelos.Jugador;
 import shootgoal.modelos.Porteria;
 import shootgoal.modelos.Portero;
 import shootgoal.modelos.Tirador;
 import shootgoal.vistas.TiradorView;
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -53,14 +56,15 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 	private int tercera;
 	Point balonPos;
 	Bitmap botonGo;
+	boolean bloqueado;
 	int i=0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		AssetManager assetManager = getAssets();
 		InputStream is,porteriaImagen;
+		bloqueado = false;
 		Bitmap cuadro = null, cuadroPorteria = null;
 		try {
 			is = assetManager.open("fondo/FondoShotComp.png");
@@ -294,6 +298,33 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 	
 	public void guardarTiro(){
 		//guardar en base de datos y al terminar hacer un callback a finish();
+		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
+		int idTirador = prefs.getInt("id", 0);
+		int idJugador1 = prefs.getInt("idJugador1", 0);
+		int idJugador2 = prefs.getInt("idJugador2", 0);
+		int idPortero;
+		int puntajeJugador1 = prefs.getInt("puntajeJugador1", 0);
+		int puntajeJugador2 = prefs.getInt("puntajeJugador2", 0);
+		if(idTirador!=idJugador1){
+			idPortero = idJugador1;
+		} else {
+			idPortero = idJugador2;
+		}
+		int status = prefs.getInt("status", 0);
+		
+		if(status == 4){
+			status = 1;
+		} else {
+			status++;
+		}
+		/*Tirador tirador = new Tirador();*/
+		tirador.setId(idTirador);
+		/*Portero portero = new Portero();*/
+		portero.setId(idPortero);
+		int tiroPos = Jugador.PosicionRelativa.getPosicionValue(tirador.posRelativa);
+		
+		Juego juego = new Juego(tirador,portero,status,tiroPos,0,true,puntajeJugador1,puntajeJugador2);
+		juego.update();
 		finish();
 	}
 	
@@ -314,7 +345,8 @@ public class ControladorTirador extends Activity implements OnTouchListener{
 				if(tirador.posRelativa == null){
 					tirador.posRelativa = Jugador.PosicionRelativa.FUERA;
 				}
-				if(tirador.posRelativa != Tirador.PosicionRelativa.FUERA){
+				if(!bloqueado && tirador.posRelativa != Tirador.PosicionRelativa.FUERA){
+					bloqueado = true;
 					guardarTiro();
 					//finish();
 				}

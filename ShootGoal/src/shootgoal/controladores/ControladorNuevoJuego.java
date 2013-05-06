@@ -65,8 +65,8 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		listaJugadores=new LinkedList<Jugadores>();
-		this.init();
+		//listaJugadores=new LinkedList<Jugadores>();
+		//this.init();
 
 	 	setContentView(R.layout.nuevo_juego);
 		 Button buscar= ((Button) findViewById(R.id.buscar_nuevo_juego));
@@ -108,7 +108,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 			}
 		});
 		
-		setContentView(R.layout.nuevo_juego);
+		//setContentView(R.layout.nuevo_juego);
 	}
 	
 	public void errorAmigos(){
@@ -227,7 +227,7 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		}else{
 			soyJugador1=false;
 		}
-		
+		//statusGlobal = listaJu
 		
 		Intent launchGame = null;
 		if(listaJugadores.get(pos).getEstado()==-1){
@@ -293,5 +293,29 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		}
 	}
 
-	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		//Pausa la vista de la Actividad
+		//TiradorView view = (TiradorView)getLayoutInflater().inflate(R.layout.tira_view, null);
+		//findViewById(R.layout.nuevo_juego).pause();
+		//Libera el candado que protege la pantalla
+		//wakeLock.release();
+	}
+
+	/**
+	 * Metodo onResume sobrescrito de la clase Activity
+	 * LLamado cuando la Actividad vuelve a primer plano
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		listaJugadores = new LinkedList<Jugadores>();
+		init();
+		//Reanuda la vista de la Actividad
+		//TiradorView view = (TiradorView)getLayoutInflater().inflate(R.layout.tira_view, null);
+		//viewTirador.resume();
+		//Retoma el candado que protege a la pantalla
+		//wakeLock.acquire();
+	}
 }

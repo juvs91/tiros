@@ -26,6 +26,10 @@ public class Tirador extends Jugador {
 	public AnimaBalon animacion;
 	Bitmap cuadro;
 	
+	public Tirador(){
+		
+	}
+	
 	public Tirador(Point TiradorPos, AssetManager assetManager){
 		AnimaBalon animacionBalon = new AnimaBalon();
 		try{

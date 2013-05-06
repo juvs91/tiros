@@ -94,13 +94,13 @@ public class Conexion {
 	public static void juegoUpdate(int idJugador1,int idJugador2,int estado,int posTiro,int posParo,int puntajeJugador1,int puntajeJugador2, AsyncHttpResponseHandler responseHandler){
 		RequestParams params = new RequestParams();
 		String resource = juegoUpdateUrl;
-		params.put("idJugador1", idJugador1+"");
-		params.put("idJugador2", idJugador2+"");
+		params.put("idJugadorUno", idJugador1+"");
+		params.put("idJugadorDos", idJugador2+"");
 		params.put("estado", estado+"");
 		params.put("posTiro", posTiro+"");
 		params.put("posParo", posParo+"");
-		params.put("puntajeJugador1", posTiro+"");
-		params.put("puntajeJugador2", posParo+"");
+		params.put("puntajeJugadorUno", puntajeJugador1+"");
+		params.put("puntajeJugadorDos", puntajeJugador2+"");
 		
 		Conexion.post(resource, params, responseHandler);	
 	}
