@@ -56,9 +56,7 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		InputStream is;
 		Bitmap cuadro = null;
 		
-		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
-		int posTiro = prefs.getInt("posTiro", 0);
-		tirador.posRelativa = Jugador.PosicionRelativa.getPosicionRelativa(posTiro);
+		
 		
 		try {
 			is = assetManager.open("fondo/FondoShotComp.png");
@@ -102,6 +100,10 @@ public class ControladorPortero extends Activity implements OnTouchListener {
 		
 		Point balonPos = new Point(view.frameBuffer.getWidth()/2, view.frameBuffer.getHeight()/2+120);
 		tirador = new Tirador(balonPos, getAssets());
+		
+		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
+		int posTiro = prefs.getInt("posTiro", 0);
+		tirador.posRelativa = Jugador.PosicionRelativa.getPosicionRelativa(posTiro);
 		
 		Point porteriaPos = new Point(view.frameBuffer.getWidth()/2, view.frameBuffer.getHeight()/2-25);
 		porteria = new Porteria(porteriaPos, getAssets());
