@@ -58,6 +58,8 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
     int idJugador2;
     boolean soyJugador1;
     int statusGlobal;
+    boolean mailExistente=false;
+    int puntajeJugador1,puntajeJugador2;
    
 	
 	@Override
@@ -123,6 +125,12 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				  nombre=item.getString("nombre");
 				  puntaje=item.getString("puntaje");
 				  id=item.getString("id");
+				  mail=item.getString("mail");
+				  jugador.setMail(mail);
+				  puntajeJugador1=Integer.parseInt(item.getString("puntajeJugador1"));
+				  jugador.setPuntajeJugador1(puntajeJugador1);
+				  puntajeJugador2=Integer.parseInt(item.getString("puntajeJugador2"));
+				  jugador.setPuntajeJugador1(puntajeJugador2);
 				  idJugador1=Integer.parseInt(item.getString("idJugador1"));
 				  idJugador2=Integer.parseInt(item.getString("idJugador2"));
 				  jugador.setIdJugador1(idJugador1);
@@ -159,6 +167,12 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				  nombre=item.getString("nombre");
 				  puntaje=item.getString("puntaje");
 				  id=item.getString("id");
+				  mail=item.getString("mail");
+				  jugador.setMail(mail);
+				  puntajeJugador1=Integer.parseInt(item.getString("puntajeJugador1"));
+				  jugador.setPuntajeJugador1(puntajeJugador1);
+				  puntajeJugador2=Integer.parseInt(item.getString("puntajeJugador2"));
+				  jugador.setPuntajeJugador1(puntajeJugador2);
 				  estado=Integer.parseInt(item.getString("estado"));
 				  idJugador1=Integer.parseInt(item.getString("idJugador1"));
 				  idJugador2=Integer.parseInt(item.getString("idJugador2"));
@@ -206,6 +220,8 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		editor.putInt("puntaje", listaJugadores.get(pos).getPuntaje());
 		editor.putInt("idJugador1", listaJugadores.get(pos).getIdJugador1());
 		editor.putInt("idJugador2", listaJugadores.get(pos).getIdJugador2());
+		editor.putInt("puntajeJugador1", listaJugadores.get(pos).getPuntajeJugador1());
+		editor.putInt("puntajeJugador2", listaJugadores.get(pos).getPuntajeJugador2());
 		editor.commit();
 		
 		if(miId==listaJugadores.get(pos).getIdJugador1()){
@@ -229,13 +245,18 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 				}
 			});
 		}else{
-			if(esPortero){
-				launchGame = new Intent(this, ControladorPortero.class);
-			} else {
-				launchGame = new Intent(this, ControladorTirador.class);
+			if(!(soyJugador1&&(statusGlobal==1||statusGlobal==2)||!soyJugador1&&(statusGlobal==0||statusGlobal==3||statusGlobal==4))){
+				
+				if(soyJugador1&&statusGlobal==3||(!soyJugador1)&&statusGlobal==1){
+					launchGame = new Intent(this, ControladorPortero.class);
+				} else {
+					launchGame = new Intent(this, ControladorTirador.class);
+				}
+				startActivity(launchGame);
+			}else{
+				Toast.makeText(getBaseContext(), "esperando al otro jugador.",Toast.LENGTH_LONG).show();
+
 			}
-			esPortero=!esPortero;
-			startActivity(launchGame);
 		}
 	
 	}
@@ -244,8 +265,16 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		// TODO Auto-generated method stub
 
 		if(v.getId()==R.id.buscar_nuevo_juego){
-			mail=((EditText) findViewById(R.id.buscar_mail)).getText().toString();
-    		buscar(mail);
+			for(Jugadores jugador:listaJugadores){
+				if(jugador.getMail()==((EditText) findViewById(R.id.buscar_mail)).getText().toString()){
+					mailExistente=true;
+				}
+			}
+			if(!mailExistente){
+				mail=((EditText) findViewById(R.id.buscar_mail)).getText().toString();
+	    		buscar(mail);
+
+			}
 		}
 		
 	}
