@@ -218,8 +218,8 @@ public class ControladorNuevoJuego  extends Activity implements OnItemClickListe
 		editor.putInt("idJugador2", listaJugadores.get(pos).getIdJugador2());
 		editor.putInt("puntajeJugador1", listaJugadores.get(pos).getPuntajeJugador1());
 		editor.putInt("puntajeJugador2", listaJugadores.get(pos).getPuntajeJugador2());
-		editor.putInt("puntajeJugador2", listaJugadores.get(pos).getPosTiro());
-		editor.putInt("puntajeJugador2", listaJugadores.get(pos).getPosParo());
+		editor.putInt("posTiro", listaJugadores.get(pos).getPosTiro());
+		editor.putInt("posParo", listaJugadores.get(pos).getPosParo());
 		editor.commit();
 		
 		if(miId==listaJugadores.get(pos).getIdJugador1()){

@@ -40,13 +40,13 @@ public class MainActivity extends Activity{
 		SharedPreferences prefs=getSharedPreferences("shootGoal",Context.MODE_PRIVATE);
 		String correo = prefs.getString("mail", "no existe");
 		
-		if(correo.equals("no existe")){
+		//if(correo.equals("no existe")){
 			Intent launchGame = new Intent(this,ControladorLogin.class);
 			startActivity(launchGame);
-		}else{
-			Intent launchGame = new Intent(this,ControladorMenu.class);
-			startActivity(launchGame);
-		}
+		//}else{
+		//	Intent launchGame = new Intent(this,ControladorMenu.class);
+		//	startActivity(launchGame);
+		//}
 				
 
 	}
