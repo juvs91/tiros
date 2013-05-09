@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="shootgoal.build"
-    android:versionCode="12"
+    package="shootgoalapp.build"
+    android:versionCode="13"
     android:versionName="1.0" >
 
     <uses-sdk

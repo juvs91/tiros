@@ -3,8 +3,8 @@ package shootgoal.general;
 import java.util.ArrayList;
 import java.util.List;
 
-import shootgoal.modelos.Cuadro;
 
+import shootgoal.modelos.Cuadro;
 import shootgoal.modelos.Tirador;
 
 

@@ -1,8 +1,8 @@
 package shootgoal.controladores;
 import java.util.List;
 
-import shootgoal.build.R;
 import shootgoal.modelos.Jugadores;
+import shootgoalapp.build.R;
 
 import android.app.Activity;
 import android.content.Context;

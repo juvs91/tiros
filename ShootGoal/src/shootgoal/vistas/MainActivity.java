@@ -6,11 +6,11 @@ package shootgoal.vistas;
  */
 
 
-import shootgoal.build.R;
 import shootgoal.controladores.ControladorLogin;
 import shootgoal.controladores.ControladorMenu;
 import shootgoal.controladores.ControladorNuevoJuego;
 import shootgoal.controladores.ControladorSignUp;
+import shootgoalapp.build.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

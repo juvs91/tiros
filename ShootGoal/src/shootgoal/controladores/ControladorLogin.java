@@ -6,8 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import shootgoal.build.R;
 import shootgoal.modelos.Jugadores;
+import shootgoalapp.build.R;
 
 import android.app.Activity;
 import android.content.Context;

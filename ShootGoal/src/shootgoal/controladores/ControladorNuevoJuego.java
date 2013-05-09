@@ -8,8 +8,6 @@ import org.json.*;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-import shootgoal.modelos.Jugadores;
-import shootgoal.vistas.TiradorView;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,7 +25,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import shootgoal.build.R;
+import shootgoal.modelos.Jugadores;
+import shootgoal.vistas.TiradorView;
+import shootgoalapp.build.R;
 
 
 public class ControladorNuevoJuego  extends Activity implements OnItemClickListener,OnClickListener  {

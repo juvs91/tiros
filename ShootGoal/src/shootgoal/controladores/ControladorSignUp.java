@@ -6,8 +6,8 @@ import org.json.JSONObject;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-import shootgoal.build.R;
 import shootgoal.modelos.Jugadores;
+import shootgoalapp.build.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
